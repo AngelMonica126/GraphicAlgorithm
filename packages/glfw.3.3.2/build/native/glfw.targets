@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003"> <!-- InitialTargets="GLFW_report"> -->
+
+	<!-- additional ui -->
+	<ItemGroup>
+		<PropertyPageSchema Include="$(MSBuildThisFileDirectory)\glfw-propertiesui.xml" />
+	</ItemGroup>
+
+	<!-- version of glfw to use (static or dynamic) -->
+	<PropertyGroup Condition="'$(GlfwLinkage)' != 'static'">
+		<GlfwLinkage>dynamic</GlfwLinkage>
+	</PropertyGroup>
+
+	<!-- Fix configuration settings -->
+	<!-- <PropertyGroup Condition="'$(GlfwConfiguration)' == '' And '$(Configuration)' == 'Debug'">
+		<GlfwConfiguration>Debug</GlfwConfiguration>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(GlfwConfiguration)' == '' And '$(Configuration)' != 'Debug'">
+		<GlfwConfiguration>Release</GlfwConfiguration>
+	</PropertyGroup>-->
+
+	<!-- Fix platform settings -->
+	<PropertyGroup Condition="'$(GlfwPlatformToolset)' == '' And $(PlatformToolsetVersion) == 100">
+		<GlfwPlatformToolset>v100</GlfwPlatformToolset>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(GlfwPlatformToolset)' == '' And $(PlatformToolsetVersion) == 110">
+		<GlfwPlatformToolset>v110</GlfwPlatformToolset>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(GlfwPlatformToolset)' == '' And $(PlatformToolsetVersion) == 120">
+		<GlfwPlatformToolset>v120</GlfwPlatformToolset>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(GlfwPlatformToolset)' == '' And $(PlatformToolsetVersion) == 140">
+		<GlfwPlatformToolset>v140</GlfwPlatformToolset>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(GlfwPlatformToolset)' == '' And $(PlatformToolsetVersion) == 141">
+		<GlfwPlatformToolset>v141</GlfwPlatformToolset>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(GlfwPlatformToolset)' == '' And $(PlatformToolsetVersion) &gt;= 142 AND $(PlatformToolsetVersion) &lt; 150">
+		<GlfwPlatformToolset>v142</GlfwPlatformToolset>
+	</PropertyGroup>
+
+	<!-- Compiler settings: defines and includes -->
+	<ItemDefinitionGroup>
+		<ClCompile>
+			<PreprocessorDefinitions>HAS_GLFW;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+			<AdditionalIncludeDirectories>$(MSBuildThisFileDirectory)include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+		</ClCompile>
+	</ItemDefinitionGroup>
+	<ItemDefinitionGroup Condition="'$(GlfwLinkage)' == 'static'">
+		<ClCompile>
+			<PreprocessorDefinitions>HAS_GLFW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+		</ClCompile>
+	</ItemDefinitionGroup>
+
+	<!-- Some reporting for debugging this script
+	<Target Name="GLFW_report" BeforeTargets="Compile">
+		<Message Importance="high" Text="GlfwLinkage = $(GlfwLinkage)" />  
+		<Message Importance="high" Text="Configuration = $(Configuration)" />  
+		<Message Importance="high" Text="GlfwConfiguration = $(GlfwConfiguration)" />  
+		<Message Importance="high" Text="PlatformToolset = $(PlatformToolset)" />  
+		<Message Importance="high" Text="GlfwPlatformToolset = $(GlfwPlatformToolset)" />  
+	</Target>-->
+	
+	<!-- Linker settings -->
+	<ItemDefinitionGroup Condition="'$(GlfwLinkage)' == 'static'">
+		<Link>
+			<AdditionalDependencies>$(MSBuildThisFileDirectory)lib\static\$(GlfwPlatformToolset)\$(PlatformName)\glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+			<IgnoreSpecificDefaultLibraries>glfw3.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>	
+		</Link>
+	</ItemDefinitionGroup>
+	<ItemDefinitionGroup Condition="'$(GlfwLinkage)' == 'dynamic'">
+		<Link>
+			<AdditionalDependencies>$(MSBuildThisFileDirectory)lib\dynamic\$(GlfwPlatformToolset)\$(PlatformName)\glfw3dll.lib;%(AdditionalDependencies)</AdditionalDependencies>
+			<IgnoreSpecificDefaultLibraries>glfw3dll.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>	
+		</Link>
+	</ItemDefinitionGroup>
+
+	<!-- Copy dll redistributable -->
+	<Target Name="GlfwCopyDllRedist" AfterTargets="AfterBuild" Condition="'$(GlfwLinkage)' == 'dynamic'">
+		<Copy SourceFiles="$(MSBuildThisFileDirectory)bin\dynamic\$(GlfwPlatformToolset)\$(PlatformName)\glfw3.dll" DestinationFolder="$(TargetDir)" SkipUnchangedFiles="true" />
+	</Target>
+	
+</Project>

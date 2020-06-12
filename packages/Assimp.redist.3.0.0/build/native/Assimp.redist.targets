@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" InitialTargets="Assimp_redist_init;Assimp_redist_init_2">
+  <PropertyGroup Label="Default initializers for properties">
+    <Linkage-Assimp_redist Condition="'$(Linkage-Assimp_redist)' == ''">dynamic</Linkage-Assimp_redist>
+    <CallingConvention-Assimp_redist Condition="'$(CallingConvention-Assimp_redist)' == ''">cdecl</CallingConvention-Assimp_redist>
+  </PropertyGroup>
+  <Target Name="Assimp_redist_init">
+    <Assimp_redist_Contains Text="Linkage-dynamic" Library="Assimp_redist" Value="dynamic" Condition="'$(Linkage-Assimp_redist)'==''">
+      <Output TaskParameter="Result" PropertyName="Linkage-Assimp_redist" />
+    </Assimp_redist_Contains>
+    <Assimp_redist_Contains Text="Linkage-static" Library="Assimp_redist" Value="static" Condition="'$(Linkage-Assimp_redist)'==''">
+      <Output TaskParameter="Result" PropertyName="Linkage-Assimp_redist" />
+    </Assimp_redist_Contains>
+    <Assimp_redist_Contains Text="Linkage-ltcg" Library="Assimp_redist" Value="ltcg" Condition="'$(Linkage-Assimp_redist)'==''">
+      <Output TaskParameter="Result" PropertyName="Linkage-Assimp_redist" />
+    </Assimp_redist_Contains>
+    <Assimp_redist_Contains Text="Linkage-sxs" Library="Assimp_redist" Value="sxs" Condition="'$(Linkage-Assimp_redist)'==''">
+      <Output TaskParameter="Result" PropertyName="Linkage-Assimp_redist" />
+    </Assimp_redist_Contains>
+    <Assimp_redist_Contains Text="CallingConvention-cdecl" Library="Assimp_redist" Value="cdecl" Condition="'$(CallingConvention-Assimp_redist)'==''">
+      <Output TaskParameter="Result" PropertyName="CallingConvention-Assimp_redist" />
+    </Assimp_redist_Contains>
+    <Assimp_redist_Contains Text="CallingConvention-stdcall" Library="Assimp_redist" Value="stdcall" Condition="'$(CallingConvention-Assimp_redist)'==''">
+      <Output TaskParameter="Result" PropertyName="CallingConvention-Assimp_redist" />
+    </Assimp_redist_Contains>
+    <Assimp_redist_Contains Text="CallingConvention-fastcall" Library="Assimp_redist" Value="fastcall" Condition="'$(CallingConvention-Assimp_redist)'==''">
+      <Output TaskParameter="Result" PropertyName="CallingConvention-Assimp_redist" />
+    </Assimp_redist_Contains>
+    <Assimp_redist_Contains Text="CallingConvention-thiscall" Library="Assimp_redist" Value="thiscall" Condition="'$(CallingConvention-Assimp_redist)'==''">
+      <Output TaskParameter="Result" PropertyName="CallingConvention-Assimp_redist" />
+    </Assimp_redist_Contains>
+    <Assimp_redist_Contains Text="CallingConvention-clrcall" Library="Assimp_redist" Value="clrcall" Condition="'$(CallingConvention-Assimp_redist)'==''">
+      <Output TaskParameter="Result" PropertyName="CallingConvention-Assimp_redist" />
+    </Assimp_redist_Contains>
+  </Target>
+  <Target Name="Assimp_redist_init_2">
+    <SetEnv Condition="'$(Platform.ToLower())' == 'x64'" Name="PATH" Prefix="true" Value="$(MSBuildThisFileDirectory)../..//build/native/bin/x64">
+      <Output TaskParameter="OutputEnvironmentVariable" PropertyName="PATH" />
+    </SetEnv>
+    <SetEnv Condition="'$(Platform.ToLower())' == 'win32'" Name="PATH" Prefix="true" Value="$(MSBuildThisFileDirectory)../..//build/native/bin/Win32">
+      <Output TaskParameter="OutputEnvironmentVariable" PropertyName="PATH" />
+    </SetEnv>
+  </Target>
+  <ItemGroup Label="x64" Condition="'$(Platform.ToLower())' == 'x64'">
+    <None Include="$(MSBuildThisFileDirectory)../..//build/native/bin/x64\Assimp64.dll" Condition="(('$(AppContainerApplication.ToLower())' == 'true')) OR (('$(TargetPlatformIdentifier.ToLower())' == 'windows phone' And '$(TargetPlatformVersion)' == '8.0'))">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+  </ItemGroup>
+  <ItemGroup Label="Win32" Condition="'$(Platform.ToLower())' == 'win32'">
+    <None Include="$(MSBuildThisFileDirectory)../..//build/native/bin/Win32\Assimp32.dll" Condition="(('$(AppContainerApplication.ToLower())' == 'true')) OR (('$(TargetPlatformIdentifier.ToLower())' == 'windows phone' And '$(TargetPlatformVersion)' == '8.0'))">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <PropertyPageSchema Include="$(MSBuildThisFileDirectory)\default-propertiesui.xml" />
+  </ItemGroup>
+  <Target Name="Assimp_redist_AfterBuild" AfterTargets="AfterBuild" />
+  <Target Name="Assimp_redist_AfterBuild_x64" Label="x64" Condition="'$(Platform.ToLower())' == 'x64'" AfterTargets="Assimp_redist_AfterBuild">
+    <Copy SourceFiles="$(MSBuildThisFileDirectory)../..//build/native/bin/x64\Assimp64.dll" DestinationFolder="$(TargetDir)" SkipUnchangedFiles="true" />
+  </Target>
+  <Target Name="Assimp_redist_AfterBuild_Win32" Label="Win32" Condition="'$(Platform.ToLower())' == 'win32'" AfterTargets="Assimp_redist_AfterBuild">
+    <Copy SourceFiles="$(MSBuildThisFileDirectory)../..//build/native/bin/Win32\Assimp32.dll" DestinationFolder="$(TargetDir)" SkipUnchangedFiles="true" />
+  </Target>
+  <UsingTask TaskName="Assimp_redist_Contains" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll" TaskFactory="CodeTaskFactory">
+    <ParameterGroup>
+      <Text Output="false" ParameterType="System.String" />
+      <Library Output="false" Required="true" ParameterType="System.String" />
+      <Value Output="false" Required="true" ParameterType="System.String" />
+      <Result Output="true" ParameterType="System.String" />
+    </ParameterGroup>
+    <Task>
+      <Code>Result = ((Text ?? "").Split(';').Contains(Library) ) ? Value : String.Empty;</Code>
+    </Task>
+  </UsingTask>
+</Project>

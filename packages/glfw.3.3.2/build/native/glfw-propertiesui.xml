@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ProjectSchemaDefinitions xmlns="clr-namespace:Microsoft.Build.Framework.XamlTypes;assembly=Microsoft.Build.Framework">
+	<Rule Name="ReferencedPackages-glfw" PageTemplate="tool" DisplayName="Referenced Packages" SwitchPrefix="/" Order="1">
+		<Rule.Categories>
+			<Category Name="glfw" DisplayName="glfw" />
+		</Rule.Categories>
+		<Rule.DataSource>
+			<DataSource Persistence="ProjectFile" ItemType="" />
+		</Rule.DataSource>
+		<EnumProperty Name="GlfwLinkage" DisplayName="Linkage" Description="Which version of the .lib file to link to this library" Category="glfw">
+			<EnumValue Name="" DisplayName="Dynamic Library (DLL)" />
+			<EnumValue Name="static" DisplayName="Static" />
+		</EnumProperty>
+		<!-- <EnumProperty Name="GlfwConfiguration" DisplayName="Configuration" Description="Which configuration of the library to use" Category="glfw">
+			<EnumValue Name="" DisplayName="default" />
+			<EnumValue Name="Release" DisplayName="Release" />
+			<EnumValue Name="Debug" DisplayName="Debug" />
+		</EnumProperty>-->
+		<EnumProperty Name="GlfwPlatformToolset" DisplayName="Toolset" Description="Which toolset version of the library to use" Category="glfw">
+			<EnumValue Name="" DisplayName="default" />
+			<EnumValue Name="v100" DisplayName="MSVC 2010 (v100)" />
+			<EnumValue Name="v110" DisplayName="MSVC 2012 (v110)" />
+			<EnumValue Name="v120" DisplayName="MSVC 2013 (v120)" />
+			<EnumValue Name="v140" DisplayName="MSVC 2015 (v140)" />
+			<EnumValue Name="v141" DisplayName="MSVC 2017 (v141)" />
+			<EnumValue Name="v142" DisplayName="MSVC 2019 (v142)" />
+		</EnumProperty>
+	</Rule>
+</ProjectSchemaDefinitions>

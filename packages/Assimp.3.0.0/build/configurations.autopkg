@@ -1,0 +1,8 @@
+configurations {
+    Platform { 
+        key : "Platform";
+        choices : { Win32, x64 };
+        Win32.aliases : { x86, win32, ia32, 386 };
+        x64.aliases : { x64, amd64, em64t, intel64, x86-64, x86_64 };
+    };
+};
