@@ -2,8 +2,6 @@
 ## 间接光照
 这篇文章可以说是全局光照中一篇超级经典的文章，大家不要被他的名字所骗了Reflective Shadow Maps直译过来是反射阴影贴图，可他不是用来解决阴影问题的，而是用来解决间接光照问题的文章。光照可以分为两类：一类为直接光照，这类光照是直接由光源或者发光物发出的光照；另一类为直接光照之后反射的光照称为间接光照。直接光照的计算十分简单，因为计算的范围和次数（没有反射）有限。而对于间接光照而言计算就十分复杂，因为间接光照可能不止反射了一次，一束光可能需要经历了很多次反射才能到达着色点。而间接光照又十分重要，可以看下面两张图第一张是只有直接光照，第二张是直接光照加上间接光照的效果，大家可以看到地板上面有间接光照的会受到周围环境的影响从而更加的逼真。因此间接光照的模拟是图形学中一个经久不衰的话题。
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20200612190307549.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMzNTM2OTgx,size_16,color_FFFFFF,t_70 =500x300)![在这里插入图片描述](https://img-blog.csdnimg.cn/20200612190307792.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMzNTM2OTgx,size_16,color_FFFFFF,t_70 =500x300)
-
 ## 虚拟点光源
 RSM的核心思想是把直接光源照亮的区域又作为发光物来进行计算。当然RSM只计算一次反射，也就是说先计算直接光照对场景的影响，然后将直接光照照亮的区域再用于计算对场景的影响，一共计算两次光照。
 * 第一步是先单独计算直接光照对环境的影响。
