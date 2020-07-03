@@ -9,4 +9,6 @@
 
 ## 光照加速
 [Non-interleaved Deferred Shading of Interleaved Sample Patterns(已复现)](https://github.com/AngelMonica126/GraphicAlgorithm/wiki/Non-interleaved-Deferred-Shading-of-Interleaved-Sample-Patterns)
+
+[Metalights : Improved Interleaved Shading(已复现)](https://github.com/AngelMonica126/GraphicAlgorithm/wiki/Metalights-:-Improved-Interleaved-Shading)
   
