@@ -11,4 +11,9 @@
 [Non-interleaved Deferred Shading of Interleaved Sample Patterns(已复现)](https://github.com/AngelMonica126/GraphicAlgorithm/wiki/Non-interleaved-Deferred-Shading-of-Interleaved-Sample-Patterns)
 
 [Metalights : Improved Interleaved Shading(已复现)](https://github.com/AngelMonica126/GraphicAlgorithm/wiki/Metalights-:-Improved-Interleaved-Shading)
+
+## 透明度
+
+[Interactive Order-Independent Transparency(已复现)](https://github.com/AngelMonica126/GraphicAlgorithm/wiki/Interactive-Order-Independent-Transparency)
+
   
