@@ -21,9 +21,6 @@
     <ClCompile Include="main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="GBufferPass.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="CustomGUI.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -36,15 +33,12 @@
     <ClCompile Include="LightCamera.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="DepthPeellingPass.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="ScreenQuad_FS.glsl">
-      <Filter>Shader</Filter>
-    </None>
-    <None Include="GBuffer_FS.glsl">
-      <Filter>Shader</Filter>
-    </None>
-    <None Include="GBuffer_VS.glsl">
       <Filter>Shader</Filter>
     </None>
     <None Include="ScreenQuad_VS.glsl">
@@ -56,12 +50,15 @@
     <None Include="BlendPass_VS.glsl">
       <Filter>Shader</Filter>
     </None>
+    <None Include="DepthPeelling_VS.glsl">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="DepthPeelling_FS.glsl">
+      <Filter>Shader</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ScreenQuadPass.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="GBufferPass.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="CustomGUI.h">
@@ -71,6 +68,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="LightCamera.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DepthPeellingPass.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

@@ -4,11 +4,11 @@
 
 class CSponza;
 
-class GBufferPass : public IRenderPass
+class DepthPeellingPass : public IRenderPass
 {
 public:
-	GBufferPass(const std::string& vPassName, int vExcutionOrder);
-	virtual ~GBufferPass();
+	DepthPeellingPass(const std::string& vPassName, int vExcutionOrder);
+	virtual ~DepthPeellingPass();
 
 	virtual void initV();
 	virtual void updateV();

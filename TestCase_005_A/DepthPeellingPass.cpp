@@ -1,4 +1,4 @@
-#include "GBufferPass.h"
+#include "DepthPeellingPass.h"
 #include "Shader.h"
 #include "Interface.h"
 #include "Common.h"
@@ -7,22 +7,22 @@
 #include <GLM/gtc/matrix_transform.hpp>
 #include <GLM/gtc/type_ptr.hpp>
 #include <GLFW/glfw3.h>
-GBufferPass::GBufferPass(const std::string& vPassName, int vExcutionOrder) : IRenderPass(vPassName, vExcutionOrder)
+DepthPeellingPass::DepthPeellingPass(const std::string& vPassName, int vExcutionOrder) : IRenderPass(vPassName, vExcutionOrder)
 {
 }
 
-GBufferPass::~GBufferPass()
+DepthPeellingPass::~DepthPeellingPass()
 {
 }
 
-void GBufferPass::initV()
+void DepthPeellingPass::initV()
 {
 	ElayGraphics::Camera::setMainCameraFarPlane(100);
 	ElayGraphics::Camera::setMainCameraPos({ -1.75313, 15.1488, 40.9769 });	//对应1.0的LightCameraSize，同时避免红光
 	ElayGraphics::Camera::setMainCameraFront({ 0.0491563, -0.0413525, -0.997935 });
 	ElayGraphics::Camera::setMainCameraMoveSpeed(0.1);
 
-	m_pShader = std::make_shared<CShader>("GBuffer_VS.glsl", "GBuffer_FS.glsl");
+	m_pShader = std::make_shared<CShader>("DepthPeelling_VS.glsl", "DepthPeelling_FS.glsl");
 	
 	m_pSponza = std::dynamic_pointer_cast<CSponza>(ElayGraphics::ResourceManager::getGameObjectByName("Sponza"));
 	for (int i = 0; i < 2; i++)
@@ -87,7 +87,7 @@ void GBufferPass::initV()
 
 }
 
-void GBufferPass::updateV()
+void DepthPeellingPass::updateV()
 {
 	for (int i = 0; i < 4; i++)
 	{
