@@ -5,6 +5,7 @@
 #include <vector>
 #include "Common.h"
 
+
 class CGroundPass : public IRenderPass
 {
 public:
@@ -14,4 +15,5 @@ public:
 	virtual void initV() override;
 	virtual void updateV() override;
 private:
+
 };

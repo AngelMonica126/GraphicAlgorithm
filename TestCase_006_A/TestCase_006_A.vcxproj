@@ -23,7 +23,7 @@
     <ProjectGuid>{31FD77D8-A49C-4D9A-B373-6E683007DC13}</ProjectGuid>
     <RootNamespace>TestCase006A</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
-    <ProjectName>TestCase_006_A(Tile-Based Texture Mapping on Graphics Hardware)</ProjectName>
+    <ProjectName>TestCase_006_A(Wang Tiles for Image and Texture Generation)</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -128,12 +128,13 @@
   <ItemGroup>
     <ClInclude Include="Ground.h" />
     <ClInclude Include="GroundPass.h" />
-    <ClInclude Include="ScreenQuadPass.h" />
+    <ClInclude Include="TilePakagePass.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Ground.cpp" />
     <ClCompile Include="GroundPass.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="TilePakagePass.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -29,10 +29,10 @@
     <ClInclude Include="GroundPass.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="ScreenQuadPass.h">
+    <ClInclude Include="Ground.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Ground.h">
+    <ClInclude Include="TilePakagePass.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -44,6 +44,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="TilePakagePass.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
