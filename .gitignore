@@ -6,7 +6,6 @@ x64/
 Model/
 SDK/
 Fonts/
-Textures/
 packages/
 001_Reflective shadow map/x64/
 002_Non-interleaved Deferred Shading of Interleaved Sample/x64/
