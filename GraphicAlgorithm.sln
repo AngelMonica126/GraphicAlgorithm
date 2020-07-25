@@ -15,7 +15,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestCase_004_A(ImprovedInte
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestCase_005_A(InteractiveOrderIndependentTransparency)", "TestCase_005_A\TestCase_005_A.vcxproj", "{E7EE1A91-C62F-48FC-AF47-83A4217F4C5A}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestCase_006_A(Tile-Based Texture Mapping on Graphics Hardware)", "TestCase_006_A\TestCase_006_A.vcxproj", "{31FD77D8-A49C-4D9A-B373-6E683007DC13}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestCase_006_A(Wang Tiles for Image and Texture Generation)", "TestCase_006_A\TestCase_006_A.vcxproj", "{31FD77D8-A49C-4D9A-B373-6E683007DC13}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "001_Reflective shadow map", "001_Reflective shadow map\001_Reflective shadow map.vcxproj", "{5E259379-45A9-4BAC-8397-F532D950A9C6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -81,6 +83,14 @@ Global
 		{31FD77D8-A49C-4D9A-B373-6E683007DC13}.Release|x64.Build.0 = Release|x64
 		{31FD77D8-A49C-4D9A-B373-6E683007DC13}.Release|x86.ActiveCfg = Release|Win32
 		{31FD77D8-A49C-4D9A-B373-6E683007DC13}.Release|x86.Build.0 = Release|Win32
+		{5E259379-45A9-4BAC-8397-F532D950A9C6}.Debug|x64.ActiveCfg = Debug|x64
+		{5E259379-45A9-4BAC-8397-F532D950A9C6}.Debug|x64.Build.0 = Debug|x64
+		{5E259379-45A9-4BAC-8397-F532D950A9C6}.Debug|x86.ActiveCfg = Debug|Win32
+		{5E259379-45A9-4BAC-8397-F532D950A9C6}.Debug|x86.Build.0 = Debug|Win32
+		{5E259379-45A9-4BAC-8397-F532D950A9C6}.Release|x64.ActiveCfg = Release|x64
+		{5E259379-45A9-4BAC-8397-F532D950A9C6}.Release|x64.Build.0 = Release|x64
+		{5E259379-45A9-4BAC-8397-F532D950A9C6}.Release|x86.ActiveCfg = Release|Win32
+		{5E259379-45A9-4BAC-8397-F532D950A9C6}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
