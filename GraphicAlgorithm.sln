@@ -19,6 +19,16 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestCase_006_A(Wang Tiles f
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "001_Reflective shadow map", "001_Reflective shadow map\001_Reflective shadow map.vcxproj", "{5E259379-45A9-4BAC-8397-F532D950A9C6}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "002_Non-interleaved Deferred Shading of Interleaved Sample", "002_Non-interleaved Deferred Shading of Interleaved Sample\002_Non-interleaved Deferred Shading of Interleaved Sample.vcxproj", "{A5653491-CD8D-42D1-9001-7098F42310EC}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "003_Stochastic Light Culling", "003_Stochastic Light Culling\003_Stochastic Light Culling.vcxproj", "{7514D0DF-CA3F-45BF-99FD-006750211566}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "004_Metalights Improved Interleaved Shading", "004_Metalights Improved Interleaved Shading\004_Metalights Improved Interleaved Shading.vcxproj", "{61461882-CA24-4828-B64B-3F3DAA9D2603}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "005_Interactive Order Independent Transparency", "005_Interactive Order Independent Transparency\005_Interactive Order Independent Transparency.vcxproj", "{0FA91BD3-6F31-4069-AB5E-61A3AF0C3302}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "006_Wang Tiles for Image and Texture Generation", "006_Wang Tiles for Image and Texture Generation\006_Wang Tiles for Image and Texture Generation.vcxproj", "{03D49C9A-2DFF-4584-AF48-80353C6270BA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -91,6 +101,46 @@ Global
 		{5E259379-45A9-4BAC-8397-F532D950A9C6}.Release|x64.Build.0 = Release|x64
 		{5E259379-45A9-4BAC-8397-F532D950A9C6}.Release|x86.ActiveCfg = Release|Win32
 		{5E259379-45A9-4BAC-8397-F532D950A9C6}.Release|x86.Build.0 = Release|Win32
+		{A5653491-CD8D-42D1-9001-7098F42310EC}.Debug|x64.ActiveCfg = Debug|x64
+		{A5653491-CD8D-42D1-9001-7098F42310EC}.Debug|x64.Build.0 = Debug|x64
+		{A5653491-CD8D-42D1-9001-7098F42310EC}.Debug|x86.ActiveCfg = Debug|Win32
+		{A5653491-CD8D-42D1-9001-7098F42310EC}.Debug|x86.Build.0 = Debug|Win32
+		{A5653491-CD8D-42D1-9001-7098F42310EC}.Release|x64.ActiveCfg = Release|x64
+		{A5653491-CD8D-42D1-9001-7098F42310EC}.Release|x64.Build.0 = Release|x64
+		{A5653491-CD8D-42D1-9001-7098F42310EC}.Release|x86.ActiveCfg = Release|Win32
+		{A5653491-CD8D-42D1-9001-7098F42310EC}.Release|x86.Build.0 = Release|Win32
+		{7514D0DF-CA3F-45BF-99FD-006750211566}.Debug|x64.ActiveCfg = Debug|x64
+		{7514D0DF-CA3F-45BF-99FD-006750211566}.Debug|x64.Build.0 = Debug|x64
+		{7514D0DF-CA3F-45BF-99FD-006750211566}.Debug|x86.ActiveCfg = Debug|Win32
+		{7514D0DF-CA3F-45BF-99FD-006750211566}.Debug|x86.Build.0 = Debug|Win32
+		{7514D0DF-CA3F-45BF-99FD-006750211566}.Release|x64.ActiveCfg = Release|x64
+		{7514D0DF-CA3F-45BF-99FD-006750211566}.Release|x64.Build.0 = Release|x64
+		{7514D0DF-CA3F-45BF-99FD-006750211566}.Release|x86.ActiveCfg = Release|Win32
+		{7514D0DF-CA3F-45BF-99FD-006750211566}.Release|x86.Build.0 = Release|Win32
+		{61461882-CA24-4828-B64B-3F3DAA9D2603}.Debug|x64.ActiveCfg = Debug|x64
+		{61461882-CA24-4828-B64B-3F3DAA9D2603}.Debug|x64.Build.0 = Debug|x64
+		{61461882-CA24-4828-B64B-3F3DAA9D2603}.Debug|x86.ActiveCfg = Debug|Win32
+		{61461882-CA24-4828-B64B-3F3DAA9D2603}.Debug|x86.Build.0 = Debug|Win32
+		{61461882-CA24-4828-B64B-3F3DAA9D2603}.Release|x64.ActiveCfg = Release|x64
+		{61461882-CA24-4828-B64B-3F3DAA9D2603}.Release|x64.Build.0 = Release|x64
+		{61461882-CA24-4828-B64B-3F3DAA9D2603}.Release|x86.ActiveCfg = Release|Win32
+		{61461882-CA24-4828-B64B-3F3DAA9D2603}.Release|x86.Build.0 = Release|Win32
+		{0FA91BD3-6F31-4069-AB5E-61A3AF0C3302}.Debug|x64.ActiveCfg = Debug|x64
+		{0FA91BD3-6F31-4069-AB5E-61A3AF0C3302}.Debug|x64.Build.0 = Debug|x64
+		{0FA91BD3-6F31-4069-AB5E-61A3AF0C3302}.Debug|x86.ActiveCfg = Debug|Win32
+		{0FA91BD3-6F31-4069-AB5E-61A3AF0C3302}.Debug|x86.Build.0 = Debug|Win32
+		{0FA91BD3-6F31-4069-AB5E-61A3AF0C3302}.Release|x64.ActiveCfg = Release|x64
+		{0FA91BD3-6F31-4069-AB5E-61A3AF0C3302}.Release|x64.Build.0 = Release|x64
+		{0FA91BD3-6F31-4069-AB5E-61A3AF0C3302}.Release|x86.ActiveCfg = Release|Win32
+		{0FA91BD3-6F31-4069-AB5E-61A3AF0C3302}.Release|x86.Build.0 = Release|Win32
+		{03D49C9A-2DFF-4584-AF48-80353C6270BA}.Debug|x64.ActiveCfg = Debug|x64
+		{03D49C9A-2DFF-4584-AF48-80353C6270BA}.Debug|x64.Build.0 = Debug|x64
+		{03D49C9A-2DFF-4584-AF48-80353C6270BA}.Debug|x86.ActiveCfg = Debug|Win32
+		{03D49C9A-2DFF-4584-AF48-80353C6270BA}.Debug|x86.Build.0 = Debug|Win32
+		{03D49C9A-2DFF-4584-AF48-80353C6270BA}.Release|x64.ActiveCfg = Release|x64
+		{03D49C9A-2DFF-4584-AF48-80353C6270BA}.Release|x64.Build.0 = Release|x64
+		{03D49C9A-2DFF-4584-AF48-80353C6270BA}.Release|x86.ActiveCfg = Release|Win32
+		{03D49C9A-2DFF-4584-AF48-80353C6270BA}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
