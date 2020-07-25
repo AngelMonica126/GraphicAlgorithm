@@ -3,13 +3,6 @@
 Debug/
 FRAME/
 x64/
-Model/
 SDK/
 Fonts/
 packages/
-001_Reflective shadow map/x64/
-002_Non-interleaved Deferred Shading of Interleaved Sample/x64/
-003_Stochastic Light Culling/x64/
-004_Metalights Improved Interleaved Shading/x64/
-005_Interactive Order Independent Transparency/x64/
-006_Wang Tiles for Image and Texture Generation/x64
