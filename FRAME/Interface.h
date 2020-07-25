@@ -2,7 +2,6 @@
 #include <vector>
 #include <memory>
 #include <glm/glm.hpp>
-#include <boost/any.hpp>
 #include "FRAME_EXPORTS.h"
 
 class IGameObject;

@@ -1,0 +1,2 @@
+GraphicSDK.zip filter=lfs diff=lfs merge=lfs -text
+GraphicSDK/* filter=lfs diff=lfs merge=lfs -text
