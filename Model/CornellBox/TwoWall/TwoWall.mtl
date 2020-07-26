@@ -1,0 +1,8 @@
+newmtl floor
+map_Kd white.png
+
+newmtl backwall
+map_Kd red.png
+
+newmtl leftWall
+map_Kd green.png
