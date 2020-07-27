@@ -1,6 +1,6 @@
 [![GitHub stars](https://img.shields.io/github/stars/AngelMonica126/GraphicAlgorithm.svg?style=flat-square)](https://github.com/AngelMonica126/GraphicAlgorithm/stargazers)
 [![GitHub issues](https://img.shields.io/github/issues/AngelMonica126/GraphicAlgorithm?style=flat-square)](https://github.com/AngelMonica126/GraphicAlgorithm/issues)
-[![GitHub forks](https://img.shields.io/github/forks/AngelMonica126/GraphicAlgorithm?style=flat-square)](https://github.com/AngelMonica126/GraphicAlgorithme/network)
+[![GitHub forks](https://img.shields.io/github/forks/AngelMonica126/GraphicAlgorithm?style=flat-square)](https://github.com/AngelMonica126/GraphicAlgorithme/network/members)
 [![GitHub last commit](https://img.shields.io/github/last-commit/AngelMonica126/GraphicAlgorithm?style=flat-square)](https://github.com/AngelMonica126/GraphicAlgorithm)
 
 
