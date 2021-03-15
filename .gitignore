@@ -1,6 +1,6 @@
 .git/
 .vs/
 Debug/
-x64/
+Release/
 Fonts/
 packages/
