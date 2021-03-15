@@ -10,25 +10,25 @@
 
 ## 全局光照
 
-[Reflective Shadow Maps(已复现)](https://github.com/AngelMonica126/GraphicAlgorithm/wiki/Reflective-Shadow-Maps)
+[Reflective Shadow Maps(已复现)](https://zhuanlan.zhihu.com/p/357259069)
 
-[Stochastic Light Culling(已复现)](https://github.com/AngelMonica126/GraphicAlgorithm/wiki/Stochastic-Light-Culling)
+[Stochastic Light Culling(已复现)](https://zhuanlan.zhihu.com/p/357266673)
 
 ## 光照加速
 
-[Non-interleaved Deferred Shading of Interleaved Sample Patterns(已复现)](https://github.com/AngelMonica126/GraphicAlgorithm/wiki/Non-interleaved-Deferred-Shading-of-Interleaved-Sample-Patterns)
+[Non-interleaved Deferred Shading of Interleaved Sample Patterns(已复现)](https://zhuanlan.zhihu.com/p/357278685)
 
-[Metalights : Improved Interleaved Shading(已复现)](https://github.com/AngelMonica126/GraphicAlgorithm/wiki/Metalights-:-Improved-Interleaved-Shading)
+[Metalights : Improved Interleaved Shading(已复现)](https://zhuanlan.zhihu.com/p/357285413)
 
-[Tile Shading(已复现)](https://github.com/AngelMonica126/GraphicAlgorithm/wiki/Tile-Shading)
+[Tile Shading(已复现)](https://zhuanlan.zhihu.com/p/357275455)
 
 ## 透明度
 
-[Interactive Order-Independent Transparency(已复现)](https://github.com/AngelMonica126/GraphicAlgorithm/wiki/Interactive-Order-Independent-Transparency)
+[Interactive Order-Independent Transparency(已复现)](https://zhuanlan.zhihu.com/p/357282813)
 
 ## 纹理
 
-[Wang Tiles for Image and Texture Generation(1)(已复现)](https://github.com/AngelMonica126/GraphicAlgorithm/wiki/Wang-Tiles-for-Image-and-Texture-Generation)
+[Wang Tiles for Image and Texture Generation(已复现)](https://zhuanlan.zhihu.com/p/357287614)
 
 
 # 项目配置
