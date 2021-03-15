@@ -4,7 +4,7 @@
 [![GitHub last commit](https://img.shields.io/github/last-commit/AngelMonica126/GraphicAlgorithm?style=flat-square)](https://github.com/AngelMonica126/GraphicAlgorithm)
 
 
-   :octopus: :octopus: :octopus: 本项目会每周复现或者解析一篇经典有趣的图形学论文(#^.^#)，大家有觉得好的图形学论文也可以发邮件给我复现。
+   :octopus: :octopus: :octopus: 本项目会复现或者解析一些经典有趣的图形学论文(#^.^#)
 
 # 实时渲染
 
