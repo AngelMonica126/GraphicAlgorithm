@@ -30,6 +30,9 @@
 
 [Wang Tiles for Image and Texture Generation(已复现)](https://zhuanlan.zhihu.com/p/357287614)
 
+## 光照模型
+
+[Tone Based Shading(已复现)](https://zhuanlan.zhihu.com/p/357295394)
 
 # 项目配置
 
