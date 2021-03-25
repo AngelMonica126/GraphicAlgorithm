@@ -416,6 +416,14 @@ GLvoid CShader::activeShader() const
 
 //************************************************************************************
 //Function:
+GLint CShader::getShaderProgram() const
+{
+	return m_ShaderProgram;
+}
+
+
+//************************************************************************************
+//Function:
 GLvoid CShader::__activeAllTextureUniform() const
 {
 	/*for (const auto& Item : m_TextureAndBindingIndexAndTextureTypeSet)

@@ -6,4 +6,5 @@ SETX /M GLM "%~dp0GraphicSDK\glm\glm"
 SETX /M OPENGL "%~dp0GraphicSDK\OpenGL\OpenGL" 
 SETX /M SOIL "%~dp0GraphicSDK\SOIL\SOIL" 
 SETX /M STB_IMAGE "%~dp0GraphicSDK\stb_image\stb_image" 
+SETX /M OPENCV "%~dp0GraphicSDK\opencv\build" 
 pause

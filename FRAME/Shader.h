@@ -61,6 +61,8 @@ public:
 
 	void InquireLocalGroupSize(std::vector<GLint>& voLocalGroupSize) const;
 
+	GLint getShaderProgram() const;
+
 private:
 	GLint m_ShaderProgram = 0;
 	GLint m_LastBindingIndex = 7;
