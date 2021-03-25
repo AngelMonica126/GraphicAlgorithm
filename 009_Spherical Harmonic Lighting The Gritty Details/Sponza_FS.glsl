@@ -20,7 +20,6 @@ void main()
 	vec3 Normal = normalize(v2f_Normal);
 	
 	float basis[16];
-
 	float x = Normal.x;
 	float y = Normal.y;
 	float z = Normal.z;

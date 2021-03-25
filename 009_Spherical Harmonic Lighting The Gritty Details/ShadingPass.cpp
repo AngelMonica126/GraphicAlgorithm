@@ -63,17 +63,11 @@ void CShadingPass::getCoefs()
 void CShadingPass::updateV()
 {
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
-	glClearColor(0.2f, 0.3f, 0.4f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glEnable(GL_DEPTH_TEST);
-	glEnable(GL_CULL_FACE);
-	glCullFace(GL_BACK);
+
 
 	m_pShader->activeShader();
 
 	m_pSponza->updateModel(*m_pShader);
 
-	glDisable(GL_CULL_FACE);
-	glDisable(GL_DEPTH_TEST);
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }

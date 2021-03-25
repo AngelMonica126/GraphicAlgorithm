@@ -24,12 +24,21 @@
     <None Include="Sponza_VS.glsl">
       <Filter>Shader</Filter>
     </None>
+    <None Include="SkyBox_FS.glsl">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="SkyBox_VS.glsl">
+      <Filter>Shader</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ShadingPass.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Sponza.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="SkyBoxPass.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -41,6 +50,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Sponza.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="SkyBoxPass.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

@@ -121,16 +121,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <None Include="SkyBox_FS.glsl" />
+    <None Include="SkyBox_VS.glsl" />
     <None Include="Sponza_FS.glsl" />
     <None Include="Sponza_VS.glsl" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ShadingPass.h" />
+    <ClInclude Include="SkyBoxPass.h" />
     <ClInclude Include="Sponza.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ShadingPass.cpp" />
+    <ClCompile Include="SkyBoxPass.cpp" />
     <ClCompile Include="Sponza.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
