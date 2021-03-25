@@ -49,7 +49,7 @@ int main(int argc, char* argv[])
 
 		cout << "reading cubemap ..." << endl;
 		Cubemap cubemap(img_files);
-		if(write_rendered)
+		if (write_rendered)
 		{
 			string expandfile = outdir + "expand." + format;
 			cout << "write expand cubemap image: " << expandfile << endl;
