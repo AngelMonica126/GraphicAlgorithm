@@ -29,6 +29,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SH_Sampler", "SH_Sampler\SH
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BRDF_Sampler", "BRDF_Sampler\BRDF_Sampler.vcxproj", "{E30BD9C0-94C1-440F-A28B-57BA0A25867A}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "010_RealTimePolygonalLightShadingWithLinearlyTransformedCosines", "010_RealTimePolygonalLightShadingWithLinearlyTransformedCosines\010_RealTimePolygonalLightShadingWithLinearlyTransformedCosines.vcxproj", "{59B22601-76C5-4BBC-AC77-498748AAED4E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -133,6 +135,14 @@ Global
 		{E30BD9C0-94C1-440F-A28B-57BA0A25867A}.Release|x64.Build.0 = Release|x64
 		{E30BD9C0-94C1-440F-A28B-57BA0A25867A}.Release|x86.ActiveCfg = Release|Win32
 		{E30BD9C0-94C1-440F-A28B-57BA0A25867A}.Release|x86.Build.0 = Release|Win32
+		{59B22601-76C5-4BBC-AC77-498748AAED4E}.Debug|x64.ActiveCfg = Debug|x64
+		{59B22601-76C5-4BBC-AC77-498748AAED4E}.Debug|x64.Build.0 = Debug|x64
+		{59B22601-76C5-4BBC-AC77-498748AAED4E}.Debug|x86.ActiveCfg = Debug|Win32
+		{59B22601-76C5-4BBC-AC77-498748AAED4E}.Debug|x86.Build.0 = Debug|Win32
+		{59B22601-76C5-4BBC-AC77-498748AAED4E}.Release|x64.ActiveCfg = Release|x64
+		{59B22601-76C5-4BBC-AC77-498748AAED4E}.Release|x64.Build.0 = Release|x64
+		{59B22601-76C5-4BBC-AC77-498748AAED4E}.Release|x86.ActiveCfg = Release|Win32
+		{59B22601-76C5-4BBC-AC77-498748AAED4E}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -32,17 +32,17 @@ void main()
 	vec3 specular = (F * envBRDF.x + envBRDF.y);
 
 	float basis[16];
-	float x = 1;
-	float y = 1;
-	float z = 1;
-	float x2 = 1;
-	float y2 = 1;
-	float z2 = 1;
+	float x = N.x;
+	float y = N.y;
+	float z = N.z;
+	float x2 = x*x;
+	float y2 = y*y;
+	float z2 = z*z;
     
     basis[0] = 1.f / 2.f * sqrt(1.f / PI);
-    basis[1] = sqrt(3.f / (4.f*PI))*z;
-    basis[2] = sqrt(3.f / (4.f*PI))*y;
-    basis[3] = sqrt(3.f / (4.f*PI))*x;
+    basis[1] = sqrt(3.f / (4.f * PI))* z;
+    basis[2] = sqrt(3.f / (4.f * PI))* y;
+    basis[3] = sqrt(3.f / (4.f * PI))* x;
     basis[4] = 1.f / 2.f * sqrt(15.f / PI) * x * z;
     basis[5] = 1.f / 2.f * sqrt(15.f / PI) * z * y;
     basis[6] = 1.f / 4.f * sqrt(5.f / PI) * (-x2 - z2 + 2 * y2);
@@ -60,5 +60,5 @@ void main()
 	for (int i = 0; i < 16; i++)
 		color += u_Coef[i] * basis[i];
 
-	Albedo_ = vec4(color ,1.0);
+	Albedo_ = vec4(0.5 * color + 0.5 * specular,1.0);
 }
