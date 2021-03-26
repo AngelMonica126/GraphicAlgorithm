@@ -31,6 +31,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BRDF_Sampler", "BRDF_Sample
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "010_RealTimePolygonalLightShadingWithLinearlyTransformedCosines", "010_RealTimePolygonalLightShadingWithLinearlyTransformedCosines\010_RealTimePolygonalLightShadingWithLinearlyTransformedCosines.vcxproj", "{59B22601-76C5-4BBC-AC77-498748AAED4E}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FitLTCMatrix", "FitLTCMatrix\FitLTCMatrix.vcxproj", "{2A7A8A8C-5242-4378-B6F6-DE73FE036B18}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -143,6 +145,14 @@ Global
 		{59B22601-76C5-4BBC-AC77-498748AAED4E}.Release|x64.Build.0 = Release|x64
 		{59B22601-76C5-4BBC-AC77-498748AAED4E}.Release|x86.ActiveCfg = Release|Win32
 		{59B22601-76C5-4BBC-AC77-498748AAED4E}.Release|x86.Build.0 = Release|Win32
+		{2A7A8A8C-5242-4378-B6F6-DE73FE036B18}.Debug|x64.ActiveCfg = Debug|x64
+		{2A7A8A8C-5242-4378-B6F6-DE73FE036B18}.Debug|x64.Build.0 = Debug|x64
+		{2A7A8A8C-5242-4378-B6F6-DE73FE036B18}.Debug|x86.ActiveCfg = Debug|Win32
+		{2A7A8A8C-5242-4378-B6F6-DE73FE036B18}.Debug|x86.Build.0 = Debug|Win32
+		{2A7A8A8C-5242-4378-B6F6-DE73FE036B18}.Release|x64.ActiveCfg = Release|x64
+		{2A7A8A8C-5242-4378-B6F6-DE73FE036B18}.Release|x64.Build.0 = Release|x64
+		{2A7A8A8C-5242-4378-B6F6-DE73FE036B18}.Release|x86.ActiveCfg = Release|Win32
+		{2A7A8A8C-5242-4378-B6F6-DE73FE036B18}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -150,6 +160,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{41DA8CC3-24CF-4E6A-8CAE-A5AD1452D9FD} = {A03BAF1F-EE48-42BE-83FC-A0DBBD02FCEE}
 		{E30BD9C0-94C1-440F-A28B-57BA0A25867A} = {A03BAF1F-EE48-42BE-83FC-A0DBBD02FCEE}
+		{2A7A8A8C-5242-4378-B6F6-DE73FE036B18} = {A03BAF1F-EE48-42BE-83FC-A0DBBD02FCEE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4D515167-7B8B-4B7D-BF16-31B78D444E75}
