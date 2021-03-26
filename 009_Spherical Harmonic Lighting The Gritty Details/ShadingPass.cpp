@@ -24,7 +24,8 @@ CShadingPass::~CShadingPass()
 //Function:
 void CShadingPass::initV()
 {
-
+	auto m_LUTTexture = std::make_shared<ElayGraphics::STexture>();
+	loadTextureFromFile("../Textures/BRDFLUT/BRDFLut.dds", m_LUTTexture);
 	getCoefs();
 	ElayGraphics::Camera::setMainCameraFarPlane(100);
 	ElayGraphics::Camera::setMainCameraPos({ -1.57278, 0.244948, 0.367194 });
@@ -33,6 +34,7 @@ void CShadingPass::initV()
 	m_pShader = std::make_shared<CShader>("Sponza_VS.glsl", "Sponza_FS.glsl");
 	m_pSponza = std::dynamic_pointer_cast<CSponza>(ElayGraphics::ResourceManager::getGameObjectByName("Sponza"));
 	m_pShader->activeShader();
+	m_pShader->setTextureUniformValue("u_BRDFLut", m_LUTTexture);
 	m_pShader->setMat4UniformValue("u_ModelMatrix", glm::value_ptr(m_pSponza->getModelMatrix()));
 	for (int i = 0; i < m_Coefs.size(); i++)
 	{
