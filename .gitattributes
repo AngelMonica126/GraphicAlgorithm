@@ -1,8 +1,14 @@
-GraphicSDK/opencv/build/x64/vc15/bin/*filter=lfs diff=lfs merge=lfs -text
-GraphicSDK/opencv/build/x64/vc14/bin/*filter=lfs diff=lfs merge=lfs -text
-GraphicSDK/* filter=lfs diff=lfs merge=lfs -text
 Model/CornellBox/* filter=lfs diff=lfs merge=lfs -text
 Model/salle_de_bain/* filter=lfs diff=lfs merge=lfs -text
 Model/sponza/* filter=lfs diff=lfs merge=lfs -text
 Model/CornellBox/HalfCornellBoxAndBuddha/* filter=lfs diff=lfs merge=lfs -text
-GraphicSDK/opencv/*filter=lfs diff=lfs merge=lfs -text
+GraphicSDK/* filter=lfs diff=lfs merge=lfs -text
+GraphicSDK/boost_1_69 filter=lfs diff=lfs merge=lfs -text
+GraphicSDK/CImg filter=lfs diff=lfs merge=lfs -text
+GraphicSDK/gli filter=lfs diff=lfs merge=lfs -text
+GraphicSDK/OpenGL filter=lfs diff=lfs merge=lfs -text
+GraphicSDK/SOIL filter=lfs diff=lfs merge=lfs -text
+GraphicSDK/Assimp filter=lfs diff=lfs merge=lfs -text
+GraphicSDK/glm filter=lfs diff=lfs merge=lfs -text
+GraphicSDK/opencv filter=lfs diff=lfs merge=lfs -text
+GraphicSDK/stb_image filter=lfs diff=lfs merge=lfs -text
