@@ -1,8 +1,3 @@
-#define STB_IMAGE_IMPLEMENTATION
-#include <stb_image.h>
-#define STB_IMAGE_WRITE_IMPLEMENTATION
-#include <stb_image_write.h>
-#include "SkyboxPass.h"
 #include "Shader.h"
 #include "Sponza.h"
 #include "Interface.h"
@@ -14,6 +9,7 @@
 #include <string>
 #include <iostream>
 #include <fstream>
+#include "SkyboxPass.h"
 
 
 CSkyboxPass::CSkyboxPass(const std::string& vPassName, int vExcutionOrder) :IRenderPass(vPassName, vExcutionOrder)
@@ -39,22 +35,18 @@ void CSkyboxPass::initV()
 	};
 	m_pShader = std::make_shared<CShader>("Skybox_VS.glsl", "Skybox_FS.glsl");
 	auto Texture = std::make_shared<ElayGraphics::STexture>();
-	int width, height, nrChannels;
-	std::string path = "../Textures/Skybox/";
-	for (int i = 0; i < faces.size(); i++)
-	{
-		unsigned char *data = stbi_load((path + faces[i]).c_str(), &width, &height, &nrChannels, 0);
-		Texture->pDataSet.push_back(data);
-	}
 	Texture->Type4WrapR = Texture->Type4WrapS = Texture->Type4WrapT = GL_CLAMP_TO_EDGE;
 	Texture->Type4MinFilter = Texture->Type4MagFilter = GL_LINEAR;
-	Texture->Width = width;
-	Texture->Height = height;
 	Texture->InternalFormat = GL_RGB;
 	Texture->ExternalFormat = GL_RGB;
 	Texture->TextureType = ElayGraphics::STexture::ETextureType::TextureCubeMap;
-	genTexture(Texture);
-
+	std::string path = "../Textures/Skybox/";
+	std::vector<std::string> p;
+	for (int i = 0; i < faces.size(); i++)
+	{
+		p.push_back((path + faces[i]));
+	}
+	loadCubeTextureFromFile(p, Texture);
 	m_pShader->activeShader();
 	m_pShader->setTextureUniformValue("u_Skybox", Texture);
 }

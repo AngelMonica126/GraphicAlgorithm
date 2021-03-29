@@ -11,6 +11,11 @@ uniform vec3 u_Coef[16];
 uniform vec3 u_DiffuseColor;
 uniform sampler2D u_BRDFLut;
 
+uniform samplerCube u_Texture1;
+uniform samplerCube u_Texture2;
+uniform samplerCube u_Texture3;
+
+
 vec3 FresnelSchlickRoughness(float cosTheta, vec3 F0, float roughness)
 {
     return F0 + (max(vec3(1.0 - roughness), F0) - F0) * pow(max(1.0 - cosTheta, 0.0), 5.0);
@@ -31,34 +36,24 @@ void main()
 	vec2 envBRDF  = texture(u_BRDFLut, vec2(max(dot(N, V), 0.0), roughness)).rg;
 	vec3 specular = (F * envBRDF.x + envBRDF.y);
 
-	float basis[16];
-	float x = N.x;
-	float y = N.y;
-	float z = N.z;
-	float x2 = x*x;
-	float y2 = y*y;
-	float z2 = z*z;
-    
-    basis[0] = 1.f / 2.f * sqrt(1.f / PI);
-    basis[1] = sqrt(3.f / (4.f * PI))* z;
-    basis[2] = sqrt(3.f / (4.f * PI))* y;
-    basis[3] = sqrt(3.f / (4.f * PI))* x;
-    basis[4] = 1.f / 2.f * sqrt(15.f / PI) * x * z;
-    basis[5] = 1.f / 2.f * sqrt(15.f / PI) * z * y;
-    basis[6] = 1.f / 4.f * sqrt(5.f / PI) * (-x2 - z2 + 2 * y2);
-    basis[7] = 1.f / 2.f * sqrt(15.f / PI) * y * x;
-    basis[8] = 1.f / 4.f * sqrt(15.f / PI) * (x2 - z2);
-    basis[9] = 1.f / 4.f * sqrt(35.f / (2.f * PI)) * (3 * x2 - z2) * z;
-    basis[10] = 1.f / 2.f * sqrt(105.f / PI)*x*z*y;
-    basis[11] = 1.f / 4.f * sqrt(21.f / (2.f * PI )) * z * (4 * y2 - x2 - z2);
-    basis[12] = 1.f / 4.f * sqrt(7.f / PI) * y * (2 * y2 - 3 * x2 - 3 * z2);
-    basis[13] = 1.f / 4.f * sqrt(21.f / (2.f * PI)) * x * (4 * y2 - x2 - z2);
-    basis[14] = 1.f / 4.f * sqrt(105.f / PI) * (x2 - z2) * y;
-    basis[15] = 1.f / 4.f * sqrt(35.f / (2 * PI)) * (x2 - 3 * z2) * x;
+	vec3 basis1 = texture(u_Texture1,N).xyz;
+	vec3 basis2 = texture(u_Texture2,N).xyz;
+	vec3 basis3 = texture(u_Texture3,N).xyz;
+
+	float basis[9];
+	basis[0]  = basis1.x / PI;
+	basis[1]  = basis1.y / PI;
+	basis[2]  = basis1.z / PI;
+	basis[3]  = basis2.x / PI;
+	basis[4]  = basis2.y / PI;
+	basis[5]  = basis2.z / PI;
+	basis[6]  = basis3.x / PI;
+	basis[7]  = basis3.y / PI;
+	basis[8]  = basis3.z / PI;
 
 	vec3 color = vec3(0,0,0);
-	for (int i = 0; i < 16; i++)
+	for (int i = 0; i < 9; i++)
 		color += u_Coef[i] * basis[i];
 
-	Albedo_ = vec4(0.5 * color + 0.5 * specular,1.0);
+	Albedo_ = vec4(1 * color + 0.0 * specular,1.0);
 }

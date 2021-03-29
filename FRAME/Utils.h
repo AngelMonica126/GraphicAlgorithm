@@ -18,6 +18,7 @@ FRAME_DLLEXPORTS GLvoid genTexture(std::shared_ptr<ElayGraphics::STexture> vioTe
 FRAME_DLLEXPORTS GLvoid genGenerateMipmap(std::shared_ptr<ElayGraphics::STexture> vioTexture);
 //FRAME_DLLEXPORTS GLvoid loadTextureFromFile(const std::string& vFilePath);
 FRAME_DLLEXPORTS GLvoid loadTextureFromFile(const std::string& vFilePath, std::shared_ptr<ElayGraphics::STexture> voTexture2D);
+FRAME_DLLEXPORTS GLvoid loadCubeTextureFromFile(const std::vector<std::string>& vFilePath, std::shared_ptr<ElayGraphics::STexture> voTexture2D);
 FRAME_DLLEXPORTS GLint  createVAO4ScreenQuad();
 FRAME_DLLEXPORTS GLint  createVAO4Cube();
 FRAME_DLLEXPORTS GLint  createVAO4Sphere();

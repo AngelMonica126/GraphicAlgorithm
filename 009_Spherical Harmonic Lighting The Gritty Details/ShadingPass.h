@@ -2,6 +2,7 @@
 #include "RenderPass.h"
 #include <memory>
 #include <GL/glew.h>
+
 class CSponza;
 
 class CShadingPass : public IRenderPass

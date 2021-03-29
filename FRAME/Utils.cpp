@@ -457,6 +457,20 @@ void configureHDRTexture(const std::string& vFilePath, std::shared_ptr<ElayGraph
 	voTexture2D->pDataSet.push_back(pImageData);
 }
 
+GLvoid loadCubeTextureFromFile(const std::vector<std::string>& vFilePath, std::shared_ptr<ElayGraphics::STexture> voTexture2D)
+{
+	if(vFilePath.size()  != 6)
+		_ASSERT(vFilePath.size());
+	int width, height, nrChannels;
+	for (int i = 0; i < vFilePath.size(); i++)
+	{
+		unsigned char *data = stbi_load((vFilePath[i]).c_str(), &width, &height, &nrChannels, 0);
+		voTexture2D->pDataSet.push_back(data);
+	}
+	voTexture2D->Width = width;
+	voTexture2D->Height = height;
+	genTexture(voTexture2D);
+}
 //************************************************************************************
 //Function:
 GLvoid loadTextureFromFile(const std::string& vFilePath, std::shared_ptr<ElayGraphics::STexture> voTexture2D)
