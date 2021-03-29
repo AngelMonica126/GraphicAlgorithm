@@ -1,6 +1,7 @@
 #include "util.h"
 #include <vector>
 #include "harmonics.h"
+#include <algorithm>
 
 using namespace std;
 
@@ -8,53 +9,51 @@ Harmonics::Harmonics(int degree)
 	:degree_(degree)
 {
 	int maxfact = degree * degree;
-	factorial.resize(maxfact+1);
-	for (int i = 0; i <= maxfact; i++) 
-	{
-		if (i == 0)
-			factorial[i] = 1;
-		else
-			factorial[i] = i * factorial[i - 1];
-	}
 }
 
-void Harmonics::Evaluate(const std::vector<Vertex>& vertices)
-{
-	int n = (degree_ + 1)*(degree_ + 1);
-	coefs = vector<Vec3>(n, Vec3());
-	for (const Vertex& v : vertices)
-	{
-		vector<float> Y = Basis(v.pos);
-		for (int i = 0; i < n; i++)
-		{
-			coefs[i] = coefs[i] + Y[i] * v.color;
-		}
-	}
-	for (Vec3& coef : coefs)
-	{
-		coef = 4*PI*coef / (float)vertices.size();
-	}
-}
 
-Vec3 Harmonics::Render(const Vec3& pos)
+std::vector<float> Harmonics::Render(Vec3& normal, int width, int height)
 {
-	int n = (degree_ + 1)*(degree_ + 1);
-
-	vector<float> Y = Basis(pos);
-	Vec3 color;
-	for (int i = 0; i < n; i++)
-	{
-		color = color + Y[i] * coefs[i];
-	}
-	return color;
-}
-
-std::array<cv::Mat, 6> Harmonics::RenderCubemap(int width, int height)
-{
-	std::array<cv::Mat, 6> imgs;
+	normal = Normalize(normal);
+	vector<float> res(9);
+	vector<float> count(9);
 	for (int k = 0; k < 6; k++)
 	{
-		imgs[k] = cv::Mat(height, width, CV_32FC3);
+		for (int i = 0; i < height; i++)
+		{
+			for (int j = 0; j < width; j++)
+			{
+				float u = (float)j / (width - 1);
+				float v = 1.f - (float)i / (height - 1);
+				Vec3 w = (CubeUV2XYZ({ k, u, v }));
+				vector<float> Y = Basis(w);
+				w = Normalize(w);
+				for (int index = 0; index < 9; index++)
+				{
+					float cos = w * normal;
+					if (cos > 0)
+						count[index]++;
+					else
+						continue;
+					res[index] += cos * Y[index];
+				}
+			}
+		}
+	}
+	for (int i = 0; i < 9; i++)
+		res[i] =  res[i] / count[i];
+	return res;
+}
+
+std::array<cv::Mat, 18> Harmonics::RenderCubemap(int width, int height)
+{
+	std::array<cv::Mat, 18> imgs;
+	int index = 0;
+	for (int k = 0; k < 6; k++)
+	{
+		imgs[index] = cv::Mat(height, width, CV_32FC3);
+		imgs[index + 1] = cv::Mat(height, width, CV_32FC3);
+		imgs[index + 2] = cv::Mat(height, width, CV_32FC3);
 		for (int i = 0; i < height; i++)
 		{
 			for (int j = 0; j < width; j++)
@@ -62,10 +61,13 @@ std::array<cv::Mat, 6> Harmonics::RenderCubemap(int width, int height)
 				float u = (float)j / (width - 1);
 				float v = 1.f - (float)i / (height - 1);
 				Vec3 pos = CubeUV2XYZ({ k, u, v });
-				Vec3 color = Render(pos);
-				imgs[k].at<cv::Vec3f>(i, j) = { color.b, color.g, color.r };
+				vector<float> color = Render(pos,64,64);
+				imgs[index].at<cv::Vec3f>(i, j) = { color[0], color[1],color[2] };
+				imgs[index + 1].at<cv::Vec3f>(i, j) = { color[3], color[4],color[5] };
+				imgs[index + 2].at<cv::Vec3f>(i, j) = { color[6], color[7],color[8] };
 			}
 		}
+		index += 3;
 	}
 	return imgs;
 }

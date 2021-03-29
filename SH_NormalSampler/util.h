@@ -31,6 +31,11 @@ inline Vec3 operator*(float c, const Vec3& a)
 	return Vec3(c*a.x, c*a.y, c*a.z);
 }
 
+inline float operator*(const Vec3& c, const Vec3& a)
+{
+	return (c.x*a.x+c.y*a.y+c.z*a.z);
+}
+
 inline Vec3 operator/(const Vec3& a, float c)
 {
 	return Vec3(a.x/c, a.y/c, a.z/c);
