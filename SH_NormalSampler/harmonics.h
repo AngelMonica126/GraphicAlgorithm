@@ -15,5 +15,4 @@ private:
 	int degree_;
 
 	std::vector<float> Basis(const Vec3& pos);
-	std::vector<float> factorial;
 };
