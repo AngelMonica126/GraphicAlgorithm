@@ -6,7 +6,8 @@
 
    :octopus: :octopus: :octopus: 本项目会复现或者解析一些经典有趣的图形学论文(#^.^#)
 
-   :octopus 论文解析：[知乎：Monica的小甜甜](https://zhuanlan.zhihu.com/p/357265599)
+# 论文解析地址
+  [知乎：Monica的小甜甜](https://zhuanlan.zhihu.com/p/357265599)
 
 # 项目配置
 
