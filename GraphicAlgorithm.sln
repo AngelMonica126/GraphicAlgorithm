@@ -35,6 +35,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FitLTCMatrix", "FitLTCMatri
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SH_NormalSampler", "SH_NormalSampler\SH_NormalSampler.vcxproj", "{F95F3E16-3992-47DD-8096-88C376C98CDF}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "011_An Efficient Representation for Irradiance Environment Maps", "011_An Efficient Representation for Irradiance Environment Maps\011_An Efficient Representation for Irradiance Environment Maps.vcxproj", "{0AA7A63F-91F2-4ED5-8FD5-A3D4AC888823}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -163,6 +165,14 @@ Global
 		{F95F3E16-3992-47DD-8096-88C376C98CDF}.Release|x64.Build.0 = Release|x64
 		{F95F3E16-3992-47DD-8096-88C376C98CDF}.Release|x86.ActiveCfg = Release|Win32
 		{F95F3E16-3992-47DD-8096-88C376C98CDF}.Release|x86.Build.0 = Release|Win32
+		{0AA7A63F-91F2-4ED5-8FD5-A3D4AC888823}.Debug|x64.ActiveCfg = Debug|x64
+		{0AA7A63F-91F2-4ED5-8FD5-A3D4AC888823}.Debug|x64.Build.0 = Debug|x64
+		{0AA7A63F-91F2-4ED5-8FD5-A3D4AC888823}.Debug|x86.ActiveCfg = Debug|Win32
+		{0AA7A63F-91F2-4ED5-8FD5-A3D4AC888823}.Debug|x86.Build.0 = Debug|Win32
+		{0AA7A63F-91F2-4ED5-8FD5-A3D4AC888823}.Release|x64.ActiveCfg = Release|x64
+		{0AA7A63F-91F2-4ED5-8FD5-A3D4AC888823}.Release|x64.Build.0 = Release|x64
+		{0AA7A63F-91F2-4ED5-8FD5-A3D4AC888823}.Release|x86.ActiveCfg = Release|Win32
+		{0AA7A63F-91F2-4ED5-8FD5-A3D4AC888823}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
