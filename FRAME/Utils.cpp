@@ -490,7 +490,7 @@ GLvoid loadTextureFromFile(const std::string& vFilePath, std::shared_ptr<ElayGra
 		configureHDRTexture(vFilePath, voTexture2D);
 	else
 		configureCommonTexture(vFilePath, voTexture2D);
-
+	voTexture2D->isMipmap = true;
 	genTexture(voTexture2D);
 
 	if (IsUseStbi) stbi_image_free(voTexture2D->pDataSet[0]);
