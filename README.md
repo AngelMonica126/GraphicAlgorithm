@@ -6,33 +6,8 @@
 
    :octopus: :octopus: :octopus: 本项目会复现或者解析一些经典有趣的图形学论文(#^.^#)
 
-# 实时渲染
-
-## 全局光照
-
-[Reflective Shadow Maps(已复现)](https://zhuanlan.zhihu.com/p/357259069)
-
-[Stochastic Light Culling(已复现)](https://zhuanlan.zhihu.com/p/357266673)
-
-## 光照加速
-
-[Non-interleaved Deferred Shading of Interleaved Sample Patterns(已复现)](https://zhuanlan.zhihu.com/p/357278685)
-
-[Metalights : Improved Interleaved Shading(已复现)](https://zhuanlan.zhihu.com/p/357285413)
-
-[Tile Shading(已复现)](https://zhuanlan.zhihu.com/p/357275455)
-
-## 透明度
-
-[Interactive Order-Independent Transparency(已复现)](https://zhuanlan.zhihu.com/p/357282813)
-
-## 纹理
-
-[Wang Tiles for Image and Texture Generation(已复现)](https://zhuanlan.zhihu.com/p/357287614)
-
-## 光照模型
-
-[Tone Based Shading(已复现)](https://zhuanlan.zhihu.com/p/357295394)
+# 论文解析地址
+  [知乎：Monica的小甜甜](https://zhuanlan.zhihu.com/p/357265599)
 
 # 项目配置
 
