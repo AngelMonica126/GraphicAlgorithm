@@ -20,7 +20,7 @@ void main()
     float opaqueDepth = texelFetch(u_OpacityTexture, ivec2(gl_FragCoord.xy), 0).r;
 	if (opaqueDepth != 0.0 && gl_FragCoord.z > opaqueDepth) discard;
 	
-	float a0 = u_DiffuseColor.a;
+	float a0 = -log(1.0 - u_DiffuseColor.a + 1e-5);
 	float depth = LinearizeDepth(gl_FragCoord.z);
 
 	float sin2, cos2, sin4, cos4, sin6, cos6, sin8, cos8, sin10, cos10, sin12, cos12, sin14, cos14;
