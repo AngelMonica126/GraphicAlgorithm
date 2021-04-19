@@ -13,6 +13,8 @@
 
 * 首先克隆本项目到本地
 
+* 下载GraphicSDK https://pan.baidu.com/s/1V67KKqjsypsHSs3LmQP83g 密码: 1234 （git lfs一直抽风），然后将其解压到GraphicAlgorithm目录下即可
+
 * 用管理员的权限运行 Graphic.bat 以自动配置环境变量
 
 * 在项目中选择Frame点击生成以生成动态链接库（这是把Opengl进行了稍微封装的引擎，简化了很多比如创建帧缓冲的代码）
