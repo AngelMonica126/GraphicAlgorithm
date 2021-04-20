@@ -43,6 +43,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "013_Fourier Opacity Optimiz
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "014_Approximating Dynamic Global Illumination in Image Space", "014_Approximating Dynamic Global Illumination in Image Space\014_Approximating Dynamic Global Illumination in Image Space.vcxproj", "{B0E41CEF-0C0A-4516-8EB7-3D50284283CC}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "015_Image Space Horizon Based Ambient Occlusion", "015_Image Space Horizon Based Ambient Occlusion\015_Image Space Horizon Based Ambient Occlusion.vcxproj", "{D84D86CE-D3CA-4199-8F2E-E482EA5F10B6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -203,6 +205,14 @@ Global
 		{B0E41CEF-0C0A-4516-8EB7-3D50284283CC}.Release|x64.Build.0 = Release|x64
 		{B0E41CEF-0C0A-4516-8EB7-3D50284283CC}.Release|x86.ActiveCfg = Release|Win32
 		{B0E41CEF-0C0A-4516-8EB7-3D50284283CC}.Release|x86.Build.0 = Release|Win32
+		{D84D86CE-D3CA-4199-8F2E-E482EA5F10B6}.Debug|x64.ActiveCfg = Debug|x64
+		{D84D86CE-D3CA-4199-8F2E-E482EA5F10B6}.Debug|x64.Build.0 = Debug|x64
+		{D84D86CE-D3CA-4199-8F2E-E482EA5F10B6}.Debug|x86.ActiveCfg = Debug|Win32
+		{D84D86CE-D3CA-4199-8F2E-E482EA5F10B6}.Debug|x86.Build.0 = Debug|Win32
+		{D84D86CE-D3CA-4199-8F2E-E482EA5F10B6}.Release|x64.ActiveCfg = Release|x64
+		{D84D86CE-D3CA-4199-8F2E-E482EA5F10B6}.Release|x64.Build.0 = Release|x64
+		{D84D86CE-D3CA-4199-8F2E-E482EA5F10B6}.Release|x86.ActiveCfg = Release|Win32
+		{D84D86CE-D3CA-4199-8F2E-E482EA5F10B6}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
