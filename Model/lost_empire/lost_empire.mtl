@@ -1,0 +1,613 @@
+Wavefront OBJ material file
+# Contains 45 materials
+
+newmtl Stone
+# Ns 0
+# Ka 0.2 0.2 0.2
+Kd 1 1 1
+Ks 0 0 0
+# map_Ka lost_empire-RGB.png
+# for G3D, to make textures look blocky:
+interpolateMode NEAREST_MAGNIFICATION_TRILINEAR_MIPMAP_MINIFICATION
+map_Kd lost_empire-RGB.png
+# illum 2
+# d 1
+# Tr 0
+
+newmtl Grass_Block
+# Ns 0
+# Ka 0.2 0.2 0.2
+Kd 1 1 1
+Ks 0 0 0
+# map_Ka lost_empire-RGB.png
+# for G3D, to make textures look blocky:
+interpolateMode NEAREST_MAGNIFICATION_TRILINEAR_MIPMAP_MINIFICATION
+map_Kd lost_empire-RGB.png
+# illum 2
+# d 1
+# Tr 0
+
+newmtl Dirt
+# Ns 0
+# Ka 0.2 0.2 0.2
+Kd 1 1 1
+Ks 0 0 0
+# map_Ka lost_empire-RGB.png
+# for G3D, to make textures look blocky:
+interpolateMode NEAREST_MAGNIFICATION_TRILINEAR_MIPMAP_MINIFICATION
+map_Kd lost_empire-RGB.png
+# illum 2
+# d 1
+# Tr 0
+
+newmtl Cobblestone
+# Ns 0
+# Ka 0.2 0.2 0.2
+Kd 1 1 1
+Ks 0 0 0
+# map_Ka lost_empire-RGB.png
+# for G3D, to make textures look blocky:
+interpolateMode NEAREST_MAGNIFICATION_TRILINEAR_MIPMAP_MINIFICATION
+map_Kd lost_empire-RGB.png
+# illum 2
+# d 1
+# Tr 0
+
+newmtl Oak_Planks
+# Ns 0
+# Ka 0.2 0.2 0.2
+Kd 1 1 1
+Ks 0 0 0
+# map_Ka lost_empire-RGB.png
+# for G3D, to make textures look blocky:
+interpolateMode NEAREST_MAGNIFICATION_TRILINEAR_MIPMAP_MINIFICATION
+map_Kd lost_empire-RGB.png
+# illum 2
+# d 1
+# Tr 0
+
+newmtl Stationary_Water
+# Ns 0
+# Ka 0.2 0.2 0.2
+Kd 1 1 1
+Ks 0.03 0.03 0.03
+# map_Ka lost_empire-RGBA.png
+# for G3D, to make textures look blocky:
+interpolateMode NEAREST_MAGNIFICATION_TRILINEAR_MIPMAP_MINIFICATION
+map_Kd lost_empire-RGBA.png
+map_d lost_empire-Alpha.png
+# illum 4
+# d 0.535
+# Tr 0.465
+# Tf 0.465 0.465 0.465
+
+newmtl Stationary_Lava
+# Ns 0
+# Ka 0.2 0.2 0.2
+Kd 1 1 1
+Ks 0 0 0
+Ke 1 1 1
+# map_Ka lost_empire-RGB.png
+# for G3D, to make textures look blocky:
+interpolateMode NEAREST_MAGNIFICATION_TRILINEAR_MIPMAP_MINIFICATION
+map_Kd lost_empire-RGB.png
+map_Ke lost_empire-RGB.png
+# illum 2
+# d 1
+# Tr 0
+
+newmtl Sand
+# Ns 0
+# Ka 0.2 0.2 0.2
+Kd 1 1 1
+Ks 0 0 0
+# map_Ka lost_empire-RGB.png
+# for G3D, to make textures look blocky:
+interpolateMode NEAREST_MAGNIFICATION_TRILINEAR_MIPMAP_MINIFICATION
+map_Kd lost_empire-RGB.png
+# illum 2
+# d 1
+# Tr 0
+
+newmtl Gravel
+# Ns 0
+# Ka 0.2 0.2 0.2
+Kd 1 1 1
+Ks 0 0 0
+# map_Ka lost_empire-RGB.png
+# for G3D, to make textures look blocky:
+interpolateMode NEAREST_MAGNIFICATION_TRILINEAR_MIPMAP_MINIFICATION
+map_Kd lost_empire-RGB.png
+# illum 2
+# d 1
+# Tr 0
+
+newmtl Iron_Ore
+# Ns 0
+# Ka 0.2 0.2 0.2
+Kd 1 1 1
+Ks 0 0 0
+# map_Ka lost_empire-RGB.png
+# for G3D, to make textures look blocky:
+interpolateMode NEAREST_MAGNIFICATION_TRILINEAR_MIPMAP_MINIFICATION
+map_Kd lost_empire-RGB.png
+# illum 2
+# d 1
+# Tr 0
+
+newmtl Coal_Ore
+# Ns 0
+# Ka 0.2 0.2 0.2
+Kd 1 1 1
+Ks 0 0 0
+# map_Ka lost_empire-RGB.png
+# for G3D, to make textures look blocky:
+interpolateMode NEAREST_MAGNIFICATION_TRILINEAR_MIPMAP_MINIFICATION
+map_Kd lost_empire-RGB.png
+# illum 2
+# d 1
+# Tr 0
+
+newmtl Oak_Log
+# Ns 0
+# Ka 0.2 0.2 0.2
+Kd 1 1 1
+Ks 0 0 0
+# map_Ka lost_empire-RGB.png
+# for G3D, to make textures look blocky:
+interpolateMode NEAREST_MAGNIFICATION_TRILINEAR_MIPMAP_MINIFICATION
+map_Kd lost_empire-RGB.png
+# illum 2
+# d 1
+# Tr 0
+
+newmtl Oak_Leaves
+# Ns 0
+# Ka 0.2 0.2 0.2
+Kd 1 1 1
+Ks 0 0 0
+# map_Ka lost_empire-RGBA.png
+# for G3D, to make textures look blocky:
+interpolateMode NEAREST_MAGNIFICATION_TRILINEAR_MIPMAP_MINIFICATION
+map_Kd lost_empire-RGBA.png
+map_d lost_empire-Alpha.png
+# illum 2
+# d 1
+# Tr 0
+
+newmtl Bed
+# Ns 0
+# Ka 0.2 0.2 0.2
+Kd 1 1 1
+Ks 0 0 0
+# map_Ka lost_empire-RGBA.png
+# for G3D, to make textures look blocky:
+interpolateMode NEAREST_MAGNIFICATION_TRILINEAR_MIPMAP_MINIFICATION
+map_Kd lost_empire-RGBA.png
+map_d lost_empire-Alpha.png
+# illum 2
+# d 1
+# Tr 0
+
+newmtl Powered_Rail
+# Ns 0
+# Ka 0.2 0.2 0.2
+Kd 1 1 1
+Ks 0 0 0
+# map_Ka lost_empire-RGBA.png
+# for G3D, to make textures look blocky:
+interpolateMode NEAREST_MAGNIFICATION_TRILINEAR_MIPMAP_MINIFICATION
+map_Kd lost_empire-RGBA.png
+map_d lost_empire-Alpha.png
+# illum 2
+# d 1
+# Tr 0
+
+newmtl Detector_Rail
+# Ns 0
+# Ka 0.2 0.2 0.2
+Kd 1 1 1
+Ks 0 0 0
+# map_Ka lost_empire-RGBA.png
+# for G3D, to make textures look blocky:
+interpolateMode NEAREST_MAGNIFICATION_TRILINEAR_MIPMAP_MINIFICATION
+map_Kd lost_empire-RGBA.png
+map_d lost_empire-Alpha.png
+# illum 2
+# d 1
+# Tr 0
+
+newmtl Sticky_Piston
+# Ns 0
+# Ka 0.2 0.2 0.2
+Kd 1 1 1
+Ks 0 0 0
+# map_Ka lost_empire-RGB.png
+# for G3D, to make textures look blocky:
+interpolateMode NEAREST_MAGNIFICATION_TRILINEAR_MIPMAP_MINIFICATION
+map_Kd lost_empire-RGB.png
+# illum 2
+# d 1
+# Tr 0
+
+newmtl Wool
+# Ns 0
+# Ka 0.2 0.2 0.2
+Kd 1 1 1
+Ks 0 0 0
+# map_Ka lost_empire-RGB.png
+# for G3D, to make textures look blocky:
+interpolateMode NEAREST_MAGNIFICATION_TRILINEAR_MIPMAP_MINIFICATION
+map_Kd lost_empire-RGB.png
+# illum 2
+# d 1
+# Tr 0
+
+newmtl Dandelion
+# Ns 0
+# Ka 0.2 0.2 0.2
+Kd 1 1 1
+Ks 0 0 0
+# map_Ka lost_empire-RGBA.png
+# for G3D, to make textures look blocky:
+interpolateMode NEAREST_MAGNIFICATION_TRILINEAR_MIPMAP_MINIFICATION
+map_Kd lost_empire-RGBA.png
+map_d lost_empire-Alpha.png
+# illum 2
+# d 1
+# Tr 0
+
+newmtl Poppy
+# Ns 0
+# Ka 0.2 0.2 0.2
+Kd 1 1 1
+Ks 0 0 0
+# map_Ka lost_empire-RGBA.png
+# for G3D, to make textures look blocky:
+interpolateMode NEAREST_MAGNIFICATION_TRILINEAR_MIPMAP_MINIFICATION
+map_Kd lost_empire-RGBA.png
+map_d lost_empire-Alpha.png
+# illum 2
+# d 1
+# Tr 0
+
+newmtl Brown_Mushroom
+# Ns 0
+# Ka 0.2 0.2 0.2
+Kd 1 1 1
+Ks 0 0 0
+# map_Ka lost_empire-RGBA.png
+# for G3D, to make textures look blocky:
+interpolateMode NEAREST_MAGNIFICATION_TRILINEAR_MIPMAP_MINIFICATION
+map_Kd lost_empire-RGBA.png
+map_d lost_empire-Alpha.png
+# illum 2
+# d 1
+# Tr 0
+
+newmtl Double_Stone_Slab
+# Ns 0
+# Ka 0.2 0.2 0.2
+Kd 1 1 1
+Ks 0 0 0
+# map_Ka lost_empire-RGB.png
+# for G3D, to make textures look blocky:
+interpolateMode NEAREST_MAGNIFICATION_TRILINEAR_MIPMAP_MINIFICATION
+map_Kd lost_empire-RGB.png
+# illum 2
+# d 1
+# Tr 0
+
+newmtl Stone_Slab
+# Ns 0
+# Ka 0.2 0.2 0.2
+Kd 1 1 1
+Ks 0 0 0
+# map_Ka lost_empire-RGB.png
+# for G3D, to make textures look blocky:
+interpolateMode NEAREST_MAGNIFICATION_TRILINEAR_MIPMAP_MINIFICATION
+map_Kd lost_empire-RGB.png
+# illum 2
+# d 1
+# Tr 0
+
+newmtl Obsidian
+# Ns 0
+# Ka 0.2 0.2 0.2
+Kd 1 1 1
+Ks 0 0 0
+# map_Ka lost_empire-RGB.png
+# for G3D, to make textures look blocky:
+interpolateMode NEAREST_MAGNIFICATION_TRILINEAR_MIPMAP_MINIFICATION
+map_Kd lost_empire-RGB.png
+# illum 2
+# d 1
+# Tr 0
+
+newmtl Torch
+# Ns 0
+# Ka 0.2 0.2 0.2
+Kd 1 1 1
+Ks 0 0 0
+Ke 1 1 1
+# map_Ka lost_empire-RGBA.png
+# for G3D, to make textures look blocky:
+interpolateMode NEAREST_MAGNIFICATION_TRILINEAR_MIPMAP_MINIFICATION
+map_Kd lost_empire-RGBA.png
+map_d lost_empire-Alpha.png
+map_Ke lost_empire-RGBA.png
+# illum 2
+# d 1
+# Tr 0
+
+newmtl Oak_Stairs
+# Ns 0
+# Ka 0.2 0.2 0.2
+Kd 1 1 1
+Ks 0 0 0
+# map_Ka lost_empire-RGB.png
+# for G3D, to make textures look blocky:
+interpolateMode NEAREST_MAGNIFICATION_TRILINEAR_MIPMAP_MINIFICATION
+map_Kd lost_empire-RGB.png
+# illum 2
+# d 1
+# Tr 0
+
+newmtl Chest
+# Ns 0
+# Ka 0.2 0.2 0.2
+Kd 1 1 1
+Ks 0 0 0
+# map_Ka lost_empire-RGB.png
+# for G3D, to make textures look blocky:
+interpolateMode NEAREST_MAGNIFICATION_TRILINEAR_MIPMAP_MINIFICATION
+map_Kd lost_empire-RGB.png
+# illum 2
+# d 1
+# Tr 0
+
+newmtl Redstone_Wire
+# Ns 0
+# Ka 0.2 0.2 0.2
+Kd 1 1 1
+Ks 0 0 0
+# map_Ka lost_empire-RGBA.png
+# for G3D, to make textures look blocky:
+interpolateMode NEAREST_MAGNIFICATION_TRILINEAR_MIPMAP_MINIFICATION
+map_Kd lost_empire-RGBA.png
+map_d lost_empire-Alpha.png
+# illum 2
+# d 1
+# Tr 0
+
+newmtl Block_of_Diamond
+# Ns 0
+# Ka 0.2 0.2 0.2
+Kd 1 1 1
+Ks 0 0 0
+# map_Ka lost_empire-RGB.png
+# for G3D, to make textures look blocky:
+interpolateMode NEAREST_MAGNIFICATION_TRILINEAR_MIPMAP_MINIFICATION
+map_Kd lost_empire-RGB.png
+# illum 2
+# d 1
+# Tr 0
+
+newmtl Crafting_Table
+# Ns 0
+# Ka 0.2 0.2 0.2
+Kd 1 1 1
+Ks 0 0 0
+# map_Ka lost_empire-RGB.png
+# for G3D, to make textures look blocky:
+interpolateMode NEAREST_MAGNIFICATION_TRILINEAR_MIPMAP_MINIFICATION
+map_Kd lost_empire-RGB.png
+# illum 2
+# d 1
+# Tr 0
+
+newmtl Furnace
+# Ns 0
+# Ka 0.2 0.2 0.2
+Kd 1 1 1
+Ks 0 0 0
+# map_Ka lost_empire-RGB.png
+# for G3D, to make textures look blocky:
+interpolateMode NEAREST_MAGNIFICATION_TRILINEAR_MIPMAP_MINIFICATION
+map_Kd lost_empire-RGB.png
+# illum 2
+# d 1
+# Tr 0
+
+newmtl Standing_Sign
+# Ns 0
+# Ka 0.2 0.2 0.2
+Kd 1 1 1
+Ks 0 0 0
+# map_Ka lost_empire-RGB.png
+# for G3D, to make textures look blocky:
+interpolateMode NEAREST_MAGNIFICATION_TRILINEAR_MIPMAP_MINIFICATION
+map_Kd lost_empire-RGB.png
+# illum 2
+# d 1
+# Tr 0
+
+newmtl Ladder
+# Ns 0
+# Ka 0.2 0.2 0.2
+Kd 1 1 1
+Ks 0 0 0
+# map_Ka lost_empire-RGBA.png
+# for G3D, to make textures look blocky:
+interpolateMode NEAREST_MAGNIFICATION_TRILINEAR_MIPMAP_MINIFICATION
+map_Kd lost_empire-RGBA.png
+map_d lost_empire-Alpha.png
+# illum 2
+# d 1
+# Tr 0
+
+newmtl Rail
+# Ns 0
+# Ka 0.2 0.2 0.2
+Kd 1 1 1
+Ks 0 0 0
+# map_Ka lost_empire-RGBA.png
+# for G3D, to make textures look blocky:
+interpolateMode NEAREST_MAGNIFICATION_TRILINEAR_MIPMAP_MINIFICATION
+map_Kd lost_empire-RGBA.png
+map_d lost_empire-Alpha.png
+# illum 2
+# d 1
+# Tr 0
+
+newmtl Cobblestone_Stairs
+# Ns 0
+# Ka 0.2 0.2 0.2
+Kd 1 1 1
+Ks 0 0 0
+# map_Ka lost_empire-RGB.png
+# for G3D, to make textures look blocky:
+interpolateMode NEAREST_MAGNIFICATION_TRILINEAR_MIPMAP_MINIFICATION
+map_Kd lost_empire-RGB.png
+# illum 2
+# d 1
+# Tr 0
+
+newmtl Wall_Sign
+# Ns 0
+# Ka 0.2 0.2 0.2
+Kd 1 1 1
+Ks 0 0 0
+# map_Ka lost_empire-RGB.png
+# for G3D, to make textures look blocky:
+interpolateMode NEAREST_MAGNIFICATION_TRILINEAR_MIPMAP_MINIFICATION
+map_Kd lost_empire-RGB.png
+# illum 2
+# d 1
+# Tr 0
+
+newmtl Lever
+# Ns 0
+# Ka 0.2 0.2 0.2
+Kd 1 1 1
+Ks 0 0 0
+# map_Ka lost_empire-RGB.png
+# for G3D, to make textures look blocky:
+interpolateMode NEAREST_MAGNIFICATION_TRILINEAR_MIPMAP_MINIFICATION
+map_Kd lost_empire-RGB.png
+# illum 2
+# d 1
+# Tr 0
+
+newmtl Iron_Door
+# Ns 0
+# Ka 0.2 0.2 0.2
+Kd 1 1 1
+Ks 0 0 0
+# map_Ka lost_empire-RGBA.png
+# for G3D, to make textures look blocky:
+interpolateMode NEAREST_MAGNIFICATION_TRILINEAR_MIPMAP_MINIFICATION
+map_Kd lost_empire-RGBA.png
+map_d lost_empire-Alpha.png
+# illum 2
+# d 1
+# Tr 0
+
+newmtl Redstone_Torch_(inactive)
+# Ns 0
+# Ka 0.2 0.2 0.2
+Kd 1 1 1
+Ks 0 0 0
+# map_Ka lost_empire-RGBA.png
+# for G3D, to make textures look blocky:
+interpolateMode NEAREST_MAGNIFICATION_TRILINEAR_MIPMAP_MINIFICATION
+map_Kd lost_empire-RGBA.png
+map_d lost_empire-Alpha.png
+# illum 2
+# d 1
+# Tr 0
+
+newmtl Redstone_Torch_(active)
+# Ns 0
+# Ka 0.2 0.2 0.2
+Kd 1 1 1
+Ks 0 0 0
+Ke 1 1 1
+# map_Ka lost_empire-RGBA.png
+# for G3D, to make textures look blocky:
+interpolateMode NEAREST_MAGNIFICATION_TRILINEAR_MIPMAP_MINIFICATION
+map_Kd lost_empire-RGBA.png
+map_d lost_empire-Alpha.png
+map_Ke lost_empire-RGBA.png
+# illum 2
+# d 1
+# Tr 0
+
+newmtl Stone_Button
+# Ns 0
+# Ka 0.2 0.2 0.2
+Kd 1 1 1
+Ks 0 0 0
+# map_Ka lost_empire-RGB.png
+# for G3D, to make textures look blocky:
+interpolateMode NEAREST_MAGNIFICATION_TRILINEAR_MIPMAP_MINIFICATION
+map_Kd lost_empire-RGB.png
+# illum 2
+# d 1
+# Tr 0
+
+newmtl Fence
+# Ns 0
+# Ka 0.2 0.2 0.2
+Kd 1 1 1
+Ks 0 0 0
+# map_Ka lost_empire-RGB.png
+# for G3D, to make textures look blocky:
+interpolateMode NEAREST_MAGNIFICATION_TRILINEAR_MIPMAP_MINIFICATION
+map_Kd lost_empire-RGB.png
+# illum 2
+# d 1
+# Tr 0
+
+newmtl Nether_Portal
+# Ns 0
+# Ka 0.2 0.2 0.2
+Kd 1 1 1
+Ks 0.03 0.03 0.03
+Ke 1 1 1
+# map_Ka lost_empire-RGBA.png
+# for G3D, to make textures look blocky:
+interpolateMode NEAREST_MAGNIFICATION_TRILINEAR_MIPMAP_MINIFICATION
+map_Kd lost_empire-RGBA.png
+map_d lost_empire-Alpha.png
+map_Ke lost_empire-RGBA.png
+# illum 4
+# d 0.8
+# Tr 0.2
+# Tf 0.2 0.2 0.2
+
+newmtl Redstone_Repeater_(inactive)
+# Ns 0
+# Ka 0.2 0.2 0.2
+Kd 1 1 1
+Ks 0 0 0
+# map_Ka lost_empire-RGB.png
+# for G3D, to make textures look blocky:
+interpolateMode NEAREST_MAGNIFICATION_TRILINEAR_MIPMAP_MINIFICATION
+map_Kd lost_empire-RGB.png
+# illum 2
+# d 1
+# Tr 0
+
+newmtl Redstone_Repeater_(active)
+# Ns 0
+# Ka 0.2 0.2 0.2
+Kd 1 1 1
+Ks 0 0 0
+# map_Ka lost_empire-RGB.png
+# for G3D, to make textures look blocky:
+interpolateMode NEAREST_MAGNIFICATION_TRILINEAR_MIPMAP_MINIFICATION
+map_Kd lost_empire-RGB.png
+# illum 2
+# d 1
+# Tr 0
