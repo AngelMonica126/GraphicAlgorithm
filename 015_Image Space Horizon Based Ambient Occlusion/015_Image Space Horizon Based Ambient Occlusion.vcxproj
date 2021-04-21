@@ -127,35 +127,27 @@
   <ItemGroup>
     <None Include="GbufferPass_FS.glsl" />
     <None Include="GbufferPass_VS.glsl" />
+    <None Include="HBAOBlurPass_FS.glsl" />
+    <None Include="HBAOBlurPass_VS.glsl" />
+    <None Include="HBAOPass_FS.glsl" />
+    <None Include="HBAOPass_VS.glsl" />
     <None Include="ScreenQuad_FS.glsl" />
     <None Include="ScreenQuad_VS.glsl" />
-    <None Include="SSAOBlurPass_FS.glsl" />
-    <None Include="SSAOBlurPass_VS.glsl" />
-    <None Include="SSAOPass_FS.glsl" />
-    <None Include="SSAOPass_VS.glsl" />
-    <None Include="SSDOBlurPass_FS.glsl" />
-    <None Include="SSDOBlurPass_VS.glsl" />
-    <None Include="SSDOPass_FS.glsl" />
-    <None Include="SSDOPass_VS.glsl" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CornellBox.h" />
     <ClInclude Include="GBufferPass.h" />
+    <ClInclude Include="HBAOBlurPass.h" />
+    <ClInclude Include="HBAOPass.h" />
     <ClInclude Include="ScreenQuadPass.h" />
-    <ClInclude Include="SSAOBlurPass.h" />
-    <ClInclude Include="SSAOPass.h" />
-    <ClInclude Include="SSDOBlurPass.h" />
-    <ClInclude Include="SSDOPass.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CornellBox.cpp" />
     <ClCompile Include="GBufferPass.cpp" />
+    <ClCompile Include="HBAOBlurPass.cpp" />
+    <ClCompile Include="HBAOPass.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ScreenQuadPass.cpp" />
-    <ClCompile Include="SSAOBlurPass.cpp" />
-    <ClCompile Include="SSAOPass.cpp" />
-    <ClCompile Include="SSDOBlurPass.cpp" />
-    <ClCompile Include="SSDOPass.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

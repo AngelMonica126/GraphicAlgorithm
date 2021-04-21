@@ -76,6 +76,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(BOOST);$(ASSIMP)/include;$(STB_IMAGE)/include;$(GLM);$(OPENGL)/include/;../FRAME;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(BOOST)/x64;$(ASSIMP)/lib/x64;$(OPENGL)/lib/x64;../x64/Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>

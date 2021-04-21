@@ -3,11 +3,11 @@
 #include <GL/glew.h>
 
 
-class CSSAOBlurPass : public IRenderPass
+class CHBAOBlurPass : public IRenderPass
 {
 public:
-	CSSAOBlurPass(const std::string& vPassName, int vExcutionOrder);
-	virtual ~CSSAOBlurPass();
+	CHBAOBlurPass(const std::string& vPassName, int vExcutionOrder);
+	virtual ~CHBAOBlurPass();
 
 	virtual void initV();
 	virtual void updateV();

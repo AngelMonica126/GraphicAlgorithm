@@ -19,7 +19,7 @@ CGBufferPass::~CGBufferPass()
 //Function:
 void CGBufferPass::initV()
 {
-	ElayGraphics::Camera::setMainCameraFarPlane(1000);
+	ElayGraphics::Camera::setMainCameraFarPlane(100);
 	ElayGraphics::Camera::setMainCameraMoveSpeed(1.0);
 	ElayGraphics::Camera::setMainCameraPos({ -25.1728, 12.768, 80.1058});
 	ElayGraphics::Camera::setMainCameraFront({ 0.488694, -0.406737, -0.771844 });

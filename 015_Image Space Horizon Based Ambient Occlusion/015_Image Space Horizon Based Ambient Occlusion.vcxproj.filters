@@ -21,60 +21,42 @@
     <None Include="ScreenQuad_FS.glsl">
       <Filter>Shader</Filter>
     </None>
-    <None Include="SSDOPass_FS.glsl">
-      <Filter>Shader</Filter>
-    </None>
     <None Include="GbufferPass_VS.glsl">
-      <Filter>Shader</Filter>
-    </None>
-    <None Include="SSAOPass_FS.glsl">
       <Filter>Shader</Filter>
     </None>
     <None Include="GbufferPass_FS.glsl">
       <Filter>Shader</Filter>
     </None>
-    <None Include="SSDOBlurPass_FS.glsl">
-      <Filter>Shader</Filter>
-    </None>
-    <None Include="SSAOBlurPass_FS.glsl">
-      <Filter>Shader</Filter>
-    </None>
-    <None Include="SSAOBlurPass_VS.glsl">
-      <Filter>Shader</Filter>
-    </None>
-    <None Include="SSAOPass_VS.glsl">
-      <Filter>Shader</Filter>
-    </None>
-    <None Include="SSDOBlurPass_VS.glsl">
-      <Filter>Shader</Filter>
-    </None>
-    <None Include="SSDOPass_VS.glsl">
-      <Filter>Shader</Filter>
-    </None>
     <None Include="ScreenQuad_VS.glsl">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="HBAOBlurPass_FS.glsl">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="HBAOBlurPass_VS.glsl">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="HBAOPass_FS.glsl">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="HBAOPass_VS.glsl">
       <Filter>Shader</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="SSDOPass.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="SSDOBlurPass.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="GBufferPass.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="CornellBox.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="SSAOBlurPass.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="SSAOPass.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="ScreenQuadPass.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="HBAOBlurPass.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="HBAOPass.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -85,22 +67,16 @@
     <ClCompile Include="main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="SSDOPass.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="SSDOBlurPass.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="GBufferPass.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="SSAOPass.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="SSAOBlurPass.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="CornellBox.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="HBAOBlurPass.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="HBAOPass.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

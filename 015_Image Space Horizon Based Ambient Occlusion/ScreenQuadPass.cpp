@@ -19,8 +19,8 @@ void CScreenQuadPass::initV()
 
 	m_pShader->activeShader();
 	m_pShader->setTextureUniformValue("u_Albedo", ElayGraphics::ResourceManager::getSharedDataByName<std::shared_ptr<ElayGraphics::STexture>>("AlbedoTexture"));
-	m_pShader->setTextureUniformValue("u_SSAOTexture", ElayGraphics::ResourceManager::getSharedDataByName<std::shared_ptr<ElayGraphics::STexture>>("BlurSSAOTexture"));
-	m_pShader->setTextureUniformValue("u_SSDOTexture", ElayGraphics::ResourceManager::getSharedDataByName<std::shared_ptr<ElayGraphics::STexture>>("BlurSSDOTexture"));
+	m_pShader->setTextureUniformValue("u_HBAOTexture", ElayGraphics::ResourceManager::getSharedDataByName<std::shared_ptr<ElayGraphics::STexture>>("BlurHBAOTexture"));
+
 }
 
 //************************************************************************************

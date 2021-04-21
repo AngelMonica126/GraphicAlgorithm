@@ -1,4 +1,4 @@
-#include "SSAOBlurPass.h"
+#include "HBAOBlurPass.h"
 #include "Shader.h"
 #include "Interface.h"
 #include "Common.h"
@@ -7,17 +7,17 @@
 #include <GLM/gtc/type_ptr.hpp>
 #include <random>
 
-CSSAOBlurPass::CSSAOBlurPass(const std::string& vPassName, int vExcutionOrder) : IRenderPass(vPassName, vExcutionOrder)
+CHBAOBlurPass::CHBAOBlurPass(const std::string& vPassName, int vExcutionOrder) : IRenderPass(vPassName, vExcutionOrder)
 {
 }
 
-CSSAOBlurPass::~CSSAOBlurPass()
+CHBAOBlurPass::~CHBAOBlurPass()
 {
 }
 
-void CSSAOBlurPass::initV()
+void CHBAOBlurPass::initV()
 {
-	m_pShader = std::make_shared<CShader>("SSAOBlurPass_VS.glsl", "SSAOBlurPass_FS.glsl");
+	m_pShader = std::make_shared<CShader>("HBAOBlurPass_VS.glsl", "HBAOBlurPass_FS.glsl");
 	auto TextureConfig4Finial = std::make_shared<ElayGraphics::STexture>();
 	TextureConfig4Finial->InternalFormat = GL_RED;
 	TextureConfig4Finial->ExternalFormat = GL_RGB;
@@ -30,14 +30,14 @@ void CSSAOBlurPass::initV()
 
 	m_FBO = genFBO({TextureConfig4Finial});
 
-	ElayGraphics::ResourceManager::registerSharedData("BlurSSAOTexture", TextureConfig4Finial);
+	ElayGraphics::ResourceManager::registerSharedData("BlurHBAOTexture", TextureConfig4Finial);
 
 	m_pShader->activeShader();
-	m_pShader->setTextureUniformValue("u_SSAOTexture", ElayGraphics::ResourceManager::getSharedDataByName<std::shared_ptr<ElayGraphics::STexture>>("SSAOTexture"));
+	m_pShader->setTextureUniformValue("u_HBAOTexture", ElayGraphics::ResourceManager::getSharedDataByName<std::shared_ptr<ElayGraphics::STexture>>("HBAOTexture"));
 
 }
 
-void CSSAOBlurPass::updateV()
+void CHBAOBlurPass::updateV()
 {
 
 	glBindFramebuffer(GL_FRAMEBUFFER, m_FBO);
