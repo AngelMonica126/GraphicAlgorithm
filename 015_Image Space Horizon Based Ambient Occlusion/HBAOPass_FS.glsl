@@ -51,7 +51,6 @@ vec3 UVToViewSpace(vec2 uv, float z)
 vec3 GetViewPos(vec2 uv)
 {
 	float z = ViewSpaceZFromDepth(texture(u_DepthTexture, uv).r);
-	//float z = texture(texture0, uv).r;
 	return UVToViewSpace(uv, z);
 }
 

@@ -46,15 +46,12 @@ void main()
         Offset = u_ProjectionMatrix * Offset; 
         Offset.xyz /= Offset.w; 
         Offset.xyz = Offset.xyz * 0.5 + 0.5; 
-        
         float SampleDepth = -texture(u_PositionTexture, Offset.xy).w; 
-        
         vec3 SampleNormal = texture(u_NormalTexture, Offset.xy).rgb;
 		vec3 SamplePos = texture(u_PositionTexture, Offset.xy).xyz;
 		vec3 SampleColor = texture(u_LightTexture, Offset.xy).xyz;
 		IndirectLight += (SampleDepth >= samples.z ? 1.0 : 0.0) * max(dot(SampleNormal, normalize(FragPos - SamplePos)), 0.0) * SampleColor;        
     }
-
 	IndirectLight /= KernelSize;
 	FragColor_ = IndirectLight * 5.0;
 }
