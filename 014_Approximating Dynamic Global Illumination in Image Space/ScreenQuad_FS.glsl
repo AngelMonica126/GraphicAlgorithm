@@ -12,5 +12,5 @@ void main()
 {
 	float Ambient = (texture(u_SSAOTexture, v2f_TexCoords, 0).r);
 	vec3 Albedo = texture(u_Albedo, v2f_TexCoords).rgb;
-	Color_ = vec4(Albedo * Ambient *0+ texture(u_SSDOTexture, v2f_TexCoords).rgb,1);
+	Color_ = vec4(Albedo * Ambient + texture(u_SSDOTexture, v2f_TexCoords).rgb,1);
 }
