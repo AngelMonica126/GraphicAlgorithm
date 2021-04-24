@@ -21,7 +21,7 @@ float ViewSpaceZFromDepth(float d)
 vec3 UVToViewSpace(vec2 uv, float z)
 {
 	uv = uv * 2.0 - 1.0;
-	uv.x = uv.x * tan(u_Fov / 2.0) * u_WindowWidth/ u_WindowHeight  * z ;
+	uv.x = uv.x * tan(u_Fov / 2.0) * u_WindowWidth / u_WindowHeight  * z ;
 	uv.y = uv.y * tan(u_Fov / 2.0)  * z ;
 	return vec3(uv, -z);
 }
@@ -31,7 +31,17 @@ vec3 GetViewPos(vec2 uv)
 	float z = ViewSpaceZFromDepth(texture(u_DepthTexture, uv).r);
 	return UVToViewSpace(uv, z);
 }
+float Length2(vec3 V)
+{
+	return dot(V,V);
+}
 
+vec3 MinDiff(vec3 P, vec3 Pr, vec3 Pl)
+{
+    vec3 V1 = Pr - P;
+    vec3 V2 = P - Pl;
+    return (Length2(V1) < Length2(V2)) ? V1 : V2;
+}
 void main()
 {
 	float xOffset = 1.0 / u_WindowWidth;
@@ -41,16 +51,10 @@ void main()
 	vec3 Pr = GetViewPos(v2f_TexCoords + vec2(xOffset,0));
 	vec3 Pu = GetViewPos(v2f_TexCoords + vec2(0,yOffset));
 	vec3 Pd = GetViewPos(v2f_TexCoords + vec2(0,-yOffset));
+	vec3 leftDir = MinDiff(P, Pr, Pl);
+    vec3 upDir = MinDiff(P, Pu, Pd);
+	vec3 Nomal = normalize(cross(leftDir,upDir));
 
-	vec3 leftDirOne = P - Pl;
-	vec3 upDirOne = P - Pd;
-	vec3 NomalOne = normalize(cross(leftDirOne,upDirOne));
-
-	vec3 leftDirTwo = Pr - P;
-	vec3 upDirTwo = Pu - P;
-	vec3 NomalTwo = normalize(cross(leftDirTwo,upDirTwo));
-
-	Color_ = vec4(normalize(NomalTwo + NomalOne), 1.0f);
-	Color_ = vec4(normalize(NomalTwo), 1.0f);
+	Color_ = vec4(normalize(Nomal), 1.0f);
 //	Color_ = vec4(GetViewPos(v2f_TexCoords), 1.0f);
 }

@@ -19,6 +19,8 @@ CDepthPass::~CDepthPass()
 //Function:
 void CDepthPass::initV()
 {
+	ElayGraphics::Camera::setMainCameraPos({ 0, 0.615485, 3 });
+	ElayGraphics::Camera::setMainCameraFront({ -0.0594117, -0.15902, -0.985486 });
 	m_pShader = std::make_shared<CShader>("Sponza_VS.glsl", "Sponza_FS.glsl");
 	m_pSponza = std::dynamic_pointer_cast<CSponza>(ElayGraphics::ResourceManager::getGameObjectByName("Sponza"));
 	auto TextureConfig4Position = std::make_shared<ElayGraphics::STexture>(); 

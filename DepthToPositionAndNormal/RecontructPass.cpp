@@ -40,7 +40,7 @@ void CRecontructPass::initV()
 //Function:
 void CRecontructPass::updateV()
 {
-	glBindFramebuffer(GL_FRAMEBUFFER, m_FBO);
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	glClearColor(1, 0, 0, 1);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	m_pShader->activeShader();
