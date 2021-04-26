@@ -25,8 +25,8 @@ void CHBAOPass::initV()
 	float *HBAONoise = generateNoise();
 	auto TextureConfigHBAO = std::make_shared<ElayGraphics::STexture>();
 	auto TextureConfigNoise = std::make_shared<ElayGraphics::STexture>();
-	TextureConfigHBAO->InternalFormat = GL_RG16;
-	TextureConfigHBAO->ExternalFormat = GL_RG;
+	TextureConfigHBAO->InternalFormat = GL_R16;
+	TextureConfigHBAO->ExternalFormat = GL_RED;
 	TextureConfigHBAO->DataType = GL_FLOAT;
 
 	TextureConfigNoise->InternalFormat = GL_RGBA16F;
@@ -53,25 +53,13 @@ void CHBAOPass::initV()
 	float fovRad = glm::radians(ElayGraphics::Camera::getMainCameraFov());
 	FocalLen[0] = 1.0f / tanf(fovRad * 0.5f) * ((float)ElayGraphics::WINDOW_KEYWORD::getWindowHeight() / (float)ElayGraphics::WINDOW_KEYWORD::getWindowWidth());
 	FocalLen[1] = 1.0f / tanf(fovRad * 0.5f);
-	InvFocalLen[0] = 1.0f / FocalLen[0];
-	InvFocalLen[1] = 1.0f / FocalLen[1];
-
-	UVToViewA[0] = -2.0f * InvFocalLen[0];
-	UVToViewA[1] = -2.0f * InvFocalLen[1];
-	UVToViewB[0] = 1.0f * InvFocalLen[0];
-	UVToViewB[1] = 1.0f * InvFocalLen[1];
-
-	float near = ElayGraphics::Camera::getMainCameraNear(), far = ElayGraphics::Camera::getMainCameraFar();
-	LinMAD[0] = (near - far) / (2.0f * near * far);
-	LinMAD[1] = (near + far) / (2.0f * near * far);
-
 	m_pShader->activeShader();
+	m_pShader->setFloatUniformValue("u_WindowWidth", ElayGraphics::WINDOW_KEYWORD::getWindowWidth());
+	m_pShader->setFloatUniformValue("u_WindowHeight", ElayGraphics::WINDOW_KEYWORD::getWindowHeight());
 	m_pShader->setFloatUniformValue("u_Near", ElayGraphics::Camera::getMainCameraNear());
+	m_pShader->setFloatUniformValue("u_Fov", glm::radians(ElayGraphics::Camera::getMainCameraFov()));
 	m_pShader->setFloatUniformValue("u_Far", ElayGraphics::Camera::getMainCameraFar());
-	m_pShader->setFloatUniformValue("FocalLen", FocalLen.x, FocalLen.y);
-	m_pShader->setFloatUniformValue("UVToViewA", UVToViewA.x, UVToViewA.y);
-	m_pShader->setFloatUniformValue("UVToViewB", UVToViewB.x, UVToViewB.y);
-	m_pShader->setFloatUniformValue("LinMAD", LinMAD.x, LinMAD.y);
+	m_pShader->setFloatUniformValue("u_FocalLen", FocalLen.x, FocalLen.y);
 	m_pShader->setTextureUniformValue("u_DepthTexture", ElayGraphics::ResourceManager::getSharedDataByName<std::shared_ptr<ElayGraphics::STexture>>("DepthTexture"));
 	m_pShader->setTextureUniformValue("u_NoiseTexture", TextureConfigNoise);
 

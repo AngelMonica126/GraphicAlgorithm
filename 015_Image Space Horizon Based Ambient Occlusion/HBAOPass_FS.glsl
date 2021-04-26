@@ -1,27 +1,16 @@
-// This is a HBAO-Shader for OpenGL, based upon nvidias directX implementation
-// supplied in their SampleSDK available from nvidia.com
-// The slides describing the implementation is available at
-// http://www.nvidia.co.uk/object/siggraph-2008-HBAO.html
-
 #version 430 core
 
 const float PI = 3.14159265;
 
 uniform sampler2D u_DepthTexture;
 uniform sampler2D u_NoiseTexture;
-
-uniform vec2 FocalLen;
-uniform vec2 UVToViewA;
-uniform vec2 UVToViewB;
-
-uniform vec2 LinMAD;
 uniform float u_Near = 0.1;
 uniform float u_Far = 100.0f;
-uniform vec2 AORes = vec2(1280.0, 720.0);
-uniform vec2 InvAORes = vec2(1.0/1280.0, 1.0/720.0);
-uniform vec2 NoiseScale = vec2(1280.0, 720.0) / 4.0;
-
-uniform float AOStrength = 1.9;
+uniform float u_Fov;
+uniform float u_WindowWidth;
+uniform float u_WindowHeight;
+uniform vec2 u_FocalLen;
+uniform float u_AOStrength = 1.9;
 uniform float R = 0.3;
 uniform float R2 = 0.3 * 0.3;
 uniform float NegInvR2 = - 1.0 / (0.3 * 0.3);
@@ -33,7 +22,7 @@ uniform int NumSamples = 3;
 
 in vec2 TexCoord;
 
-out vec2 out_frag0;
+out float Color_;
 
 float ViewSpaceZFromDepth(float d)
 {
@@ -44,8 +33,10 @@ float ViewSpaceZFromDepth(float d)
 
 vec3 UVToViewSpace(vec2 uv, float z)
 {
-	uv = UVToViewA * uv + UVToViewB;
-	return vec3(uv * z, z);
+	uv = uv * 2.0 - 1.0;
+	uv.x = uv.x * tan(u_Fov / 2.0) * u_WindowWidth / u_WindowHeight  * z ;
+	uv.y = uv.y * tan(u_Fov / 2.0)  * z ;
+	return vec3(-uv, z);
 }
 
 vec3 GetViewPos(vec2 uv)
@@ -77,7 +68,6 @@ float BiasedTangent(vec3 V)
 float Tangent(vec3 P, vec3 S)
 {
     return Tangent(S - P);
-//    return -(P.z - S.z) * InvLength(S.xy - P.xy);
 }
 
 float Length2(vec3 V)
@@ -94,7 +84,7 @@ vec3 MinDiff(vec3 P, vec3 Pr, vec3 Pl)
 
 vec2 SnapUVOffset(vec2 uv)
 {
-    return round(uv * AORes) * InvAORes;
+    return round(uv * vec2(u_WindowWidth,u_WindowHeight)) * vec2(1.0 / u_WindowWidth,1.0 / u_WindowHeight);
 }
 
 float Falloff(float d2)
@@ -173,69 +163,45 @@ void ComputeSteps(inout vec2 stepSizeUv, inout float numSteps, float rayRadiusPi
         stepSizePix = MaxRadiusPixels / numSteps;
     }
 
-    // Step size in uv space
-    stepSizeUv = stepSizePix * InvAORes;
+    stepSizeUv = stepSizePix * vec2(1.0 / u_WindowWidth,1.0 / u_WindowHeight);;
 }
 
 void main(void)
 {
+	vec2 NoiseScale = vec2(u_WindowWidth/4.0f, u_WindowHeight/4.0f);
 	float numDirections = NumDirections;
 
 	vec3 P, Pr, Pl, Pt, Pb;
 	P 	= GetViewPos(TexCoord);
-
 	// Sample neighboring pixels
-    Pr 	= GetViewPos(TexCoord + vec2( InvAORes.x, 0));
-    Pl 	= GetViewPos(TexCoord + vec2(-InvAORes.x, 0));
-    Pt 	= GetViewPos(TexCoord + vec2( 0, InvAORes.y));
-    Pb 	= GetViewPos(TexCoord + vec2( 0,-InvAORes.y));
-
-    // Calculate tangent basis vectors using the minimu difference
+    Pr 	= GetViewPos(TexCoord + vec2( 1.0 / u_WindowWidth, 0));
+    Pl 	= GetViewPos(TexCoord + vec2(-1.0 / u_WindowWidth, 0));
+    Pt 	= GetViewPos(TexCoord + vec2( 0, 1.0 / u_WindowHeight));
+    Pb 	= GetViewPos(TexCoord + vec2( 0,-1.0 / u_WindowHeight));
     vec3 dPdu = MinDiff(P, Pr, Pl);
-    vec3 dPdv = MinDiff(P, Pt, Pb) * (AORes.y * InvAORes.x);
-
+    vec3 dPdv = MinDiff(P, Pt, Pb) * (u_WindowHeight * 1.0 / u_WindowWidth);
     // Get the random samples from the noise texture
 	vec3 random = texture(u_NoiseTexture, TexCoord.xy * NoiseScale).rgb;
-
 	// Calculate the projected size of the hemisphere
-    vec2 rayRadiusUV = 0.5 * R * FocalLen / -P.z;
-    float rayRadiusPix = rayRadiusUV.x * AORes.x;
-
+    vec2 rayRadiusUV = 0.5 * R * u_FocalLen / -P.z;
+    float rayRadiusPix = rayRadiusUV.x * u_WindowWidth;
     float ao = 1.0;
-
     // Make sure the radius of the evaluated hemisphere is more than a pixel
     float numSteps;
     vec2 stepSizeUV;
     if(rayRadiusPix > 1.0)
     {
-    	
 		ao = 0.0;
-    	// Compute the number of steps
     	ComputeSteps(stepSizeUV, numSteps, rayRadiusPix, random.z);
-
 		float alpha = 2.0 * PI / numDirections;
-
-		// Calculate the horizon occlusion of each direction
 		for(float d = 0; d < numDirections; ++d)
 		{
 			float theta = alpha * d;
-
-			// Apply noise to the direction
 			vec2 dir = RotateDirections(vec2(cos(theta), sin(theta)), random.xy);
 			vec2 deltaUV = dir * stepSizeUV;
-
-			// Sample the pixels along the direction
-			ao += HorizonOcclusion(	deltaUV,
-									P,
-									dPdu,
-									dPdv,
-									random.z,
-									numSteps);
+			ao += HorizonOcclusion(deltaUV,P,dPdu,dPdv,random.z,numSteps);
 		}
-
-		// Average the results and produce the final AO
-		ao = 1.0 - ao / numDirections * AOStrength;
+		ao = 1.0 - ao / numDirections * u_AOStrength;
 	}
-
-	out_frag0 = vec2(ao, 30.0 * P.z);
+	Color_ = ao;
 }
