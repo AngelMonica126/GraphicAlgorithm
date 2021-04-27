@@ -41,15 +41,15 @@ void main()
 	float y2 = y * y;
 	float z2 = z * z;
     
-    basis[0] = 0.8862 * 1.f / 2.f * sqrt(1.f / PI);
-    basis[1] = 1.0233 * sqrt(3.f / (4.f * PI)) * z;
-    basis[2] = 1.0233 * sqrt(3.f / (4.f * PI)) * y;
-    basis[3] = 1.0233 * sqrt(3.f / (4.f * PI)) * x;
-    basis[4] = 0.4954 * 1.f / 2.f * sqrt(15.f / PI) * x * z;
-    basis[5] = 0.4954 * 1.f / 2.f * sqrt(15.f / PI) * z * y;
-    basis[6] = 0.4954 * 1.f / 4.f * sqrt(5.f / PI) * (-x2 - z2 + 2 * y2);
-    basis[7] = 0.4954 * 1.f / 2.f * sqrt(15.f / PI) * y * x;
-    basis[8] = 0.4954 * 1.f / 4.f * sqrt(15.f / PI) * (x2 - z2);
+    basis[0] = 1.f / 2.f * sqrt(1.f / PI);
+    basis[1] = 2.0 / 3.0 * sqrt(3.f / (4.f * PI)) * z;
+    basis[2] = 2.0 / 3.0 * sqrt(3.f / (4.f * PI)) * y;
+    basis[3] = 2.0 / 3.0 * sqrt(3.f / (4.f * PI)) * x;
+    basis[4] = 1.0 / 4.0 * 1.f / 2.f * sqrt(15.f / PI) * x * z;
+    basis[5] = 1.0 / 4.0 * 1.f / 2.f * sqrt(15.f / PI) * z * y;
+    basis[6] = 1.0 / 4.0 * 1.f / 4.f * sqrt(5.f / PI) * (-x2 - z2 + 2 * y2);
+    basis[7] = 1.0 / 4.0 * 1.f / 2.f * sqrt(15.f / PI) * y * x;
+    basis[8] = 1.0 / 4.0 * 1.f / 4.f * sqrt(15.f / PI) * (x2 - z2);
 
 	vec3 color = vec3(0,0,0);
 	for (int i = 0; i < 9; i++)
