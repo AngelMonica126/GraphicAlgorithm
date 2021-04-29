@@ -16,7 +16,7 @@ FRAME_DLLEXPORTS GLvoid getSSBOBuffer(GLint BufferID, GLsizeiptr vSize, GLvoid *
 FRAME_DLLEXPORTS GLvoid updateSSBOBuffer(GLint BufferID, GLsizeiptr vSize, const GLvoid *vData, GLenum vUsage);
 FRAME_DLLEXPORTS GLvoid genTexture(std::shared_ptr<ElayGraphics::STexture> vioTexture/* = ElayGraphics::STexture()*/);
 FRAME_DLLEXPORTS GLvoid genGenerateMipmap(std::shared_ptr<ElayGraphics::STexture> vioTexture);
-//FRAME_DLLEXPORTS GLvoid loadTextureFromFile(const std::string& vFilePath);
+FRAME_DLLEXPORTS GLvoid ClearTexture(std::shared_ptr<ElayGraphics::STexture> vioTexture, GLuint TextureType);
 FRAME_DLLEXPORTS GLvoid loadTextureFromFile(const std::string& vFilePath, std::shared_ptr<ElayGraphics::STexture> voTexture2D);
 FRAME_DLLEXPORTS GLvoid loadCubeTextureFromFile(const std::vector<std::string>& vFilePath, std::shared_ptr<ElayGraphics::STexture> voTexture2D);
 FRAME_DLLEXPORTS GLint  createVAO4ScreenQuad();

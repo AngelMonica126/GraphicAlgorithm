@@ -289,6 +289,16 @@ void transferData2Buffer(GLenum vTarget,GLint vTargetID,std::vector<GLintptr> vO
 	glBindBuffer(vTarget, 0);
 }
 
+
+GLvoid ClearTexture(std::shared_ptr<ElayGraphics::STexture> vioTexture, GLuint TextureType)
+{
+	std::vector<GLfloat> emptyData(vioTexture->Width * vioTexture->Height * vioTexture->Depth * sizeof(float), 0.0);
+	glBindTexture(TextureType, vioTexture->TextureID);
+	//glTexImage3D(GL_TEXTURE_3D, 0, GL_RGBA16F, MAX_GRID_SIZE, MAX_GRID_SIZE, MAX_GRID_SIZE, 0, GL_RGBA, GL_FLOAT, &emptyData[0]);
+	//or
+	glTexSubImage3D(TextureType, 0, 0, 0, 0, vioTexture->Width , vioTexture->Height , vioTexture->Depth, vioTexture->ExternalFormat, vioTexture->DataType, &emptyData[0]);
+	glBindTexture(TextureType, 0);
+}
 //************************************************************************************
 //Function:
 GLvoid genTexture(std::shared_ptr<ElayGraphics::STexture> vioTexture)
@@ -314,6 +324,7 @@ GLvoid genTexture(std::shared_ptr<ElayGraphics::STexture> vioTexture)
 	case ElayGraphics::STexture::ETextureType::Texture3D:
 		TextureType = GL_TEXTURE_3D;
 		glBindTexture(TextureType, TextureID);
+		glTexImage3D(TextureType, 0, vioTexture->InternalFormat, vioTexture->Width, vioTexture->Height, vioTexture->Depth, 0, vioTexture->ExternalFormat, vioTexture->DataType, vioTexture->pDataSet.size() > 0 ? vioTexture->pDataSet[0] : nullptr);
 		break;
 	case ElayGraphics::STexture::ETextureType::TextureCubeMap:
 		TextureType = GL_TEXTURE_CUBE_MAP;
@@ -558,6 +569,10 @@ GLint genFBO(const std::initializer_list< std::shared_ptr<ElayGraphics::STexture
 				glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + (++i), vioTexture->TextureID, 0);
 				Attachments.push_back(GL_COLOR_ATTACHMENT0 + i);
 				HasDepthTextureAttachment = GL_TRUE;	//FIXME: there is a problem: if set it as GL_FALSE, the depth render buffer will be added, then result in incomplete fbo.
+				break;
+			case ElayGraphics::STexture::ETextureType::Texture3D:
+				glFramebufferTexture3D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + (++i), GL_TEXTURE_3D, vioTexture->TextureID,0, 0);
+				Attachments.push_back(GL_COLOR_ATTACHMENT0 + i);
 				break;
 			default:
 				break;
