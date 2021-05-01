@@ -100,37 +100,24 @@ float HorizonOcclusion(	vec2 deltaUV,
 						float numSamples)
 {
 	float ao = 0;
-
-	// Offset the first coord with some noise
 	vec2 uv = TexCoord + SnapUVOffset(randstep*deltaUV);
-	deltaUV = SnapUVOffset( deltaUV );
-
-	// Calculate the tangent vector
+	deltaUV = SnapUVOffset(deltaUV);
 	vec3 T = deltaUV.x * dPdu + deltaUV.y * dPdv;
-
-	// Get the angle of the tangent vector from the viewspace axis
 	float tanH = BiasedTangent(T);
 	float sinH = TanToSin(tanH);
-
 	float tanS;
 	float d2;
 	vec3 S;
-
-	// Sample to find the maximum angle
 	for(float s = 1; s <= numSamples; ++s)
 	{
 		uv += deltaUV;
 		S = GetViewPos(uv);
 		tanS = Tangent(P, S);
 		d2 = Length2(S - P);
-
-		// Is the sample within the radius and the angle greater?
 		if(d2 < R2 && tanS > tanH)
 		{
 			float sinS = TanToSin(tanS);
-			// Apply falloff based on the distance
 			ao += Falloff(d2) * (sinS - sinH);
-
 			tanH = tanS;
 			sinH = sinS;
 		}
@@ -147,17 +134,13 @@ vec2 RotateDirections(vec2 Dir, vec2 CosSin)
 
 void ComputeSteps(inout vec2 stepSizeUv, inout float numSteps, float rayRadiusPix, float rand)
 {
-    // Avoid oversampling if numSteps is greater than the kernel radius in pixels
     numSteps = min(NumSamples, rayRadiusPix);
 
-    // Divide by Ns+1 so that the farthest samples are not fully attenuated
     float stepSizePix = rayRadiusPix / (numSteps + 1);
 
-    // Clamp numSteps if it is greater than the max kernel footprint
     float maxNumSteps = MaxRadiusPixels / stepSizePix;
     if (maxNumSteps < numSteps)
     {
-        // Use dithering to avoid AO discontinuities
         numSteps = floor(maxNumSteps + rand);
         numSteps = max(numSteps, 1);
         stepSizePix = MaxRadiusPixels / numSteps;
@@ -173,20 +156,16 @@ void main(void)
 
 	vec3 P, Pr, Pl, Pt, Pb;
 	P 	= GetViewPos(TexCoord);
-	// Sample neighboring pixels
     Pr 	= GetViewPos(TexCoord + vec2( 1.0 / u_WindowWidth, 0));
     Pl 	= GetViewPos(TexCoord + vec2(-1.0 / u_WindowWidth, 0));
     Pt 	= GetViewPos(TexCoord + vec2( 0, 1.0 / u_WindowHeight));
     Pb 	= GetViewPos(TexCoord + vec2( 0,-1.0 / u_WindowHeight));
     vec3 dPdu = MinDiff(P, Pr, Pl);
     vec3 dPdv = MinDiff(P, Pt, Pb) * (u_WindowHeight * 1.0 / u_WindowWidth);
-    // Get the random samples from the noise texture
 	vec3 random = texture(u_NoiseTexture, TexCoord.xy * NoiseScale).rgb;
-	// Calculate the projected size of the hemisphere
     vec2 rayRadiusUV = 0.5 * R * u_FocalLen / -P.z;
     float rayRadiusPix = rayRadiusUV.x * u_WindowWidth;
     float ao = 1.0;
-    // Make sure the radius of the evaluated hemisphere is more than a pixel
     float numSteps;
     vec2 stepSizeUV;
     if(rayRadiusPix > 1.0)
