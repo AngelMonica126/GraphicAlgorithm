@@ -354,6 +354,18 @@ GLvoid genTexture(std::shared_ptr<ElayGraphics::STexture> vioTexture)
 
 //************************************************************************************
 //Function:
+GLvoid genTextureByBuffer(std::shared_ptr<ElayGraphics::STexture> vioTexture, GLint vBuffer)
+{
+	GLint TextureID;
+	glGenTextures(1, &(GLuint&)TextureID);
+	glBindTexture(GL_TEXTURE_BUFFER, TextureID);
+	glTexBuffer(GL_TEXTURE_BUFFER, vioTexture->InternalFormat, vBuffer);
+	glBindTexture(GL_TEXTURE_BUFFER, 0);
+	vioTexture->TextureID = TextureID;
+}
+
+//************************************************************************************
+//Function:
 GLvoid genGenerateMipmap(std::shared_ptr<ElayGraphics::STexture> vioTexture)
 {
 	GLint TextureID = vioTexture->TextureID;
