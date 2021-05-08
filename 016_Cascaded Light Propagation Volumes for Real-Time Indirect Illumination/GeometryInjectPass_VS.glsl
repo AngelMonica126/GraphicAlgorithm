@@ -21,7 +21,7 @@ ivec3 convertPointToGridIndex(vec3 vPos) {
 }
 
 float calculateSurfelAreaLightOrtho(vec3 lightPos) {
-	return (u_RSMArea * lightPos.z * lightPos.z)/(u_RSMResolution * u_RSMResolution);
+	return (u_RSMArea)/(u_RSMResolution * u_RSMResolution);
 }
 
 void main()

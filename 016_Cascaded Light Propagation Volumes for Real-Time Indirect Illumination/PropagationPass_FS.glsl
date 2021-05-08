@@ -28,7 +28,7 @@ flat in ivec3 v2f_volumeCellIndex;
 
 uniform vec3 u_GridDim;
 uniform bool u_FirstPropStep;
-uniform float occlusionAmplifier = 0.0f;
+uniform float occlusionAmplifier = 1.0f;
 
 const float directFaceSubtendedSolidAngle =  0.4006696846f; 
 const float sideFaceSubtendedSolidAngle = 0.4234413544f; 
@@ -55,19 +55,19 @@ const ivec3 propDirections[6] = {
 	//-Y
 	ivec3(0,-1,0)
 };
-const ivec2 cellSides[4] = { ivec2( 1.0, 0.0 ), ivec2( 0.0, 1.0 ), ivec2( -1.0, 0.0 ), ivec2( 0.0, -1.0 ) };
+const ivec2 cellSides[4] = {ivec2(1.0, 0.0), ivec2(0.0, 1.0), ivec2(-1.0, 0.0), ivec2(0.0, -1.0)};
 
-vec3 getEvalSideDirection( int index, ivec3 orientation ) {
+vec3 getEvalSideDirection(int index, ivec3 orientation) {
 	const float smallComponent = 0.4472135; // 1 / sqrt(5)
 	const float bigComponent = 0.894427; // 2 / sqrt(5)
 	const ivec2 side = cellSides[ index ];
-	vec3 tmp = vec3( side.x * smallComponent, side.y * smallComponent, bigComponent );
+	vec3 tmp = vec3(side.x * smallComponent, side.y * smallComponent, bigComponent);
 	return vec3(orientation.x * tmp.x, orientation.y * tmp.y, orientation.z * tmp.z);
 }
 
-vec3 getReprojSideDirection( int index, ivec3 orientation ) {
+vec3 getReprojSideDirection(int index, ivec3 orientation) {
 	const ivec2 side = cellSides[ index ];
-	return vec3( orientation.x*side.x, orientation.y*side.y, 0 );
+	return vec3(orientation.x*side.x, orientation.y*side.y, 0);
 }
 
 
@@ -105,8 +105,8 @@ void main()
 			vec4 occCoeffs = texture(GeometryVolume, occCoord);
 			occlusionValue = 1.0 - clamp(occlusionAmplifier * dot(occCoeffs, evalSH_direct(-evalDirection)),0.0,1.0);
 			float occludedSideFaceContribution = occlusionValue * sideFaceSubtendedSolidAngle;
-			vec4 reprojDirectionCosineLobeSH = evalCosineLobeToDir(reprojDirection);
-			vec4 evalDirectionSH = evalSH_direct(evalDirection);
+			vec4 reprojDirectionCosineLobeSH = evalSH_direct(reprojDirection);
+			vec4 evalDirectionSH = evalCosineLobeToDir(evalDirection);
 			
 			cR += occludedSideFaceContribution * max(0.0, dot(RSHcoeffsNeighbour, evalDirectionSH)) * reprojDirectionCosineLobeSH;
 			cG += occludedSideFaceContribution * max(0.0, dot(GSHcoeffsNeighbour, evalDirectionSH)) * reprojDirectionCosineLobeSH;

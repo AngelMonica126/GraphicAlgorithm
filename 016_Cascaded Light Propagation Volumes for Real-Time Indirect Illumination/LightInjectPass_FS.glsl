@@ -19,19 +19,20 @@ flat in ivec3 v2f_volumeCellIndex;
 in vec3 v2f_posFromRSM;
 in vec3 v2f_normalFromRSM;
 in vec4 v2f_fluxFromRSM;
+in vec3 v2f_vplToCell;
 
-
-vec4 evalCosineLobeToDir(vec3 dir) {
-	return vec4(SH_cosLobe_C0, -SH_cosLobe_C1 * dir.y, SH_cosLobe_C1 * dir.z, -SH_cosLobe_C1 * dir.x);
+vec4 evalSH_direct(vec3 dir) {	
+	return vec4(SH_C0, -SH_C1 * dir.y, SH_C1 * dir.z, -SH_C1 * dir.x);
 }
+
 
 void main()
 {
-	vec4 SHCoeffsR = evalCosineLobeToDir(v2f_normalFromRSM) * v2f_fluxFromRSM.r;
-	vec4 SHCoeffsG = evalCosineLobeToDir(v2f_normalFromRSM) * v2f_fluxFromRSM.g;
-	vec4 SHCoeffsB = evalCosineLobeToDir(v2f_normalFromRSM) * v2f_fluxFromRSM.b;
+	vec4 SHCoeffsR = evalSH_direct(v2f_vplToCell) * v2f_fluxFromRSM.r;
+	vec4 SHCoeffsG = evalSH_direct(v2f_vplToCell) * v2f_fluxFromRSM.g;
+	vec4 SHCoeffsB = evalSH_direct(v2f_vplToCell) * v2f_fluxFromRSM.b;
 
-	imageAtomicAdd(LPVGridR_,v2f_volumeCellIndex,f16vec4(SHCoeffsR / PI));
-	imageAtomicAdd(LPVGridG_,v2f_volumeCellIndex,f16vec4(SHCoeffsG / PI));
-	imageAtomicAdd(LPVGridB_,v2f_volumeCellIndex,f16vec4(SHCoeffsB / PI));
+	imageAtomicAdd(LPVGridR_,v2f_volumeCellIndex,f16vec4(SHCoeffsR));
+	imageAtomicAdd(LPVGridG_,v2f_volumeCellIndex,f16vec4(SHCoeffsG));
+	imageAtomicAdd(LPVGridB_,v2f_volumeCellIndex,f16vec4(SHCoeffsB));
 }
