@@ -61,7 +61,7 @@ public:
 	GLvoid update(const CShader& vShader) const;
 
 	std::shared_ptr<CAABB> getOrCreateBounding();
-
+	std::vector<glm::vec3> getTriangle();
 private:
 	std::vector<SMeshVertex>	m_Vertices;
 	std::vector<SMeshTexture>	m_Textures;

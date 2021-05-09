@@ -218,3 +218,17 @@ std::shared_ptr<CAABB> CModel::getOrCreateBounding()
 	}
 	return m_pBounding;
 }
+
+//************************************************************************************
+//Function:
+std::vector<glm::vec3> CModel::getTriangle()
+{
+	std::vector<glm::vec3> Triangle;
+	size_t MeshSize = m_Meshes.size();
+	for (size_t i = 0; i < MeshSize; ++i)
+	{
+		std::vector<glm::vec3> temp = m_Meshes[i].getTriangle();
+		Triangle.insert(Triangle.end(), temp.begin(), temp.end());
+	}
+	return Triangle;
+}

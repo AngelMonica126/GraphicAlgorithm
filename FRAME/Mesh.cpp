@@ -88,3 +88,14 @@ std::shared_ptr<CAABB> CMesh::getOrCreateBounding()
 	}
 	return m_pBounding;
 }
+
+//************************************************************************************
+//Function:
+std::vector<glm::vec3> CMesh::getTriangle()
+{
+	std::vector<glm::vec3> Triangle;
+	size_t VerticesNum = m_Vertices.size();
+	for (size_t i = 0; i < VerticesNum; ++i)
+		Triangle.push_back(m_Vertices[i].Position);
+	return Triangle;
+}

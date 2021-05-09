@@ -253,3 +253,10 @@ std::shared_ptr<CAABB> IGameObject::getAABB() const
 {
 	return m_pModel->getOrCreateBounding();
 }
+
+//************************************************************************************
+//Function:
+std::vector<glm::vec3> IGameObject::getTriangle()
+{
+	return m_pModel->getTriangle();
+}

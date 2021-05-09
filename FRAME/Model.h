@@ -23,7 +23,7 @@ public:
 	void update(const CShader &vShader) const;
 
 	std::shared_ptr<CAABB> getOrCreateBounding();
-
+	std::vector<glm::vec3> getTriangle();
 private:
 	int						   m_MeshCount = -1;
 	std::vector<SMeshTexture>  m_LoadedTextures;

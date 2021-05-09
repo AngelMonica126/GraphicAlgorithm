@@ -2,6 +2,7 @@
 #include <string>
 #include <GLM/glm.hpp>
 #include <memory>
+#include <vector>
 #include "FRAME_EXPORTS.h"
 
 class CModel;
@@ -50,7 +51,7 @@ public:
 	void updateModel(const CShader& vShader) const;
 
 	std::shared_ptr<CAABB> getAABB() const;
-
+	std::vector<glm::vec3> getTriangle();
 	bool operator<(const IGameObject& vOtherPass) const;
 
 private:
