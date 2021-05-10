@@ -19,7 +19,7 @@ out VS_GS_VEXTEX
 void main()
 {
 	vec4 FragPos =  u_ModelMatrix * vec4(_Position, 1.0f);
-	gl_Position = u_ProjectionMatrix * u_ViewMatrix * FragPos;
+	gl_Position = vec4(0.5,0.5,0.5,1);
 	vs_gs_out.TexCoord = _TexCoord;
 	vs_gs_out.NormalW = _Normal;	
 	vs_gs_out.PositionS = u_ModelMatrix * FragPos;

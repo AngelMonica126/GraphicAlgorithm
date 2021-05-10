@@ -48,7 +48,6 @@ out GS_FS_VERTEX
 
 uniform int u_NoiseNum;
 uniform int u_NumS;
-
 float getArea(vec3 vPositions[3])
 {
 	vec3 V1 = vPositions[1] - vPositions[0];
@@ -59,7 +58,7 @@ float getArea(vec3 vPositions[3])
 
 int getLevel(float vArea, float vRand)
 {
-	int level = -1;
+	int level = 0;
 	for(int i = 1; i < u_NumS; i++)
 	{
 		float AS = vArea / u_Skp[i];
@@ -71,6 +70,8 @@ int getLevel(float vArea, float vRand)
 	}
 	return level;
 }
+
+
 int getMaxEdge(vec3 vEdge[3])
 {
 	float edge[3];
@@ -127,27 +128,47 @@ void splitTriangle(vec3 vPositions[3], out vec3 TriangleOne[3],out vec3 Triangle
 		TriangleTwo[2] = mid;
 	}
 }
+
 vec3 getNormal(vec3 vTriangle[3])
 {
 	vec3 V1 = vTriangle[1] - vTriangle[0];
 	vec3 V2 = vTriangle[2] - vTriangle[0];
 	return normalize(cross(V1,V2));
 }
-void sendTriangle(vec3 vTriangle[3],float vArea,float vLevel)
+
+vec2 getTexcoord(vec3 P)
+{
+	vec3 P0 = vs_gs_in[0].PositionS.xyz;
+	vec3 P1 = vs_gs_in[1].PositionS.xyz;
+	vec3 P2 = vs_gs_in[2].PositionS.xyz;
+
+	float b = ((P0.x - P2.x) * (P1.y - P2.y) - (P0.y - P2.y) * (P1.x - P2.x));
+	float u = (P.x *(P1.y - P2.y) - P.y * (P1.x - P2.x)) / b;
+	float v = (P.x *(P0.y - P2.y) - P.y * (P0.x - P2.x)) / (-b);
+	
+	vec2 T0 = vs_gs_in[0].TexCoord - vs_gs_in[2].TexCoord;
+	vec2 T1 = vs_gs_in[1].TexCoord - vs_gs_in[2].TexCoord;
+	return T0 * u + T1 * v;
+
+}
+void sendTriangle(vec3 vTriangle[3],float vArea,float vLevel,int temp)
 {
 	STriangle TempTriangle;
 	TempTriangle.mPositions[0] = vTriangle[0];
 	TempTriangle.mPositions[1] = vTriangle[1];
 	TempTriangle.mPositions[2] = vTriangle[2];
 	TempTriangle.mNormals = getNormal(vTriangle);
-	TempTriangle.mTexCoords = (vs_gs_in[0].TexCoord + vs_gs_in[1].TexCoord + vs_gs_in[2].TexCoord) / 3.0;
+	vec3 Center = (TempTriangle.mPositions[0] + TempTriangle.mPositions[1] + TempTriangle.mPositions[2]) / 3.0;
+	TempTriangle.mTexCoords = getTexcoord(Center);
 	TempTriangle.mAreaAndLevel = vec2(vArea,vLevel);
 	for (int i = 0; i < 3; ++i)
 	{
 		fragment_out.TriangleInfo = TempTriangle;
-		gl_Position = u_ProjectionMatrix * u_ViewMatrix * u_ModelMatrix * vec4(vTriangle[i],1);
+		gl_Position = vec4(temp / 1260.0,0,0,1);
+//		gl_Position = u_ProjectionMatrix * u_ViewMatrix  * u_ModelMatrix * vec4(vTriangle[i],1);
 		EmitVertex();
 	}
+
 }
 void main()
 {
@@ -158,6 +179,8 @@ void main()
 	stack[++top] = vs_gs_in[2].PositionS.xyz;
 	float rand = u_Noise[gl_PrimitiveIDIn % u_NoiseNum];
 	float maxS = u_Skp[u_NumS - 1];
+	int temp = 0;
+	 
 	while(top > 0 && top < TriangleVerticesNum)
 	{
 		vec3 Triangle[3];
@@ -189,9 +212,12 @@ void main()
 		else
 		{
 			int level = getLevel(area,rand);
-			sendTriangle(Triangle,area,level);
+			sendTriangle(Triangle,area,level,temp);
+			temp++;
 		}
 	}
+	gl_Position = vec4(0,1.0 / 720.0,0,1);
+	EmitVertex();
 	EndPrimitive();
 
 }

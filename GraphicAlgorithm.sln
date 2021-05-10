@@ -49,6 +49,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DepthToPositionAndNormal", 
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "016_Cascaded Light Propagation Volumes for Real-Time Indirect Illumination", "016_Cascaded Light Propagation Volumes for Real-Time Indirect Illumination\016_Cascaded Light Propagation Volumes for Real-Time Indirect Illumination.vcxproj", "{22C27244-14DE-45C4-BCC0-146F8ABDE9D2}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "017_Forward Light Cuts A Scalable Approach to RealTime Global Illumination", "017_Forward Light Cuts A Scalable Approach to RealTime Global Illumination\017_Forward Light Cuts A Scalable Approach to RealTime Global Illumination.vcxproj", "{BF0B1F03-F638-42FC-94F2-122BC37FB679}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -233,6 +235,14 @@ Global
 		{22C27244-14DE-45C4-BCC0-146F8ABDE9D2}.Release|x64.Build.0 = Release|x64
 		{22C27244-14DE-45C4-BCC0-146F8ABDE9D2}.Release|x86.ActiveCfg = Release|Win32
 		{22C27244-14DE-45C4-BCC0-146F8ABDE9D2}.Release|x86.Build.0 = Release|Win32
+		{BF0B1F03-F638-42FC-94F2-122BC37FB679}.Debug|x64.ActiveCfg = Debug|x64
+		{BF0B1F03-F638-42FC-94F2-122BC37FB679}.Debug|x64.Build.0 = Debug|x64
+		{BF0B1F03-F638-42FC-94F2-122BC37FB679}.Debug|x86.ActiveCfg = Debug|Win32
+		{BF0B1F03-F638-42FC-94F2-122BC37FB679}.Debug|x86.Build.0 = Debug|Win32
+		{BF0B1F03-F638-42FC-94F2-122BC37FB679}.Release|x64.ActiveCfg = Release|x64
+		{BF0B1F03-F638-42FC-94F2-122BC37FB679}.Release|x64.Build.0 = Release|x64
+		{BF0B1F03-F638-42FC-94F2-122BC37FB679}.Release|x86.ActiveCfg = Release|Win32
+		{BF0B1F03-F638-42FC-94F2-122BC37FB679}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

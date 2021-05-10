@@ -66,5 +66,5 @@ void main()
 								getF(d,level) * 
 								VPLRadiance * max(dot(VPLNormal, VPL2Frag), 0) * max(dot(Normal, -VPL2Frag), 0) / SquareDistance;
 	}
-	Color_ = vec4(IndirectIllumination / PI,1);
+	Color_ = vec4(u_Intensity * IndirectIllumination / PI,1);
 }

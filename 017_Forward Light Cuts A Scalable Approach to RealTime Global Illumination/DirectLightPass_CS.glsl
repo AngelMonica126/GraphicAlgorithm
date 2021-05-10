@@ -36,7 +36,7 @@ void main()
 	vec4 FragPosInLightSpace = u_LightVPMatrixMulInverseCameraViewMatrix * vec4(FragViewPos, 1);
 	FragPosInLightSpace /= FragPosInLightSpace.w;
 	FragPosInLightSpace.xyz = (FragPosInLightSpace.xyz + 1) / 2;
-	vec3 LightDirInViewSpace = -normalize(vec3(u_ViewMatrix * vec4(u_LightDir, 0.0f)));	//这个负号不要忘了
+	vec3 LightDirInViewSpace = -normalize(vec3(vec4(u_LightDir, 0.0f)));	//这个负号不要忘了
 	float DirectIllumination;
 	float Visibility4DirectLight = 0.0f;
 	if(FragPosInLightSpace.z < 0.0f || FragPosInLightSpace.x > 1.0f || FragPosInLightSpace.y > 1.0f || FragPosInLightSpace.x < 0.0f || FragPosInLightSpace.y < 0.0f)
