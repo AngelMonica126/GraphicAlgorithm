@@ -39,7 +39,7 @@ float *CTriangleCutPass::getSkp(float *Sk)
 		float sum = 0;
 		for (int j = 0; j < i; j++)
 		{
-			sum += Sk[j];
+			sum += 1.0 / Sk[j];
 		}
 		Skp[i] = 1.0 / sum;
 	}

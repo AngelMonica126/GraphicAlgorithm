@@ -39,13 +39,23 @@ float getF(float d,int level)
 	float DkMinus = sqrt(u_Sk[level - 1]);
 	float Dk = sqrt(u_Sk[level]);
 	float DkPlus = sqrt(u_Sk[level + 1]);
-	if(d >= DkMinus && d <= Dk)
+	if(d <= sqrt(u_Sk[0]))
+		return 0;
+	else if(d >= DkMinus && d <= Dk)
 		return (d - DkMinus) / (Dk - DkMinus);
 	else if(d >= Dk && d <= DkPlus)
 		return (DkPlus - d) / (DkPlus - Dk);
 	else return 0;
 }
-
+float getAllF(int level,float d)
+{
+	float sum = 0;
+	for(int i = 0; i <= level; i++)
+	{
+		sum += u_Sk[i] * getF(d,i);
+	}
+	return sum;
+}
 void main()
 {
 	
@@ -62,8 +72,7 @@ void main()
 		float SquareDistance = dot(VPL2Frag, VPL2Frag);
 		int level = int(u_Triangles[i].NormalandLevel.w);
 		float d = sqrt(SquareDistance) / dot(VPLNormal, VPL2Frag);
-		IndirectIllumination += u_Sk[level] *
-								getF(d,level) * 
+		IndirectIllumination += getAllF(level,d) * 
 								VPLRadiance * max(dot(VPLNormal, VPL2Frag), 0) * max(dot(Normal, -VPL2Frag), 0) / SquareDistance;
 	}
 	Color_ = vec4(u_Intensity * IndirectIllumination / PI,1);

@@ -48,6 +48,8 @@ out GS_FS_VERTEX
 
 uniform int u_NoiseNum;
 uniform int u_NumS;
+uniform float InWidth = 1.0 / 1920.0;
+uniform float InHeight = 1.0 / 1080.0;
 float getArea(vec3 vPositions[3])
 {
 	vec3 V1 = vPositions[1] - vPositions[0];
@@ -118,7 +120,7 @@ void splitTriangle(vec3 vPositions[3], out vec3 TriangleOne[3],out vec3 Triangle
 	}
 	else
 	{
-	vec3 mid = 0.5 * (vPositions[2] + vPositions[0]);
+		vec3 mid = 0.5 * (vPositions[2] + vPositions[0]);
 		TriangleOne[0] = vPositions[1];
 		TriangleOne[1] = vPositions[0];
 		TriangleOne[2] = mid;
@@ -164,7 +166,7 @@ void sendTriangle(vec3 vTriangle[3],float vArea,float vLevel,int temp)
 	for (int i = 0; i < 3; ++i)
 	{
 		fragment_out.TriangleInfo = TempTriangle;
-		gl_Position = vec4(temp / 1260.0,0,0,1);
+		gl_Position = vec4(temp * InWidth,0,0,1);
 //		gl_Position = u_ProjectionMatrix * u_ViewMatrix  * u_ModelMatrix * vec4(vTriangle[i],1);
 		EmitVertex();
 	}
@@ -180,7 +182,6 @@ void main()
 	float rand = u_Noise[gl_PrimitiveIDIn % u_NoiseNum];
 	float maxS = u_Skp[u_NumS - 1];
 	int temp = 0;
-	 
 	while(top > 0 && top < TriangleVerticesNum)
 	{
 		vec3 Triangle[3];
@@ -189,7 +190,7 @@ void main()
 		Triangle[2] = stack[top--];
 		float area = getArea(Triangle);
 		if(area <= rand * u_Skp[0])continue;
-		if(rand * maxS < area)
+		if(rand * maxS > area)
 		{
 			//·Ö¸î
 			if(top >= TriangleVerticesNum) continue;
@@ -216,7 +217,7 @@ void main()
 			temp++;
 		}
 	}
-	gl_Position = vec4(0,1.0 / 720.0,0,1);
+	gl_Position = vec4(0,InHeight,0,1);
 	EmitVertex();
 	EndPrimitive();
 
