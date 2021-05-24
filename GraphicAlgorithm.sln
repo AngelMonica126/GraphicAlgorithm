@@ -51,6 +51,12 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "016_Cascaded Light Propagat
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "017_Forward Light Cuts A Scalable Approach to RealTime Global Illumination", "017_Forward Light Cuts A Scalable Approach to RealTime Global Illumination\017_Forward Light Cuts A Scalable Approach to RealTime Global Illumination.vcxproj", "{BF0B1F03-F638-42FC-94F2-122BC37FB679}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "018_Cascaded Shadow Maps", "018_Cascaded Shadow Maps\018_Cascaded Shadow Maps.vcxproj", "{41A08EF9-DFE0-4D05-8506-3DF00FBC2080}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Pipeline", "Pipeline\Pipeline.vcxproj", "{849C16C0-DB96-4E31-84BE-0160B14C1A5D}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "019_A Survey of Efficient Representations  for Independent Unit Vectors", "019_A Survey of Efficient Representations  for Independent Unit Vectors\019_A Survey of Efficient Representations  for Independent Unit Vectors.vcxproj", "{3886A6D2-06D3-424F-BC77-2F97EEF68441}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -243,6 +249,30 @@ Global
 		{BF0B1F03-F638-42FC-94F2-122BC37FB679}.Release|x64.Build.0 = Release|x64
 		{BF0B1F03-F638-42FC-94F2-122BC37FB679}.Release|x86.ActiveCfg = Release|Win32
 		{BF0B1F03-F638-42FC-94F2-122BC37FB679}.Release|x86.Build.0 = Release|Win32
+		{41A08EF9-DFE0-4D05-8506-3DF00FBC2080}.Debug|x64.ActiveCfg = Debug|x64
+		{41A08EF9-DFE0-4D05-8506-3DF00FBC2080}.Debug|x64.Build.0 = Debug|x64
+		{41A08EF9-DFE0-4D05-8506-3DF00FBC2080}.Debug|x86.ActiveCfg = Debug|Win32
+		{41A08EF9-DFE0-4D05-8506-3DF00FBC2080}.Debug|x86.Build.0 = Debug|Win32
+		{41A08EF9-DFE0-4D05-8506-3DF00FBC2080}.Release|x64.ActiveCfg = Release|x64
+		{41A08EF9-DFE0-4D05-8506-3DF00FBC2080}.Release|x64.Build.0 = Release|x64
+		{41A08EF9-DFE0-4D05-8506-3DF00FBC2080}.Release|x86.ActiveCfg = Release|Win32
+		{41A08EF9-DFE0-4D05-8506-3DF00FBC2080}.Release|x86.Build.0 = Release|Win32
+		{849C16C0-DB96-4E31-84BE-0160B14C1A5D}.Debug|x64.ActiveCfg = Debug|x64
+		{849C16C0-DB96-4E31-84BE-0160B14C1A5D}.Debug|x64.Build.0 = Debug|x64
+		{849C16C0-DB96-4E31-84BE-0160B14C1A5D}.Debug|x86.ActiveCfg = Debug|Win32
+		{849C16C0-DB96-4E31-84BE-0160B14C1A5D}.Debug|x86.Build.0 = Debug|Win32
+		{849C16C0-DB96-4E31-84BE-0160B14C1A5D}.Release|x64.ActiveCfg = Release|x64
+		{849C16C0-DB96-4E31-84BE-0160B14C1A5D}.Release|x64.Build.0 = Release|x64
+		{849C16C0-DB96-4E31-84BE-0160B14C1A5D}.Release|x86.ActiveCfg = Release|Win32
+		{849C16C0-DB96-4E31-84BE-0160B14C1A5D}.Release|x86.Build.0 = Release|Win32
+		{3886A6D2-06D3-424F-BC77-2F97EEF68441}.Debug|x64.ActiveCfg = Debug|x64
+		{3886A6D2-06D3-424F-BC77-2F97EEF68441}.Debug|x64.Build.0 = Debug|x64
+		{3886A6D2-06D3-424F-BC77-2F97EEF68441}.Debug|x86.ActiveCfg = Debug|Win32
+		{3886A6D2-06D3-424F-BC77-2F97EEF68441}.Debug|x86.Build.0 = Debug|Win32
+		{3886A6D2-06D3-424F-BC77-2F97EEF68441}.Release|x64.ActiveCfg = Release|x64
+		{3886A6D2-06D3-424F-BC77-2F97EEF68441}.Release|x64.Build.0 = Release|x64
+		{3886A6D2-06D3-424F-BC77-2F97EEF68441}.Release|x86.ActiveCfg = Release|Win32
+		{3886A6D2-06D3-424F-BC77-2F97EEF68441}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -253,6 +283,7 @@ Global
 		{2A7A8A8C-5242-4378-B6F6-DE73FE036B18} = {A03BAF1F-EE48-42BE-83FC-A0DBBD02FCEE}
 		{F95F3E16-3992-47DD-8096-88C376C98CDF} = {A03BAF1F-EE48-42BE-83FC-A0DBBD02FCEE}
 		{D0849283-50C8-430F-BF80-D9ADDA14EFA3} = {A03BAF1F-EE48-42BE-83FC-A0DBBD02FCEE}
+		{849C16C0-DB96-4E31-84BE-0160B14C1A5D} = {A03BAF1F-EE48-42BE-83FC-A0DBBD02FCEE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4D515167-7B8B-4B7D-BF16-31B78D444E75}
