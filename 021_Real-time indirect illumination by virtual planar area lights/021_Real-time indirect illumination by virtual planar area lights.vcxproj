@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{F0306D53-92F4-46EB-9F86-407134E43F6E}</ProjectGuid>
+    <RootNamespace>My021Realtimeindirectilluminationbyvirtualplanararealights</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(BOOST);$(ASSIMP)/include;$(STB_IMAGE)/include;$(GLM);$(OPENGL)/include/;../FRAME;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DisableSpecificWarnings>4251;4305;4244</DisableSpecificWarnings>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>$(BOOST)/x64;$(ASSIMP)/lib/x64;$(OPENGL)/lib/x64;../x64/Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>FRAME.lib;opengl32.lib;glfw3-vc140.lib;assimp-vc140-mt.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;glew32d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(BOOST);$(ASSIMP)/include;$(STB_IMAGE)/include;$(GLM);$(OPENGL)/include/;../FRAME;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DisableSpecificWarnings>4251;4305;4244</DisableSpecificWarnings>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>$(BOOST)/x64;$(ASSIMP)/lib/x64;$(OPENGL)/lib/x64;../x64/Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>FRAME.lib;opengl32.lib;glfw3-vc140.lib;assimp-vc140-mt.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;glew32d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <None Include="CalculateEigen_CS.glsl" />
+    <None Include="CalculatePlane_CS.glsl" />
+    <None Include="CalculateWeight_CS.glsl" />
+    <None Include="DirectLightPass_CS.glsl" />
+    <None Include="FitContinuityPlane_CS.glsl" />
+    <None Include="GaussianBlur_FS.glsl" />
+    <None Include="GaussianBlur_VS.glsl" />
+    <None Include="GBufferDynamicObject_FS.glsl" />
+    <None Include="GBufferDynamicObject_VS.glsl" />
+    <None Include="GBuffer_FS.glsl" />
+    <None Include="GBuffer_VS.glsl" />
+    <None Include="LightSource_FS.glsl" />
+    <None Include="LightSource_VS.glsl" />
+    <None Include="LowRSMBuffer_FS.glsl" />
+    <None Include="LowRSMBuffer_VS.glsl" />
+    <None Include="NormalCompute_FS.glsl" />
+    <None Include="NormalCompute_VS.glsl" />
+    <None Include="RSMBufferDynamicObject_FS.glsl" />
+    <None Include="RSMBufferDynamicObject_VS.glsl" />
+    <None Include="RSMBuffer_FS.glsl" />
+    <None Include="RSMBuffer_VS.glsl" />
+    <None Include="ScreenQuad_FS.glsl" />
+    <None Include="ScreenQuad_VS.glsl" />
+    <None Include="ShadingWithRSMAndTile_CS.glsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CalculateEigenPass.h" />
+    <ClInclude Include="CalculatePlanePass.h" />
+    <ClInclude Include="CalculateWeightPass.h" />
+    <ClInclude Include="CustomGUI.h" />
+    <ClInclude Include="DirectLightPass.h" />
+    <ClInclude Include="DynamicObject.h" />
+    <ClInclude Include="FitContinuityPlanePass.h" />
+    <ClInclude Include="GaussianBlurPass.h" />
+    <ClInclude Include="GBufferPass.h" />
+    <ClInclude Include="LightCamera.h" />
+    <ClInclude Include="LightSourcePass.h" />
+    <ClInclude Include="LowRSMBufferPass.h" />
+    <ClInclude Include="NormalComputePass.h" />
+    <ClInclude Include="RSMBufferPass.h" />
+    <ClInclude Include="ScreenQuadPass.h" />
+    <ClInclude Include="ShadingWithRSMAndTilePass.h" />
+    <ClInclude Include="Sponza.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="CalculateEigenPass.cpp" />
+    <ClCompile Include="CalculatePlanePass.cpp" />
+    <ClCompile Include="CalculateWeightPass.cpp" />
+    <ClCompile Include="CustomGUI.cpp" />
+    <ClCompile Include="DirectLightPass.cpp" />
+    <ClCompile Include="DynamicObject.cpp" />
+    <ClCompile Include="FitContinuityPlanePass.cpp" />
+    <ClCompile Include="GaussianBlurPass.cpp" />
+    <ClCompile Include="GBufferPass.cpp" />
+    <ClCompile Include="LightCamera.cpp" />
+    <ClCompile Include="LightSourcePass.cpp" />
+    <ClCompile Include="LowRSMBufferPass.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="NormalComputePass.cpp" />
+    <ClCompile Include="RSMBufferPass.cpp" />
+    <ClCompile Include="ScreenQuadPass.cpp" />
+    <ClCompile Include="ShadingWithRSMAndTilePass.cpp" />
+    <ClCompile Include="Sponza.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

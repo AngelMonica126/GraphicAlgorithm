@@ -57,6 +57,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "019_A Survey of Efficient R
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "020_Real-time Approximation to Large Convolution Kernel", "020_Real-time Approximation to Large Convolution Kernel\020_Real-time Approximation to Large Convolution Kernel.vcxproj", "{23775CB2-8026-4ABA-94B6-A348110FCF64}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "021_Real-time indirect illumination by virtual planar area lights", "021_Real-time indirect illumination by virtual planar area lights\021_Real-time indirect illumination by virtual planar area lights.vcxproj", "{F0306D53-92F4-46EB-9F86-407134E43F6E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -273,6 +275,14 @@ Global
 		{23775CB2-8026-4ABA-94B6-A348110FCF64}.Release|x64.Build.0 = Release|x64
 		{23775CB2-8026-4ABA-94B6-A348110FCF64}.Release|x86.ActiveCfg = Release|Win32
 		{23775CB2-8026-4ABA-94B6-A348110FCF64}.Release|x86.Build.0 = Release|Win32
+		{F0306D53-92F4-46EB-9F86-407134E43F6E}.Debug|x64.ActiveCfg = Debug|x64
+		{F0306D53-92F4-46EB-9F86-407134E43F6E}.Debug|x64.Build.0 = Debug|x64
+		{F0306D53-92F4-46EB-9F86-407134E43F6E}.Debug|x86.ActiveCfg = Debug|Win32
+		{F0306D53-92F4-46EB-9F86-407134E43F6E}.Debug|x86.Build.0 = Debug|Win32
+		{F0306D53-92F4-46EB-9F86-407134E43F6E}.Release|x64.ActiveCfg = Release|x64
+		{F0306D53-92F4-46EB-9F86-407134E43F6E}.Release|x64.Build.0 = Release|x64
+		{F0306D53-92F4-46EB-9F86-407134E43F6E}.Release|x86.ActiveCfg = Release|Win32
+		{F0306D53-92F4-46EB-9F86-407134E43F6E}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
