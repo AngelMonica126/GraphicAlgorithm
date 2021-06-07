@@ -84,8 +84,8 @@ void CLightCamera::setFrustum()
 		for (int j = 0; j < 8; j++) {
 			t_transf = t_shad_mvp * glm::vec4(t_frustum.Pos[j], 1.0f);
 
-			t_transf.x /= t_transf.w;
-			t_transf.y /= t_transf.w;
+			//t_transf.x /= t_transf.w;
+			//t_transf.y /= t_transf.w;
 
 			if (t_transf.x > tmax.x) { tmax.x = t_transf.x; }
 			if (t_transf.x < tmin.x) { tmin.x = t_transf.x; }
@@ -101,11 +101,9 @@ void CLightCamera::setFrustum()
 		t_shad_crop[1][1] = tscale.y;
 		t_shad_crop[0][3] = toffset.x;
 		t_shad_crop[1][3] = toffset.y;
-		t_shad_crop = glm::transpose(t_shad_crop);
+		//t_shad_crop = glm::transpose(t_shad_crop);
 		m_Frustum[i] = t_shad_crop * t_ortho;
 	}
-
-
 }
 void CLightCamera::initV()
 {
