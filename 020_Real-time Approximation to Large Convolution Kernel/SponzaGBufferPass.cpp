@@ -56,6 +56,8 @@ void CSponzaGBufferPass::initV()
 //Function:
 void CSponzaGBufferPass::updateV()
 {
+	ElayGraphics::Camera::setMainCameraPos({ -0.163989, -1.29911, 2.43392 });
+	ElayGraphics::Camera::setMainCameraFront({ 0.0103159, -0.171929, -0.985055 });
 	glBindFramebuffer(GL_FRAMEBUFFER, m_FBO);
 	glClearColor(0.2f, 0.3f, 0.4f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

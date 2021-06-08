@@ -18,8 +18,7 @@ void CScreenQuadPass::initV()
 	m_pShader = std::make_shared<CShader>("ScreenQuad_VS.glsl", "ScreenQuad_FS.glsl");
 
 	m_pShader->activeShader();
-	m_pShader->setTextureUniformValue("u_Albedo", ElayGraphics::ResourceManager::getSharedDataByName<std::shared_ptr<ElayGraphics::STexture>>("AlbedoTexture"));
-	m_pShader->setTextureUniformValue("u_Test", ElayGraphics::ResourceManager::getSharedDataByName<std::shared_ptr<ElayGraphics::STexture>>("Texture"));
+	m_pShader->setTextureUniformValue("u_Albedo", ElayGraphics::ResourceManager::getSharedDataByName<std::shared_ptr<ElayGraphics::STexture>>("Texture"));
 }
 
 //************************************************************************************
@@ -33,6 +32,4 @@ void CScreenQuadPass::updateV()
 	m_pShader->activeShader();
 	drawQuad();
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
-	index++;
-	//captureScreen2Img("pic"+std::to_string(index)+".png");
 }

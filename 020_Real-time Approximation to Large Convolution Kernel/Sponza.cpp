@@ -12,4 +12,5 @@ void CSponza::initV()
 
 void CSponza::updateV()
 {
+	
 }
