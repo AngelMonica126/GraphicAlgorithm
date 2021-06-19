@@ -131,31 +131,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="CustomGUI.cpp" />
     <ClCompile Include="DynamicObject.cpp" />
     <ClCompile Include="GBufferPass.cpp" />
-    <ClCompile Include="LightCamera.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="ScreenQuadPass.cpp" />
     <ClCompile Include="ScreenSpaceRayTracingPass.cpp" />
     <ClCompile Include="Sponza.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CustomGUI.h" />
     <ClInclude Include="DynamicObject.h" />
     <ClInclude Include="GBufferPass.h" />
-    <ClInclude Include="LightCamera.h" />
-    <ClInclude Include="ScreenQuadPass.h" />
     <ClInclude Include="ScreenSpaceRayTracingPass.h" />
     <ClInclude Include="Sponza.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="GBufferDynamicObject_FS.glsl" />
-    <None Include="GBufferDynamicObject_VS.glsl" />
     <None Include="GBuffer_FS.glsl" />
     <None Include="GBuffer_VS.glsl" />
-    <None Include="ScreenQuad_FS.glsl" />
-    <None Include="ScreenQuad_VS.glsl" />
     <None Include="ScreenSpaceRayTracing_FS.glsl" />
     <None Include="ScreenSpaceRayTracing_VS.glsl" />
   </ItemGroup>

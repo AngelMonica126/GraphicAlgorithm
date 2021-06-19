@@ -18,22 +18,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="CustomGUI.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="DynamicObject.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="GBufferPass.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="LightCamera.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="ScreenQuadPass.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Sponza.cpp">
@@ -42,21 +30,15 @@
     <ClCompile Include="ScreenSpaceRayTracingPass.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="DynamicObject.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CustomGUI.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="DynamicObject.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="GBufferPass.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="LightCamera.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="ScreenQuadPass.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Sponza.h">
@@ -71,18 +53,6 @@
       <Filter>Shader</Filter>
     </None>
     <None Include="GBuffer_VS.glsl">
-      <Filter>Shader</Filter>
-    </None>
-    <None Include="GBufferDynamicObject_FS.glsl">
-      <Filter>Shader</Filter>
-    </None>
-    <None Include="GBufferDynamicObject_VS.glsl">
-      <Filter>Shader</Filter>
-    </None>
-    <None Include="ScreenQuad_FS.glsl">
-      <Filter>Shader</Filter>
-    </None>
-    <None Include="ScreenQuad_VS.glsl">
       <Filter>Shader</Filter>
     </None>
     <None Include="ScreenSpaceRayTracing_FS.glsl">

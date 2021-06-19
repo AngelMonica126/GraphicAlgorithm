@@ -19,7 +19,7 @@ CScreenSpaceRayTracingPass::~CScreenSpaceRayTracingPass()
 void CScreenSpaceRayTracingPass::initV()
 {
 	m_pShader = std::make_shared<CShader>("GBuffer_VS.glsl", "GBuffer_FS.glsl");
-	m_pDynamicObjectShader = std::make_shared<CShader>("GBufferDynamicObject_VS.glsl", "GBufferDynamicObject_FS.glsl");
+	m_pDynamicObjectShader = std::make_shared<CShader>("ScreenSpaceRayTracing_VS.glsl", "ScreenSpaceRayTracing_FS.glsl");
 
 	m_pSponza = std::dynamic_pointer_cast<CSponza>(ElayGraphics::ResourceManager::getGameObjectByName("Sponza"));
 	m_pDynamicObject = std::dynamic_pointer_cast<CDynamicObject>(ElayGraphics::ResourceManager::getGameObjectByName("DynamicObject"));
@@ -28,12 +28,23 @@ void CScreenSpaceRayTracingPass::initV()
 	m_pShader->setMat4UniformValue("u_ModelMatrix", glm::value_ptr(m_pSponza->getModelMatrix()));
 	m_pShader->setFloatUniformValue("u_Near", ElayGraphics::Camera::getMainCameraNear());
 	m_pShader->setFloatUniformValue("u_Far", ElayGraphics::Camera::getMainCameraFar());
-	m_pShader->setMat4UniformValue("u_ModelMatrix", glm::value_ptr(m_pSponza->getModelMatrix()));
 	m_pShader->setMat4UniformValue("u_TransposeInverseViewModelMatrix", glm::value_ptr(glm::transpose(glm::inverse(ElayGraphics::Camera::getMainCameraViewMatrix() *  m_pSponza->getModelMatrix()))));
 	m_pSponza->initModel(*m_pShader);
 
+
+	//uniform vec3 u_DiffuseColor;
+	//uniform sampler2D u_DepthTexture;
+	//uniform sampler2D u_AlbedoTexture;
+	//uniform float u_Near = 0.1;
+	//uniform float u_Far = 1000.0f;
+	//uniform vec2 u_DepthSize;
 	m_pDynamicObjectShader->activeShader();
-	m_pDynamicObjectShader->setMat4UniformValue("u_ModelMatrix", glm::value_ptr(m_pDynamicObject->getModelMatrix()));
+	m_pDynamicObjectShader->setMat4UniformValue("u_ModelMatrix", glm::value_ptr(m_pSponza->getModelMatrix()));
+	m_pDynamicObjectShader->setFloatUniformValue("u_Near", ElayGraphics::Camera::getMainCameraNear());
+	m_pDynamicObjectShader->setFloatUniformValue("u_Far", ElayGraphics::Camera::getMainCameraFar());
+	m_pDynamicObjectShader->setFloatUniformValue("u_DepthSize", 1920.0f,1152.0f);
+	m_pDynamicObjectShader->setTextureUniformValue("u_DepthTexture", ElayGraphics::ResourceManager::getSharedDataByName<std::shared_ptr<ElayGraphics::STexture>>("DepthTexture"));
+	m_pDynamicObjectShader->setTextureUniformValue("u_AlbedoTexture", ElayGraphics::ResourceManager::getSharedDataByName<std::shared_ptr<ElayGraphics::STexture>>("AlbedoTexture"));
 }
 
 void CScreenSpaceRayTracingPass::updateV()
@@ -51,7 +62,6 @@ void CScreenSpaceRayTracingPass::updateV()
 
 	m_pDynamicObjectShader->activeShader();
 	m_pDynamicObjectShader->setMat4UniformValue("u_ModelMatrix", glm::value_ptr(m_pDynamicObject->getModelMatrix()));
-	//m_pDynamicObject->updateModel(*m_pDynamicObjectShader);
 	drawQuad();
 
 	glDisable(GL_CULL_FACE);

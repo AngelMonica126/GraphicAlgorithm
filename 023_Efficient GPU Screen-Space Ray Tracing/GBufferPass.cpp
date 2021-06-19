@@ -18,30 +18,38 @@ GBufferPass::~GBufferPass()
 void GBufferPass::initV()
 {
 	
+	ElayGraphics::Camera::setMainCameraFarPlane(100);
+	ElayGraphics::Camera::setMainCameraMoveSpeed(1.0);
+	ElayGraphics::Camera::setMainCameraPos({ 0, -2.03285, 3.00298});
+	ElayGraphics::Camera::setMainCameraFront({ -0.305803, 0.190466, -0.932849 });
+	//ElayGraphics::Camera::setMainCameraFront({ 0, 0.176569, -0.983381 });
+
 	m_pShader = std::make_shared<CShader>("GBuffer_VS.glsl", "GBuffer_FS.glsl");
 
 	m_pSponza = std::dynamic_pointer_cast<CSponza>(ElayGraphics::ResourceManager::getGameObjectByName("Sponza"));
-	auto TextureConfig4Position = std::make_shared<ElayGraphics::STexture>();
-	auto TextureConfig4NormalAndDoubleRoughness = std::make_shared<ElayGraphics::STexture>();
-	auto TextureConfig4AlbedoAndMetallic = std::make_shared<ElayGraphics::STexture>();
-	TextureConfig4AlbedoAndMetallic->InternalFormat = TextureConfig4NormalAndDoubleRoughness->InternalFormat = TextureConfig4Position->InternalFormat = GL_RGBA32F;
-	TextureConfig4AlbedoAndMetallic->ExternalFormat = TextureConfig4NormalAndDoubleRoughness->ExternalFormat = TextureConfig4Position->ExternalFormat = GL_RGBA;
-	TextureConfig4AlbedoAndMetallic->DataType = TextureConfig4NormalAndDoubleRoughness->DataType = TextureConfig4Position->DataType = GL_FLOAT;
-	TextureConfig4AlbedoAndMetallic->isMipmap = TextureConfig4NormalAndDoubleRoughness->isMipmap = TextureConfig4Position->isMipmap = false;
-	genTexture(TextureConfig4AlbedoAndMetallic);
-	genTexture(TextureConfig4NormalAndDoubleRoughness);
-	genTexture(TextureConfig4Position);
-	m_FBO = genFBO({ TextureConfig4AlbedoAndMetallic, TextureConfig4NormalAndDoubleRoughness, TextureConfig4Position});
+	auto TextureConfig4Albedo = std::make_shared<ElayGraphics::STexture>();
+	auto TextureConfig4Depth = std::make_shared<ElayGraphics::STexture>();
+	TextureConfig4Albedo->InternalFormat = GL_RGBA32F;
+	TextureConfig4Albedo->ExternalFormat = GL_RGBA;
+	TextureConfig4Albedo->DataType  = GL_FLOAT;
+	genTexture(TextureConfig4Albedo);
+	TextureConfig4Depth->InternalFormat = GL_DEPTH_COMPONENT32F;
+	TextureConfig4Depth->ExternalFormat = GL_DEPTH_COMPONENT;
+	TextureConfig4Depth->DataType = GL_FLOAT;
+	TextureConfig4Depth->Type4MinFilter = GL_NEAREST;
+	TextureConfig4Depth->Type4MagFilter = GL_NEAREST;
+	TextureConfig4Depth->TextureAttachmentType = ElayGraphics::STexture::ETextureAttachmentType::DepthTexture;
+	genTexture(TextureConfig4Depth);
 
-	ElayGraphics::ResourceManager::registerSharedData("AlbedoTexture", TextureConfig4AlbedoAndMetallic);
-	ElayGraphics::ResourceManager::registerSharedData("NormalTexture", TextureConfig4NormalAndDoubleRoughness);
-	ElayGraphics::ResourceManager::registerSharedData("PositionTexture", TextureConfig4Position);
+	m_FBO = genFBO({ TextureConfig4Albedo,TextureConfig4Depth });
+
+	ElayGraphics::ResourceManager::registerSharedData("AlbedoTexture", TextureConfig4Albedo);
+	ElayGraphics::ResourceManager::registerSharedData("DepthTexture", TextureConfig4Depth);
 
 	m_pShader->activeShader();
 	m_pShader->setMat4UniformValue("u_ModelMatrix", glm::value_ptr(m_pSponza->getModelMatrix()));
 	m_pShader->setFloatUniformValue("u_Near", ElayGraphics::Camera::getMainCameraNear());
 	m_pShader->setFloatUniformValue("u_Far", ElayGraphics::Camera::getMainCameraFar());
-	m_pShader->setMat4UniformValue("u_ModelMatrix", glm::value_ptr(m_pSponza->getModelMatrix()));
 	m_pShader->setMat4UniformValue("u_TransposeInverseViewModelMatrix", glm::value_ptr(glm::transpose(glm::inverse(ElayGraphics::Camera::getMainCameraViewMatrix() *  m_pSponza->getModelMatrix()))));
 	m_pSponza->initModel(*m_pShader);
 
