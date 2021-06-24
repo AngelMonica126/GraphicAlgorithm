@@ -24,16 +24,8 @@ void main()
 		Albedo_ = vec4(0, 0, 0, 1);
 		return;
 	}
-	vec3 F0 = vec3(0.2,0.2,0.2);
-	float roughness = 0.2;
-	vec3 N = normalize(v2f_Normal);
-	vec3 V = -normalize(v2f_FragPosInViewSpace);
-	vec3 F        = FresnelSchlickRoughness(max(dot(N, V), 0.0), F0, roughness);
-	vec2 envBRDF  = texture(u_BRDFLut, vec2(max(dot(N, V), 0.0), roughness)).rg;
-	vec3 specular = (F * envBRDF.x + envBRDF.y);
 
-
-	float basis[9];
+	float Basis[9];
 	float x = v2f_Normal.x;
 	float y = v2f_Normal.y;
 	float z = v2f_Normal.z;
@@ -41,19 +33,50 @@ void main()
 	float y2 = y * y;
 	float z2 = z * z;
     
-    basis[0] = 1.f / 2.f * sqrt(1.f / PI);
-    basis[1] = 2.0 / 3.0 * sqrt(3.f / (4.f * PI)) * z;
-    basis[2] = 2.0 / 3.0 * sqrt(3.f / (4.f * PI)) * y;
-    basis[3] = 2.0 / 3.0 * sqrt(3.f / (4.f * PI)) * x;
-    basis[4] = 1.0 / 4.0 * 1.f / 2.f * sqrt(15.f / PI) * x * z;
-    basis[5] = 1.0 / 4.0 * 1.f / 2.f * sqrt(15.f / PI) * z * y;
-    basis[6] = 1.0 / 4.0 * 1.f / 4.f * sqrt(5.f / PI) * (-x2 - z2 + 2 * y2);
-    basis[7] = 1.0 / 4.0 * 1.f / 2.f * sqrt(15.f / PI) * y * x;
-    basis[8] = 1.0 / 4.0 * 1.f / 4.f * sqrt(15.f / PI) * (x2 - z2);
+    Basis[0] = 1.f / 2.f * sqrt(1.f / PI);
+    Basis[1] = 2.0 / 3.0 * sqrt(3.f / (4.f * PI)) * z;
+    Basis[2] = 2.0 / 3.0 * sqrt(3.f / (4.f * PI)) * y;
+    Basis[3] = 2.0 / 3.0 * sqrt(3.f / (4.f * PI)) * x;
+    Basis[4] = 1.0 / 4.0 * 1.f / 2.f * sqrt(15.f / PI) * x * z;
+    Basis[5] = 1.0 / 4.0 * 1.f / 2.f * sqrt(15.f / PI) * z * y;
+    Basis[6] = 1.0 / 4.0 * 1.f / 4.f * sqrt(5.f / PI) * (-x2 - z2 + 2 * y2);
+    Basis[7] = 1.0 / 4.0 * 1.f / 2.f * sqrt(15.f / PI) * y * x;
+    Basis[8] = 1.0 / 4.0 * 1.f / 4.f * sqrt(15.f / PI) * (x2 - z2);
 
-	vec3 color = vec3(0,0,0);
+	vec3 Diffuse = vec3(0,0,0);
 	for (int i = 0; i < 9; i++)
-		color += u_Coef[i] * basis[i];
+		Diffuse += u_Coef[i] * Basis[i];
 
-	Albedo_ = vec4(1 * color + 0.3 * specular,1.0);
+
+	vec3 F0 = vec3(0.2,0.2,0.2);
+	float Roughness = 0.2;
+	vec3 N = normalize(v2f_Normal);
+	vec3 V = -normalize(v2f_FragPosInViewSpace);
+	vec3 R = reflect(-V, N); 
+	vec3 F        = FresnelSchlickRoughness(max(dot(N, V), 0.0), F0, Roughness);
+	vec2 EnvBRDF  = texture(u_BRDFLut, vec2(max(dot(N, V), 0.0), Roughness)).rg;
+	vec3 LUT = (F * EnvBRDF.x + EnvBRDF.y);
+
+	x = R.x;
+	y = R.y;
+	z = R.z;
+	x2 = x * x;
+	y2 = y * y;
+	z2 = z * z;
+	Basis[0] = 1.f / 2.f * sqrt(1.f / PI);
+    Basis[1] = 2.0 / 3.0 * sqrt(3.f / (4.f * PI)) * z;
+    Basis[2] = 2.0 / 3.0 * sqrt(3.f / (4.f * PI)) * y;
+    Basis[3] = 2.0 / 3.0 * sqrt(3.f / (4.f * PI)) * x;
+    Basis[4] = 1.0 / 4.0 * 1.f / 2.f * sqrt(15.f / PI) * x * z;
+    Basis[5] = 1.0 / 4.0 * 1.f / 2.f * sqrt(15.f / PI) * z * y;
+    Basis[6] = 1.0 / 4.0 * 1.f / 4.f * sqrt(5.f / PI) * (-x2 - z2 + 2 * y2);
+    Basis[7] = 1.0 / 4.0 * 1.f / 2.f * sqrt(15.f / PI) * y * x;
+    Basis[8] = 1.0 / 4.0 * 1.f / 4.f * sqrt(15.f / PI) * (x2 - z2);
+
+	vec3 Specular = vec3(0,0,0);
+	for (int i = 0; i < 9; i++)
+		Specular += u_Coef[i] * Basis[i];
+
+
+	Albedo_ = vec4(1 * Diffuse + 1.0 * Specular * LUT,1.0);
 }
