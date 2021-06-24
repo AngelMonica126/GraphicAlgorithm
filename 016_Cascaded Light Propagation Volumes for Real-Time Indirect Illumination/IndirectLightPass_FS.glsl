@@ -23,19 +23,16 @@ vec4 evalSH_direct( vec3 direction ) {
 ivec3 convertPointToGridIndex(vec3 vPos) {
 	return ivec3((vPos - u_MinAABB) / u_CellSize);
 }
-const ivec3 propDirections[6] = {
-	//+Z
-	ivec3(0,0,1),
-	//-Z
-	ivec3(0,0,-1),
-	//+X
-	ivec3(1,0,0),
-	//-X
-	ivec3(-1,0,0),
-	//+Y
-	ivec3(0,1,0),
-	//-Y
-	ivec3(0,-1,0)
+const ivec3 propDirections[8] = {
+	ivec3(u_CellSize * 0.5,u_CellSize * 0.5,u_CellSize * 0.5),
+	ivec3(u_CellSize * 0.5,u_CellSize * 0.5,-u_CellSize * 0.5),
+	ivec3(u_CellSize * 0.5,-u_CellSize * 0.5,u_CellSize * 0.5),
+	ivec3(u_CellSize * 0.5,-u_CellSize * 0.5,-u_CellSize * 0.5),
+	ivec3(-u_CellSize * 0.5,u_CellSize * 0.5,u_CellSize * 0.5),
+	ivec3(-u_CellSize * 0.5,u_CellSize * 0.5,-u_CellSize * 0.5),
+	ivec3(-u_CellSize * 0.5,-u_CellSize * 0.5,u_CellSize * 0.5),
+	ivec3(-u_CellSize * 0.5,-u_CellSize * 0.5,-u_CellSize * 0.5)
+	
 };
 void main()
 {
@@ -43,18 +40,22 @@ void main()
 	vec3 Position = texture(u_PositionTexture, v2f_TexCoords).xyz;
 	vec4 SHintensity = evalSH_direct(Normal);
 	ivec3 LpvCellCoords = convertPointToGridIndex(Position);
-	vec3 LpvIntensity =  vec3( 
+	vec3 LpvIntensity  = vec3(0);
+	vec3 LpvCellBasePos = vec3(convertPointToGridIndex(Position)) * u_CellSize +  u_MinAABB;
+	vec3 alpha = clamp((Position - LpvCellBasePos) / u_CellSize, vec3(0), vec3(1));
+	for (int i = 0; i < 8; ++i) {
+		ivec3 offset = ivec3(i, i >> 1, i >> 2) & ivec3(1);
+		ivec3 LpvCellCoords = convertPointToGridIndex(Position) + offset;
+		vec3 trilinear = mix (1 - alpha, alpha, offset);
+		float weight = trilinear.x * trilinear.y * trilinear.z;
+
+		weight = max(0.0002, weight);
+		LpvIntensity += weight 
+		* vec3( 
 				dot(SHintensity, texelFetch(u_RAccumulatorLPV, LpvCellCoords,0)),
 				dot(SHintensity, texelFetch(u_GAccumulatorLPV, LpvCellCoords,0)),
 				dot(SHintensity, texelFetch(u_BAccumulatorLPV, LpvCellCoords,0))
-		) * 0.36;	
-	for(int neighbour = 0; neighbour < 6; neighbour++)
-	{
-		LpvIntensity += vec3( 
-				dot(SHintensity, texelFetch(u_RAccumulatorLPV, LpvCellCoords - propDirections[neighbour],0)),
-				dot(SHintensity, texelFetch(u_GAccumulatorLPV, LpvCellCoords - propDirections[neighbour],0)),
-				dot(SHintensity, texelFetch(u_BAccumulatorLPV, LpvCellCoords - propDirections[neighbour],0))
-		) * 0.12;	
+		);
 	}
 	Color_ = vec4(max(LpvIntensity, 0 ),1) ;
 }
