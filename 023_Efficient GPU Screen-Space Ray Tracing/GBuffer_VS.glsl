@@ -10,9 +10,11 @@ layout(std140, binding = 0) uniform u_Matrices4ProjectionWorld
 
 uniform mat4 u_ModelMatrix;
 out vec2 v2f_TexCoords;
+out vec3 test;
 void main()
 {
 	vec4 FragPosInViewSpace = u_ViewMatrix * u_ModelMatrix * vec4(_Position, 1.0f);
 	gl_Position = u_ProjectionMatrix * FragPosInViewSpace;
 	v2f_TexCoords = _TexCoord;
+	test = FragPosInViewSpace.xyz;
 }

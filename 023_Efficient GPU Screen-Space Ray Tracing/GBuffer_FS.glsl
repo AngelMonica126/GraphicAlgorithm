@@ -1,6 +1,7 @@
 #version 430 core
 
 in  vec2 v2f_TexCoords;
+in  vec3 test;
 layout (location = 0) out vec4 AlbedoAndMetallic_;
 
 uniform mat4 u_TransposeInverseViewModelMatrix;
@@ -10,18 +11,6 @@ uniform sampler2D u_NormalTexture;
 uniform float u_Near = 0.1;
 uniform float u_Far = 1000.0f;
 
-float LinearizeDepth(float vDepth)
-{
-    float z = vDepth * 2.0 - 1.0; 
-    return (2.0 * u_Near * u_Far) / (u_Far + u_Near - z * (u_Far - u_Near));    
-}
-
-vec3 FetchNormal(vec2 vTexcoord, mat3 vTBNMatrix)
-{
-    vec3 n = texture2D(u_NormalTexture, vTexcoord).wyz * 2.0 - 1.0;
-    n.z = sqrt(max(1.0 - n.x*n.x - n.y*n.y, 0.0));
-    return (vTBNMatrix * n);
-}
 void main()
 {
 	float gamma = 2.2;

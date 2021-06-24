@@ -14,7 +14,7 @@ void CDynamicObject::initV()
 {
 	//setModel(ElayGraphics::ResourceManager::getOrCreateModel("../Model/Lucy/Lucy.obj"));//../Model/Dragon/dragon.obj
 	rotateX(90);
-	scale(glm::vec3(100, 100, 1));
+	scale(glm::vec3(10, 10, 1));
 	translate({ 0, -2.19, -0.56});
 }
 

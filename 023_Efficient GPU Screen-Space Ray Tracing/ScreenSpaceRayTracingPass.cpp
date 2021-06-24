@@ -45,6 +45,14 @@ void CScreenSpaceRayTracingPass::initV()
 	m_pDynamicObjectShader->setFloatUniformValue("u_DepthSize", 1920.0f,1152.0f);
 	m_pDynamicObjectShader->setTextureUniformValue("u_DepthTexture", ElayGraphics::ResourceManager::getSharedDataByName<std::shared_ptr<ElayGraphics::STexture>>("DepthTexture"));
 	m_pDynamicObjectShader->setTextureUniformValue("u_AlbedoTexture", ElayGraphics::ResourceManager::getSharedDataByName<std::shared_ptr<ElayGraphics::STexture>>("AlbedoTexture"));
+	glm::mat4 screenSpaceProjectionMatrix = glm::mat4(1);
+	float width = ElayGraphics::WINDOW_KEYWORD::getWindowWidth();
+	float height = ElayGraphics::WINDOW_KEYWORD::getWindowHeight();
+	screenSpaceProjectionMatrix[0][0] = width * 0.5f;
+	screenSpaceProjectionMatrix[1][1] = height * 0.5f;
+	screenSpaceProjectionMatrix[0][3] = width * 0.5f;
+	screenSpaceProjectionMatrix[1][3] = height * 0.5f;
+	m_pDynamicObjectShader->setMat4UniformValue("_ScreenSpaceProjectionMatrix", glm::value_ptr(screenSpaceProjectionMatrix * ElayGraphics::Camera::getMainCameraProjectionMatrix()));
 }
 
 void CScreenSpaceRayTracingPass::updateV()
