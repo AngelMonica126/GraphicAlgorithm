@@ -36,24 +36,24 @@ void main()
 	vec2 envBRDF  = texture(u_BRDFLut, vec2(max(dot(N, V), 0.0), roughness)).rg;
 	vec3 specular = (F * envBRDF.x + envBRDF.y);
 
-	vec3 basis1 = texture(u_Texture1,N).xyz;
-	vec3 basis2 = texture(u_Texture2,N).xyz;
-	vec3 basis3 = texture(u_Texture3,N).xyz;
+	vec3 Basis1 = texture(u_Texture1,N).xyz;
+	vec3 Basis2 = texture(u_Texture2,N).xyz;
+	vec3 Basis3 = texture(u_Texture3,N).xyz;
 
-	float basis[9];
-	basis[0]  = basis1.x / PI;
-	basis[1]  = basis1.y / PI;
-	basis[2]  = basis1.z / PI;
-	basis[3]  = basis2.x / PI;
-	basis[4]  = basis2.y / PI;
-	basis[5]  = basis2.z / PI;
-	basis[6]  = basis3.x / PI;
-	basis[7]  = basis3.y / PI;
-	basis[8]  = basis3.z / PI;
+	float Basis[9];
+	Basis[0]  = Basis1.x / PI;
+	Basis[1]  = Basis1.y / PI;
+	Basis[2]  = Basis1.z / PI;
+	Basis[3]  = Basis2.x / PI;
+	Basis[4]  = Basis2.y / PI;
+	Basis[5]  = Basis2.z / PI;
+	Basis[6]  = Basis3.x / PI;
+	Basis[7]  = Basis3.y / PI;
+	Basis[8]  = Basis3.z / PI;
 
 	vec3 color = vec3(0,0,0);
 	for (int i = 0; i < 9; i++)
-		color += u_Coef[i] * basis[i];
+		color += u_Coef[i] * Basis[i];
 
 	Albedo_ = vec4(1 * color + 0.0 * specular,1.0);
 }
