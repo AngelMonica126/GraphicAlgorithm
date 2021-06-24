@@ -41,9 +41,9 @@ vec3 calcPointLight(vec3 vFragViewPos, vec3 vNormal, vec3 vLightViewPos, vec3 vL
 void main()
 {
 	ivec2 FragPos = ivec2(gl_GlobalInvocationID.xy);
-	int index = int(u_BlockX * gl_GlobalInvocationID.y + gl_GlobalInvocationID.x);
-	vec3 sum = vec3(0);
-	SPointLight PointLight = u_PointLights[index];
+	int Index = int(u_BlockX * gl_GlobalInvocationID.y + gl_GlobalInvocationID.x);
+	vec3 Sum = vec3(0);
+	SPointLight PointLight = u_PointLights[Index];
 
 	for(int i = 0 ; i < u_LowWidth ; i++)
 		for(int j = 0 ; j < u_LowHeight ; j++)
@@ -53,8 +53,8 @@ void main()
 			vec3 Albedo = texelFetch(u_AlbedoTexture, TexCoord, 0).xyz;
 			vec3 FragViewPos = texelFetch(u_PositionTexture, TexCoord, 0).xyz;
 			vec4 LightViewPos = u_ViewMatrix * PointLight.Position;
-			sum += calcPointLight(FragViewPos, Normal, LightViewPos.xyz, PointLight.ColorAndRadius.xyz, PointLight.ColorAndRadius.w);
+			Sum += calcPointLight(FragViewPos, Normal, LightViewPos.xyz, PointLight.ColorAndRadius.xyz, PointLight.ColorAndRadius.w);
 		}
-//	sum /= u_LowHeight*u_LowWidth;
-	u_PointLights[index].Importance = vec4(dot(sum,sum),1,0,0);
+//	Sum /= u_LowHeight*u_LowWidth;
+	u_PointLights[Index].Importance = vec4(dot(Sum,Sum),1,0,0);
 }
