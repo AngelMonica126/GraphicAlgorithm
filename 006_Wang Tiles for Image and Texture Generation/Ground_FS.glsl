@@ -15,9 +15,9 @@ layout (std430, binding = 0) buffer WhichTile
 };
 void main()
 {
-	ivec2 location = ivec2(v2f_TexCoords * vec2(u_WindowWidth, u_WindowHeight));
-	ivec2 tileIndex = ivec2(location.x / u_TileWidth, location.y / u_TileHeight);
-	vec2 tileTexCoord = vec2((location.x % u_TileWidth) / float(u_TileWidth), (location.y % u_TileHeight) / float(u_TileHeight));
-	int whichTile = u_WhichTile[tileIndex.y][tileIndex.x];
-	FragColor_ = vec4(texture(u_TileArrayTextures, vec3(tileTexCoord, whichTile)).xyz, 1.0);
+	ivec2 Location = ivec2(v2f_TexCoords * vec2(u_WindowWidth, u_WindowHeight));
+	ivec2 TileIndex = ivec2(Location.x / u_TileWidth, Location.y / u_TileHeight);
+	vec2 TileTexCoord = vec2((Location.x % u_TileWidth) / float(u_TileWidth), (Location.y % u_TileHeight) / float(u_TileHeight));
+	int WhichTile = u_WhichTile[TileIndex.y][TileIndex.x];
+	FragColor_ = vec4(texture(u_TileArrayTextures, vec3(TileTexCoord, WhichTile)).xyz, 1.0);
 }
