@@ -14,9 +14,9 @@ out vec2 v2f_TexCoords;
 out vec3 v2f_Normal;
 void main()
 {
-	vec4 FragPosInViewSpace =  u_ModelMatrix * vec4(_Position, 1.0f);
-	gl_Position = u_ProjectionMatrix * u_ViewMatrix * FragPosInViewSpace;
+	vec4 FragPosInViewSpace = u_ViewMatrix * u_ModelMatrix * vec4(_Position, 1.0f);
+	gl_Position = u_ProjectionMatrix * FragPosInViewSpace;
 	v2f_TexCoords = _TexCoord;
-	v2f_Normal = _Normal;	
+	v2f_Normal =  normalize(mat3(transpose(inverse(u_ViewMatrix * u_ModelMatrix))) * _Normal);	
 	v2f_FragPosInViewSpace = vec3(FragPosInViewSpace);
 }

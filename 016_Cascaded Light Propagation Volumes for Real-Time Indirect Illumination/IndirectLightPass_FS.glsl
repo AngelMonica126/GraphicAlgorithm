@@ -15,6 +15,7 @@ uniform sampler2D u_NormalTexture;
 uniform sampler2D u_PositionTexture;
 uniform float u_CellSize;
 uniform vec3 u_MinAABB;
+uniform mat4 u_InverseCameraViewMatrix;
 
 vec4 evalSH_direct( vec3 direction ) {	
 	return vec4( SH_C0, -SH_C1 * direction.y, SH_C1 * direction.z, -SH_C1 * direction.x );
@@ -38,6 +39,7 @@ void main()
 {
 	vec3 Normal = texture(u_NormalTexture,v2f_TexCoords).xyz;
 	vec3 Position = texture(u_PositionTexture, v2f_TexCoords).xyz;
+	Position = vec3(u_InverseCameraViewMatrix * vec4(Position,1));
 	vec4 SHintensity = evalSH_direct(Normal);
 	ivec3 LpvCellCoords = convertPointToGridIndex(Position);
 	vec3 LpvIntensity  = vec3(0);

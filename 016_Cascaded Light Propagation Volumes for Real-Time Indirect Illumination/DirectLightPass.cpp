@@ -51,7 +51,7 @@ void CDirectLightPass::updateV()
 	m_pShader->activeShader();
 	auto ViewMatrix = ElayGraphics::Camera::getMainCameraViewMatrix();
 	m_LightVPMatrix = ElayGraphics::ResourceManager::getSharedDataByName<glm::mat4>("LightProjectionMatrix") * ElayGraphics::ResourceManager::getSharedDataByName<glm::mat4>("LightViewMatrix");
-	glm::mat4 LightViewMatrixMulInverseCameraViewMatrix = m_LightVPMatrix;
+	glm::mat4 LightViewMatrixMulInverseCameraViewMatrix = m_LightVPMatrix * glm::inverse(ViewMatrix);
 	m_pShader->setMat4UniformValue("u_LightVPMatrixMulInverseCameraViewMatrix", glm::value_ptr(LightViewMatrixMulInverseCameraViewMatrix));
 	auto LightDir = ElayGraphics::ResourceManager::getSharedDataByName<glm::vec3>("LightDir");
 	m_pShader->setFloatUniformValue("u_LightDir", LightDir.x, LightDir.y, LightDir.z);
