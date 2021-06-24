@@ -46,14 +46,18 @@ vec3 calcVPLIrradiance(vec4 vVPLRadianceIntensityAndRadius, vec4 vVPLNormalAndAl
 {
 	vec3 VPL2Frag = vFragPos - vVPLPos;
 	float SquareDistance = dot(VPL2Frag, VPL2Frag);
-	float fil = 1.0f / SquareDistance;
-	float pil = min(fil/vVPLNormalAndAlphai.w, 1.0f);
+	float Fil = 1.0f / SquareDistance;
+	float Pil = min(Fil/vVPLNormalAndAlphai.w, 1.0f);
 	float Atten;
-	if(pil > vXi4VPL)
-		Atten = max(vVPLNormalAndAlphai.w, fil);
+	if(Pil > vXi4VPL)
+	{
+		Atten = max(vVPLNormalAndAlphai.w, Fil);
+		return vVPLRadianceIntensityAndRadius.xyz * max(dot(vVPLNormalAndAlphai.xyz, VPL2Frag), 0) * max(dot(vFragNormal, -VPL2Frag), 0) / SquareDistance * Atten;
+	}
 	else
-		Atten = 0;
-	return vVPLRadianceIntensityAndRadius.xyz * max(dot(vVPLNormalAndAlphai.xyz, VPL2Frag), 0) * max(dot(vFragNormal, -VPL2Frag), 0) / SquareDistance * Atten;
+	{
+		return vec3(0);
+	}
 }
 
 void main()
