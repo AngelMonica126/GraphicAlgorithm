@@ -43,7 +43,8 @@ namespace ElayGraphics
 			Texture2D = GL_TEXTURE_2D,
 			Texture3D = GL_TEXTURE_3D,
 			Texture2DArray = GL_TEXTURE_2D_ARRAY,
-			TextureCubeMap = GL_TEXTURE_CUBE_MAP
+			TextureCubeMap = GL_TEXTURE_CUBE_MAP,
+			DepthCubeMap = GL_DEPTH_COMPONENT,
 		};
 		enum class ETextureAttachmentType
 		{
@@ -51,7 +52,8 @@ namespace ElayGraphics
 			DepthTexture,
 			CubeDepthTexture,
 			StencilTexture,
-			DepthAndStencilTexture
+			DepthAndStencilTexture,
+			DepthArrayTexture
 		};
 		GLint					InternalFormat;
 		GLenum					ExternalFormat;

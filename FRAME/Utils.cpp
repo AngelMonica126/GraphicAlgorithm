@@ -332,6 +332,12 @@ GLvoid genTexture(std::shared_ptr<ElayGraphics::STexture> vioTexture)
 		for (int i = 0; i < 6; ++i)
 			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, vioTexture->InternalFormat, vioTexture->Width, vioTexture->Height, 0, vioTexture->ExternalFormat, vioTexture->DataType, int(vioTexture->pDataSet.size()) > i ? vioTexture->pDataSet[i] : nullptr);
 		break;
+	case ElayGraphics::STexture::ETextureType::DepthCubeMap:
+		TextureType = GL_TEXTURE_CUBE_MAP;
+		glBindTexture(TextureType, TextureID);
+		for (int i = 0; i < 6; ++i)
+			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_DEPTH_COMPONENT, vioTexture->Width, vioTexture->Height, 0, GL_DEPTH_COMPONENT, vioTexture->DataType, int(vioTexture->pDataSet.size()) > i ? vioTexture->pDataSet[i] : nullptr);
+		break;
 	default:
 		break;
 	}
@@ -543,6 +549,11 @@ GLint genFBO(const std::initializer_list< std::shared_ptr<ElayGraphics::STexture
 		_ASSERT(vioTexture->TextureID != -1);
 		switch (vioTexture->TextureAttachmentType)
 		{
+		case ElayGraphics::STexture::ETextureAttachmentType::DepthArrayTexture:
+			glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, vioTexture->TextureID, 0);
+			HasDepthTextureAttachment = GL_TRUE;
+			HasStencilTextureAttachment = GL_TRUE;	//FIXME£ºthere is a problem: if set it as GL_FALSE, the stencil render buffer will be added, then result in incomplete fbo 
+			break;
 		case ElayGraphics::STexture::ETextureAttachmentType::DepthTexture:
 			glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, vioTexture->TextureID, 0);
 			HasDepthTextureAttachment = GL_TRUE;
@@ -618,7 +629,7 @@ GLint genFBO(const std::initializer_list< std::shared_ptr<ElayGraphics::STexture
 	}
 	if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
 	{
-		std::cerr << "Error::FBO:: Framebuffer Is Not Complete." << std::endl;
+		std::cerr << "Error::FBO:: Framebuffer Is Not Complete." << glCheckFramebufferStatus(GL_FRAMEBUFFER) << std::endl;
 	}
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	return FBO;
