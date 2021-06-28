@@ -52,6 +52,9 @@ void EncodePass::initV()
 	TextureConfig4->InternalFormat = GL_RGBA32F;
 	TextureConfig4->ExternalFormat = GL_RGBA;
 	TextureConfig4->DataType  = GL_FLOAT;
+	TextureConfig4->Type4WrapS = GL_CLAMP_TO_EDGE;
+	TextureConfig4->Type4WrapT = GL_CLAMP_TO_EDGE;
+	TextureConfig4->Type4WrapR = GL_CLAMP_TO_EDGE;
 	genTexture(TextureConfig4);
 
 	m_FBO = genFBO({ TextureConfig4 });
