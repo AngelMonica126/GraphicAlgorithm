@@ -33,6 +33,9 @@
     <ClCompile Include="DynamicObject.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="ScreenQuadPass.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DynamicObject.h">
@@ -47,6 +50,9 @@
     <ClInclude Include="ScreenSpaceRayTracingPass.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="ScreenQuadPass.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="GBuffer_FS.glsl">
@@ -59,6 +65,12 @@
       <Filter>Shader</Filter>
     </None>
     <None Include="ScreenSpaceRayTracing_VS.glsl">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="ScreenQuad_FS.glsl">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="ScreenQuad_VS.glsl">
       <Filter>Shader</Filter>
     </None>
   </ItemGroup>

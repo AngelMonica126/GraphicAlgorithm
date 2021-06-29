@@ -2,6 +2,7 @@
 #include "Sponza.h"
 #include "GBufferPass.h"
 #include "ScreenSpaceRayTracingPass.h"
+#include "ScreenQuadPass.h"
 int main()
 {
 	ElayGraphics::WINDOW_KEYWORD::setWindowSize(1920, 1152);
@@ -14,6 +15,7 @@ int main()
 
 	ElayGraphics::ResourceManager::registerRenderPass(std::make_shared<GBufferPass>("SponzaGBufferPass", 0));
 	ElayGraphics::ResourceManager::registerRenderPass(std::make_shared<CScreenSpaceRayTracingPass>("ScreenSpaceRayTracingPass", 1));
+	ElayGraphics::ResourceManager::registerRenderPass(std::make_shared<CScreenQuadPass>("ScreenQuadPass", 2));
 
 	ElayGraphics::App::initApp();
 	ElayGraphics::App::updateApp();

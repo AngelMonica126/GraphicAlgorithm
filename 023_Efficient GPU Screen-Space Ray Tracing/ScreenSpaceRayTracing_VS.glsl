@@ -9,16 +9,10 @@ layout(std140, binding = 0) uniform u_Matrices4ProjectionWorld
 
 uniform mat4 u_ModelMatrix;
 
-out vec3 v2f_Normal;
-out vec3 v2f_FragPosInViewSpace;
-out vec2 uv;
+out vec3 v2f_FragPosInWorldSpace;
 void main()
 {
-	vec4 FragPosInViewSpace = u_ViewMatrix * u_ModelMatrix * vec4(_Position, 1.0f);
-	vec4 temp = u_ProjectionMatrix * FragPosInViewSpace;
-	gl_Position = u_ProjectionMatrix * FragPosInViewSpace;
-	uv = temp.xy / temp.w;
-	uv.xy = (uv.xy + 1) / 2;
-	v2f_Normal = normalize(mat3(transpose(inverse(u_ViewMatrix * u_ModelMatrix))) * vec3(0,1,0));	//这个可以在外面算好了传进来
-	v2f_FragPosInViewSpace = vec3(FragPosInViewSpace);
+	vec4 FragPosInWorldSpace = u_ModelMatrix * vec4(_Position, 1.0f);
+	gl_Position = u_ProjectionMatrix * u_ViewMatrix * FragPosInWorldSpace;
+	v2f_FragPosInWorldSpace = vec3(FragPosInWorldSpace);
 }
