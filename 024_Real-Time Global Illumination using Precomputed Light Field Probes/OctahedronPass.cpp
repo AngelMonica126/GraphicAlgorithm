@@ -55,14 +55,13 @@ void COctahedronPass::initV()
 	TextureConfig4Depth->Depth = m_TextureConfig4Albedos.size();
 	TextureConfig4Depth->TextureAttachmentType = ElayGraphics::STexture::ETextureAttachmentType::DepthArrayTexture;
 	genTexture(TextureConfig4Depth);
-
 	m_FBO = genFBO({ m_TextureConfig4Albedo, m_TextureConfig4Normal,m_TextureConfig4Chebyshev,TextureConfig4Depth });
 
 
 	m_pShader = std::make_shared<CShader>("OctahedronPass_VS.glsl", "OctahedronPass_FS.glsl");
 	m_pShader->activeShader();
 }
-
+	
 //************************************************************************************
 //Function:
 void COctahedronPass::updateV()
@@ -79,8 +78,11 @@ void COctahedronPass::updateV()
 		for (int j = m_Min.y; j < m_Max.y; j++)
 			for (int k = m_Min.z; k < m_Max.z; k++)
 			{
-				glFramebufferTextureLayer(GL_DRAW_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, m_TextureConfig4Chebyshev->TextureID, 0, Index);
+				glBindTexture(GL_TEXTURE_2D_ARRAY, m_TextureConfig4Albedo->TextureID);
+				glFramebufferTextureLayer(GL_DRAW_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, m_TextureConfig4Albedo->TextureID, 0, Index);
+				glBindTexture(GL_TEXTURE_2D_ARRAY, m_TextureConfig4Normal->TextureID);
 				glFramebufferTextureLayer(GL_DRAW_FRAMEBUFFER, GL_COLOR_ATTACHMENT1, m_TextureConfig4Normal->TextureID, 0, Index);
+				glBindTexture(GL_TEXTURE_2D_ARRAY, m_TextureConfig4Chebyshev->TextureID);
 				glFramebufferTextureLayer(GL_DRAW_FRAMEBUFFER, GL_COLOR_ATTACHMENT2, m_TextureConfig4Chebyshev->TextureID, 0, Index);
 				m_pShader->activeShader();
 				m_pShader->setTextureUniformValue("u_BakeAlbedoTextures", m_TextureConfig4Albedos[Index]);

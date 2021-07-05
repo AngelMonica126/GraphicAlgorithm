@@ -33,4 +33,5 @@ void main()
 	AlbedoAndMetallic_= texture(u_BakeAlbedoTextures, Dir);
 	Normal_= texture(u_BakeNormalTextures, Dir);
 	Chebyshevs_= texture(u_BakeChebyshevsTextures, Dir).xy;
+	AlbedoAndMetallic_ = vec4(1,1,0,1);
 }

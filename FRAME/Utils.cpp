@@ -550,7 +550,10 @@ GLint genFBO(const std::initializer_list< std::shared_ptr<ElayGraphics::STexture
 		switch (vioTexture->TextureAttachmentType)
 		{
 		case ElayGraphics::STexture::ETextureAttachmentType::DepthArrayTexture:
-			glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, vioTexture->TextureID, 0);
+			for (int k = 0; k < vioTexture->Depth; ++k)
+			{
+				glFramebufferTextureLayer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, vioTexture->TextureID, 0, k);
+			}
 			HasDepthTextureAttachment = GL_TRUE;
 			HasStencilTextureAttachment = GL_TRUE;	//FIXME£ºthere is a problem: if set it as GL_FALSE, the stencil render buffer will be added, then result in incomplete fbo 
 			break;
@@ -582,11 +585,12 @@ GLint genFBO(const std::initializer_list< std::shared_ptr<ElayGraphics::STexture
 				Attachments.push_back(GL_COLOR_ATTACHMENT0 + i);
 				break;
 			case ElayGraphics::STexture::ETextureType::Texture2DArray:
+				int temp = ++i;
 				for (int k = 0; k < vioTexture->Depth; ++k)
 				{
-					glFramebufferTextureLayer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + (++i), vioTexture->TextureID, 0, k);
-					Attachments.push_back(GL_COLOR_ATTACHMENT0 + i);
+					glFramebufferTextureLayer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + temp, vioTexture->TextureID, 0, k);
 				}
+				Attachments.push_back(GL_COLOR_ATTACHMENT0 + temp);
 				break;
 			case ElayGraphics::STexture::ETextureType::TextureCubeMap:
 				glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + (++i), vioTexture->TextureID, 0);
