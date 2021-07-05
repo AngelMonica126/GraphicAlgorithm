@@ -111,6 +111,11 @@ inline CubeUV XYZ2CubeUV(const Vec3& p)
 	return c;
 }
 
+static double surfaceArea(double x, double y)
+{
+	return atan2(x * y, sqrt(x * x + y * y + 1.0));
+}
+
 inline float UniformRandom()
 {
 	static std::default_random_engine generator;

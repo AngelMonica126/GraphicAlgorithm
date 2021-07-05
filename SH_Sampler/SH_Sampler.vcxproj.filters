@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="cubemap.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="harmonics.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -26,9 +23,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="cubemap.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="harmonics.cpp">
       <Filter>源文件</Filter>
     </ClCompile>

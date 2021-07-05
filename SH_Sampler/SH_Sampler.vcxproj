@@ -123,12 +123,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="cubemap.h" />
     <ClInclude Include="harmonics.h" />
     <ClInclude Include="util.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="cubemap.cpp" />
     <ClCompile Include="harmonics.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
