@@ -7,20 +7,6 @@
 #include <GLM/gtc/type_ptr.hpp>
 const float PI = (float)M_PI;
 
-inline float latLongTexelArea(glm::ivec2 pos, glm::ivec2 imageSize)
-{
-	glm::vec2 uv0 = glm::vec2(pos) / glm::vec2(imageSize);
-	glm::vec2 uv1 = glm::vec2(pos + 1) / glm::vec2(imageSize);
-
-	float theta0 = PI * (uv0.x*2.0f - 1.0f);
-	float theta1 = PI * (uv1.x*2.0f - 1.0f);
-
-	float phi0 = PI * (uv0.y - 0.5f);
-	float phi1 = PI * (uv1.y - 0.5f);
-
-	return abs(theta1 - theta0) * abs(sin(phi1) - sin(phi0));
-}
-
 inline glm::vec2 sampleHammersley(glm::u32 i, glm::u32 n)
 {
 	glm::u32 bits = i;

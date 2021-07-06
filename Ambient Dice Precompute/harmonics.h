@@ -9,7 +9,7 @@
 class Harmonics
 {
 public:
-	Harmonics(int vDegree, std::array<std::string, 6> vImageFilenames);
+	Harmonics(std::array<std::string, 6> vImageFilenames);
 	void Evaluate();
 	std::vector<glm::vec3> getCoefficients()const
 	{

@@ -8,7 +8,7 @@
 #include <fstream>
 using namespace std;
 
-Harmonics::Harmonics(int vDegree, std::array<std::string, 6> vImageFilenames)
+Harmonics::Harmonics(std::array<std::string, 6> vImageFilenames)
 {
 	for (int i = 0; i < 6; i++)
 	{
@@ -53,16 +53,12 @@ void Harmonics::Evaluate()
 				vector<float> Y = Basis(p);
 				for (int i = 0; i < m_Vertices.size(); i++)
 				{
-					m_Coefs[i] = m_Coefs[i] + Y[i] * color;
+					momentsR[i] += Y[i] * color.r;
+					momentsG[i] += Y[i] * color.g;
+					momentsB[i] += Y[i] * color.b;
 				}
 			}
 		}
-	}
-	for (int i = 0; i < 12; i++)
-	{
-		momentsR[i] = m_Coefs[i].r;
-		momentsG[i] = m_Coefs[i].g;
-		momentsB[i] = m_Coefs[i].b;
 	}
 	Eigen::MatrixXf gram = computeGramMatrixSRBF();
 	const auto solver = gram.jacobiSvd(Eigen::ComputeThinU | Eigen::ComputeThinV);
