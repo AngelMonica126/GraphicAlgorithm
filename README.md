@@ -13,9 +13,9 @@
 
 * 首先克隆本项目到本地
 
-* 下载GraphicSDK https://pan.baidu.com/s/1V67KKqjsypsHSs3LmQP83g 密码: 1234 （git lfs一直抽风），然后将其解压到GraphicAlgorithm目录下即可
+* 下载GraphicSDK https://pan.baidu.com/s/1XjYGrGhCO_KSqL7pCUzBrA 密码: 1234 （git lfs一直抽风），然后将其解压即可
 
-* 用管理员的权限运行 Graphic.bat 以自动配置环境变量
+* 用**管理员的权限**运行GraphicSDK里面的 Graphic.bat 以自动配置环境变量
 
 * 在项目中选择Frame点击生成以生成动态链接库
 
