@@ -73,7 +73,7 @@ void Harmonics::Evaluate()
 
 glm::vec3 Harmonics::Render(const glm::vec3& pos)
 {
-	vector<float> Y = Basis(pos);
+	vector<float> Y = RenderBasis(pos);
 	glm::vec3 color = glm::vec3(0);
 	for (int i = 0; i < m_Vertices.size(); i++)
 	{
@@ -153,13 +153,7 @@ vector<float> Harmonics::RenderBasis(const glm::vec3& pos)
 	for (int i = 0; i < m_Vertices.size(); i++)
 	{
 		float cos = glm::dot(normal, m_Vertices[i]);
-		if (cos < 0)
-		{
-			Y[i] = 0;
-			continue;
-		}
-		cos *= cos;
-		Y[i] = 0.7f * 0.5f * cos + 0.3f * 5.0f / 6.0f * cos * cos;
+		Y[i] = 0.05981 + 0.12918 * cos + 0.07056 * cos * cos;
 	}
 	return Y;
 }
