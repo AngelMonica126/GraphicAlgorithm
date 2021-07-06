@@ -9,10 +9,10 @@
 
 using namespace std;
 
-std::string CoefficientsString(const std::vector<Vec3>& vCoefs)
+std::string CoefficientsString(const std::vector<glm::vec3>& vCoefs)
 {
 	ostringstream oss;
-	for (const Vec3& c : vCoefs)
+	for (const glm::vec3& c : vCoefs)
 	{
 		oss << c.r << "\t" << c.g << "\t" << c.b << std::endl;
 	}
@@ -21,24 +21,24 @@ std::string CoefficientsString(const std::vector<Vec3>& vCoefs)
 
 int main(int argc, char* argv[])
 {
-	int degree = 2;
-
-	string dir = "C:/Users/veerzeng/Pictures/LightProbe/";
+	string dir;
+	cout << "ÇëÊäÈëÍ¼Æ¬Â·¾¶" << endl;
+	cin >> dir;
+	if (dir[dir.length() - 1] != '\\')
+		dir.push_back('\\');
 	array<string, 6> faces = { "right", "left", "top", "bottom", "front", "back" };
 	array<std::string, 6> imgFiles;
 	string format = "png";
 	for (int i = 0; i < 6; i++)
 		imgFiles[i] = dir + faces[i] + "." + format;
-
 	string outdir = dir;
-
 	try {
-		Harmonics harmonics(degree, imgFiles);
+		Harmonics harmonics(imgFiles);
 		{
 			cout << "sampling ..." << endl;
 			harmonics.Evaluate();
 			cv::Mat expand = harmonics.RenderCubemap(128, 128);
-			string expandfile = outdir + "expand." + format;
+			string expandfile = outdir + "SHExpand." + format;
 			cv::imwrite(expandfile, expand * 255);
 		}
 
@@ -48,14 +48,8 @@ int main(int argc, char* argv[])
 		cout << coefstr;
 		cout << "----------------------------------" << endl;
 
-		ofstream coeffile(dir + "coefficients.txt");
-		if (coeffile)
-		{
+		ofstream coeffile(dir + "SHCoefficients.txt");
 			coeffile << coefstr;
-			cout << "written " << dir + "coefficients.txt" << endl;
-		}
-		else
-			cout << "write coefficients.txt failed" << endl;
 	}
 	catch (std::exception e)
 	{

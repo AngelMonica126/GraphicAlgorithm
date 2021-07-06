@@ -8,17 +8,17 @@
 class Harmonics
 {
 public:
-	Harmonics(int vDegree, std::array<std::string, 6> vImageFilenames);
+	Harmonics(std::array<std::string, 6> vImageFilenames);
 	void Evaluate();
-	std::vector<Vec3> getCoefficients()const
+	std::vector<glm::vec3> getCoefficients()const
 	{
 		return m_Coefs;
 	}
-	Vec3 Render(const Vec3& vPos);
+	glm::vec3 Render(const glm::vec3& vPos);
 	cv::Mat RenderCubemap(int vWidth, int vHeight);
 private:
-	int m_Degree;
-	std::vector<Vec3> m_Coefs;
-	std::vector<float> Basis(const Vec3& vPos);
+	int m_Degree = 16;
+	std::vector<glm::vec3> m_Coefs;
+	std::vector<float> Basis(const glm::vec3& vPos);
 	std::array<cv::Mat, 6> m_Images;
 };

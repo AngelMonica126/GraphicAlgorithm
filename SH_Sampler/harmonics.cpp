@@ -8,8 +8,7 @@
 #include <fstream>
 using namespace std;
 
-Harmonics::Harmonics(int vDegree, std::array<std::string, 6> vImageFilenames)
-	:m_Degree(vDegree)
+Harmonics::Harmonics(std::array<std::string, 6> vImageFilenames)
 {
 	for (int i = 0; i < 6; i++)
 	{
@@ -18,13 +17,11 @@ Harmonics::Harmonics(int vDegree, std::array<std::string, 6> vImageFilenames)
 			throw std::runtime_error("read image failed: " + vImageFilenames[i]);
 		img.convertTo(m_Images[i], CV_32FC3, 1.0 / 255.0);
 	}
-	int maxfact = m_Degree * m_Degree;
 }
 
 void Harmonics::Evaluate()
 {
-	int n = (m_Degree + 1) * (m_Degree + 1);
-	m_Coefs = vector<Vec3>(n, Vec3());
+	m_Coefs = vector<glm::vec3>(m_Degree, glm::vec3());
 	int w = m_Images[0].cols;
 	int h = m_Images[0].rows;
 	for (int k = 0; k < 6; k++)
@@ -47,11 +44,11 @@ void Harmonics::Evaluate()
 				u = (float)j / (img.cols - 1);
 				v = 1.0f - (float)i / (img.rows - 1);
 
-				Vec3 p = CubeUV2XYZ({ k, u, v });
+				glm::vec3 p = CubeUV2XYZ({ k, u, v });
 				auto c = img.at<cv::Vec3f>(i, j);
-				Vec3 color = { c[2] * d_a, c[1] * d_a,c[0] * d_a };
+				glm::vec3 color = { c[2] * d_a, c[1] * d_a,c[0] * d_a };
 				vector<float> Y = Basis(p);
-				for (int i = 0; i < n; i++)
+				for (int i = 0; i < m_Degree; i++)
 				{
 					m_Coefs[i] = m_Coefs[i] + Y[i] * color;
 				}
@@ -60,13 +57,11 @@ void Harmonics::Evaluate()
 	}
 }
 
-Vec3 Harmonics::Render(const Vec3& pos)
+glm::vec3 Harmonics::Render(const glm::vec3& pos)
 {
-	int n = (m_Degree + 1) * (m_Degree + 1);
-
 	vector<float> Y = Basis(pos);
-	Vec3 color;
-	for (int i = 0; i < n; i++)
+	glm::vec3 color;
+	for (int i = 0; i < m_Degree; i++)
 	{
 		color = color + Y[i] * m_Coefs[i];
 	}
@@ -85,8 +80,8 @@ cv::Mat Harmonics::RenderCubemap(int width, int height)
 			{
 				float u = (float)j / (width - 1);
 				float v = 1.f - (float)i / (height - 1);
-				Vec3 pos = CubeUV2XYZ({ k, u, v });
-				Vec3 color = Render(pos);
+				glm::vec3 pos = CubeUV2XYZ({ k, u, v });
+				glm::vec3 color = Render(pos);
 				imgs[k].at<cv::Vec3f>(i, j) = { color.b, color.g, color.r };
 			}
 		}
@@ -106,11 +101,10 @@ cv::Mat Harmonics::RenderCubemap(int width, int height)
 	return expandimg;
 }
 
-vector<float> Harmonics::Basis(const Vec3& pos)
+vector<float> Harmonics::Basis(const glm::vec3& pos)
 {
-	int n = (m_Degree + 1) * (m_Degree + 1);
-	vector<float> Y(n);
-	Vec3 normal = Normalize(pos);
+	vector<float> Y(m_Degree);
+	glm::vec3 normal = glm::normalize(pos);
 	float x = normal.x;
 	float y = normal.y;
 	float z = normal.z;

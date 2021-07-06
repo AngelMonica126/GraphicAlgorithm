@@ -76,7 +76,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(OPENCV)/include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(GLM);$(OPENCV)/include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(OPENCV)/x64/vc15/lib</AdditionalLibraryDirectories>

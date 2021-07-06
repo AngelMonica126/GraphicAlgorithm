@@ -3,67 +3,35 @@
 #define _USE_MATH_DEFINES
 #include <cmath>
 #include <random>
-
+#include <GLM/gtc/matrix_transform.hpp>
+#include <GLM/gtc/type_ptr.hpp>
 const float PI = (float)M_PI;
 
-class Vec3
+inline glm::vec2 sampleHammersley(glm::u32 i, glm::u32 n)
 {
-public:	
-	Vec3(float x_, float y_, float z_)
-		:x(x_), y(y_), z(z_)
-	{}
-	Vec3()
-		:x(0), y(0), z(0)
-	{}
-	union { float x, r, radius; };
-	union { float y, g, theta; };
-	union { float z, b, phi; };
-
-};
-
-inline Vec3 operator+(const Vec3& a, const Vec3& b)
-{
-	return Vec3(a.x+b.x, a.y+b.y, a.z+b.z);
+	glm::u32 bits = i;
+	bits = (bits << 16u) | (bits >> 16u);
+	bits = ((bits & 0x55555555u) << 1u) | ((bits & 0xAAAAAAAAu) >> 1u);
+	bits = ((bits & 0x33333333u) << 2u) | ((bits & 0xCCCCCCCCu) >> 2u);
+	bits = ((bits & 0x0F0F0F0Fu) << 4u) | ((bits & 0xF0F0F0F0u) >> 4u);
+	bits = ((bits & 0x00FF00FFu) << 8u) | ((bits & 0xFF00FF00u) >> 8u);
+	float vdc = float(bits) * 2.3283064365386963e-10f;
+	return glm::vec2(float(i) / float(n), vdc);
 }
 
-inline Vec3 operator*(float c, const Vec3& a)
+inline glm::vec3 sampleUniformSphere(float u, float v)
 {
-	return Vec3(c*a.x, c*a.y, c*a.z);
-}
+	float z = 1.0f - 2.0f * u;
+	float r = sqrt(glm::max(0.0f, 1.0f - z * z));
+	float phi = 2.0f * glm::pi<float>() * v;
 
-inline Vec3 operator/(const Vec3& a, float c)
-{
-	return Vec3(a.x/c, a.y/c, a.z/c);
-}
+	float sinPhi = sin(phi);
+	float cosPhi = cos(phi);
 
-inline Vec3 Normalize(const Vec3& a)
-{
-	float r = std::sqrt(a.x*a.x + a.y*a.y + a.z*a.z);
-	return { a.x / r, a.y / r, a.z / r };
-}
+	float x = r * cosPhi;
+	float y = r * sinPhi;
 
-class Vertex
-{
-public:
-	Vec3 pos, color;
-};
-
-inline Vec3 Cartesian2Spherical(const Vec3& p)
-{
-	Vec3 s;
-	s.radius = std::sqrt(p.x*p.x + p.y*p.y + p.z*p.z);
-	s.theta = std::acos(p.y / s.radius);
-	s.phi = std::atan2(p.z, p.x);
-	return s;
-}
-
-inline Vec3 Spherical2Cartesian(const Vec3& s)
-{
-	Vec3 p;
-	p.x = s.radius*std::sin(s.theta)*std::cos(s.phi);
-	p.y = s.radius*std::cos(s.theta);
-	p.z = s.radius*std::sin(s.theta)*std::sin(s.phi);
-	return p;
+	return glm::vec3(x, y, z);
 }
 
 struct CubeUV
@@ -72,43 +40,20 @@ struct CubeUV
 	float u, v;
 };
 
-inline Vec3 CubeUV2XYZ(const CubeUV& c)
+inline glm::vec3 CubeUV2XYZ(const CubeUV& c)
 {
-	float u = c.u*2.f - 1.f;
-	float v = c.v*2.f - 1.f;
+	float u = c.u * 2.f - 1.f;
+	float v = c.v * 2.f - 1.f;
 	switch (c.index)
 	{
-	case 0: return {  1,  v, -u }; 	// +x
+	case 0: return { 1,  v, -u }; 	// +x
 	case 1: return { -1,  v,  u }; 	// -x
-	case 2: return {  u,  1, -v };  // +y
-	case 3: return {  u, -1,  v };	// -y
-	case 4: return {  u,  v,  1 };  // +z
+	case 2: return { u,  1, -v };  // +y
+	case 3: return { u, -1,  v };	// -y
+	case 4: return { u,  v,  1 };  // +z
 	case 5: return { -u,  v, -1 };	// -z
 	}
-	return Vec3();
-}
-
-inline CubeUV XYZ2CubeUV(const Vec3& p)
-{
-	float ax = std::abs(p.x);
-	float ay = std::abs(p.y);
-	float az = std::abs(p.z);
-	CubeUV c;
-	if (ax >= ay && ax >= az)	// x face
-	{
-		c = { p.x >= 0 ? 0 : 1, -p.z / p.x, p.y / ax };
-	}
-	else if (ay >= az)	// y face
-	{
-		c = { p.y >= 0 ? 2 : 3, p.x / ay, -p.z / p.y };
-	}
-	else // z face
-	{
-		c = { p.z >= 0 ? 4 : 5, p.x / p.z, p.y / az };
-	}
-	c.u = c.u*0.5f + 0.5f;
-	c.v = c.v*0.5f + 0.5f;
-	return c;
+	return glm::vec3();
 }
 
 static double surfaceArea(double x, double y)
@@ -116,16 +61,3 @@ static double surfaceArea(double x, double y)
 	return atan2(x * y, sqrt(x * x + y * y + 1.0));
 }
 
-inline float UniformRandom()
-{
-	static std::default_random_engine generator;
-	static std::uniform_real_distribution<float> distribution(0.0f, 1.0f);
-	return distribution(generator);
-}
-
-inline float NormalRandom(float mu = 0.f, float sigma = 1.f)
-{
-	static std::default_random_engine generator;
-	static std::normal_distribution<float> distribution(mu, sigma);
-	return distribution(generator);
-}
