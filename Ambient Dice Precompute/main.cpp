@@ -14,7 +14,7 @@ std::string CoefficientsString(const std::vector<glm::vec3>& vCoefs)
 	ostringstream oss;
 	for (const glm::vec3& c : vCoefs)
 	{
-		oss << c.r << ",\t" << c.g << ",\t" << c.b << std::endl;
+		oss << c.r << "\t" << c.g << "\t" << c.b << std::endl;
 	}
 	return oss.str();
 }
