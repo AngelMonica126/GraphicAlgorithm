@@ -20,5 +20,6 @@ private:
 	int m_Degree = 16;
 	std::vector<glm::vec3> m_Coefs;
 	std::vector<float> Basis(const glm::vec3& vPos);
+	std::vector<float> RenderBasis(const glm::vec3& vPos);
 	std::array<cv::Mat, 6> m_Images;
 };
