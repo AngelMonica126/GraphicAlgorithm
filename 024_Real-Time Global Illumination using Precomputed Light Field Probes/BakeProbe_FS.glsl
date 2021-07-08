@@ -4,9 +4,11 @@ in  vec3 v2f_FragPosInViewSpace;
 in  vec2 v2f_TexCoords;
 in  vec3 v2f_Normal;
 //in vec3 v2f_Tangent;
-layout (location = 0) out vec4 AlbedoAndMetallic_;
-layout (location = 1) out vec4 Normal_;
-layout (location = 2) out vec2 Chebyshevs_;
+//layout (location = 0) out vec4 AlbedoAndMetallic_;
+//layout (location = 1) out vec4 Normal_;
+//layout (location = 2) out vec2 Chebyshevs_;
+layout(rgba16f ,binding = 0) uniform image3D LPVGridR_;
+
 
 uniform sampler2D u_LightDepthTexture;	
 uniform sampler2D u_DiffuseTexture;

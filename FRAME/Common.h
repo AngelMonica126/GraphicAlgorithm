@@ -44,6 +44,7 @@ namespace ElayGraphics
 			Texture3D = GL_TEXTURE_3D,
 			Texture2DArray = GL_TEXTURE_2D_ARRAY,
 			TextureCubeMap = GL_TEXTURE_CUBE_MAP,
+			TextureCubeArray = GL_TEXTURE_CUBE_MAP_ARRAY,
 			DepthCubeMap = GL_DEPTH_COMPONENT,
 		};
 		enum class ETextureAttachmentType

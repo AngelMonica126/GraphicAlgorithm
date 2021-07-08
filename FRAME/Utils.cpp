@@ -332,6 +332,11 @@ GLvoid genTexture(std::shared_ptr<ElayGraphics::STexture> vioTexture)
 		for (int i = 0; i < 6; ++i)
 			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, vioTexture->InternalFormat, vioTexture->Width, vioTexture->Height, 0, vioTexture->ExternalFormat, vioTexture->DataType, int(vioTexture->pDataSet.size()) > i ? vioTexture->pDataSet[i] : nullptr);
 		break;
+	case ElayGraphics::STexture::ETextureType::TextureCubeArray:
+		TextureType = GL_TEXTURE_CUBE_MAP_ARRAY;
+		glBindTexture(TextureType, TextureID);
+		glTexImage3D(GL_TEXTURE_CUBE_MAP_ARRAY, 0, vioTexture->InternalFormat, vioTexture->Width, vioTexture->Height, vioTexture->Depth * 6, 0, vioTexture->ExternalFormat, vioTexture->DataType, int(vioTexture->pDataSet.size()) > i ? vioTexture->pDataSet[i] : nullptr);
+		break;
 	case ElayGraphics::STexture::ETextureType::DepthCubeMap:
 		TextureType = GL_TEXTURE_CUBE_MAP;
 		glBindTexture(TextureType, TextureID);

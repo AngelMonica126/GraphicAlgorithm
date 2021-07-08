@@ -16,10 +16,9 @@ public:
 private:
 	std::shared_ptr<CSponza> m_pSponza;
 
-	std::vector<std::shared_ptr<ElayGraphics::STexture>> m_TextureConfig4Albedos;
-	std::vector<std::shared_ptr<ElayGraphics::STexture>> m_TextureConfig4Normals;
-	std::vector<std::shared_ptr<ElayGraphics::STexture>> m_TextureConfig4Depths;
-	std::vector<std::shared_ptr<ElayGraphics::STexture>> m_TextureConfig4Chebyshevs;
+	std::shared_ptr<ElayGraphics::STexture> m_TextureConfig4Radiance;
+	std::shared_ptr<ElayGraphics::STexture> m_TextureConfig4Normal;
+	std::shared_ptr<ElayGraphics::STexture> m_TextureConfig4Chebyshev;
 	glm::ivec3 m_MinAABB;
 	glm::ivec3 m_MaxAABB;
 	std::vector<int> m_FBOs;

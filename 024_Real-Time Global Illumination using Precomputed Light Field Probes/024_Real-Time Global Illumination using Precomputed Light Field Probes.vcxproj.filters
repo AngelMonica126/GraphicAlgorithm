@@ -54,10 +54,7 @@
     <None Include="Common.glsl">
       <Filter>Shader</Filter>
     </None>
-    <None Include="OctahedronPass_FS.glsl">
-      <Filter>Shader</Filter>
-    </None>
-    <None Include="OctahedronPass_VS.glsl">
+    <None Include="OctahedronPass_CS.glsl">
       <Filter>Shader</Filter>
     </None>
   </ItemGroup>

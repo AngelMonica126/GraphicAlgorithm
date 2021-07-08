@@ -1,11 +1,13 @@
 #include "OctahedronPass.h"
+#include "Common.h"
 #include "Interface.h"
-#include "Shader.h"
 #include "Utils.h"
-#include <GLFW/glfw3.h>
-#include <GLM/gtc/matrix_transform.hpp>
+#include "Shader.h"
+#include <random>
 #include <GLM/gtc/type_ptr.hpp>
-COctahedronPass::COctahedronPass(const std::string& vPassName, int vExecutionOrder) : IRenderPass(vPassName, vExecutionOrder)
+#include <GLFW/glfw3.h>
+
+COctahedronPass::COctahedronPass(const std::string& vPassName, int vExcutionOrder) : IRenderPass(vPassName, vExcutionOrder)
 {
 }
 
@@ -13,86 +15,72 @@ COctahedronPass::~COctahedronPass()
 {
 }
 
-//************************************************************************************
-//Function:
 void COctahedronPass::initV()
 {
-	m_BakeResolution = ElayGraphics::ResourceManager::getSharedDataByName<int>("BakeResolution");
-	m_Min = ElayGraphics::ResourceManager::getSharedDataByName<glm::vec3>("MinAABB");
-	m_Max = ElayGraphics::ResourceManager::getSharedDataByName<glm::vec3>("MaxAABB");
-	m_TextureConfig4Albedos = ElayGraphics::ResourceManager::getSharedDataByName<std::vector<std::shared_ptr<ElayGraphics::STexture>>>("BakeAlbedoTextures");
-	m_TextureConfig4Normals = ElayGraphics::ResourceManager::getSharedDataByName<std::vector<std::shared_ptr<ElayGraphics::STexture>>>("BakeNormalTextures");
-	m_TextureConfig4Chebyshevs = ElayGraphics::ResourceManager::getSharedDataByName<std::vector<std::shared_ptr<ElayGraphics::STexture>>>("BakeChebyshevsTextures");
+	int BakeResolution = ElayGraphics::ResourceManager::getSharedDataByName<int>("BakeResolution");
+	auto BakeAlbedoTextures = ElayGraphics::ResourceManager::getSharedDataByName<std::vector<std::shared_ptr<ElayGraphics::STexture>>>("BakeAlbedoTextures");
+	auto BakeNormalTextures = ElayGraphics::ResourceManager::getSharedDataByName<std::vector<std::shared_ptr<ElayGraphics::STexture>>>("BakeNormalTextures");
+	auto BakeChebyshevsTextures = ElayGraphics::ResourceManager::getSharedDataByName<std::vector<std::shared_ptr<ElayGraphics::STexture>>>("BakeChebyshevsTextures");
+
+	auto OctAlbedoTextureConfig = std::make_shared<ElayGraphics::STexture>(); 
+	auto OctNormalTextureConfig = std::make_shared<ElayGraphics::STexture>();
+	auto OctChebyshevsTextureConfig = std::make_shared<ElayGraphics::STexture>();
+	int Level = 2;
+	int Width = BakeAlbedoTextures.size() * BakeResolution / Level;
+	int Height = BakeResolution * Level;
+	OctNormalTextureConfig->InternalFormat = OctAlbedoTextureConfig->InternalFormat = GL_RGBA32F;
+	OctNormalTextureConfig->ExternalFormat = OctAlbedoTextureConfig->ExternalFormat = GL_RGBA;
+	OctNormalTextureConfig->DataType = OctAlbedoTextureConfig->DataType = GL_FLOAT;
+	OctNormalTextureConfig->Type4MinFilter = OctAlbedoTextureConfig->Type4MinFilter = GL_LINEAR;
+	OctNormalTextureConfig->Type4MagFilter = OctAlbedoTextureConfig->Type4MagFilter = GL_LINEAR;
+	OctNormalTextureConfig->Width = OctAlbedoTextureConfig->Width = Width;
+	OctNormalTextureConfig->Height = OctAlbedoTextureConfig->Height = Height;
+
+	OctChebyshevsTextureConfig->InternalFormat = GL_RG32F;
+	OctChebyshevsTextureConfig->ExternalFormat = GL_RG;
+	OctChebyshevsTextureConfig->DataType = GL_FLOAT;
+	OctChebyshevsTextureConfig->Type4MinFilter = GL_LINEAR;
+	OctChebyshevsTextureConfig->Type4MagFilter = GL_LINEAR;
+	OctChebyshevsTextureConfig->ImageBindUnit = 0;
+	OctChebyshevsTextureConfig->Width = Width;
+	OctChebyshevsTextureConfig->Height = Height;
+
+	OctAlbedoTextureConfig->ImageBindUnit = 0;
+	OctNormalTextureConfig->ImageBindUnit = 1;
+	OctChebyshevsTextureConfig->ImageBindUnit = 2;
+	genTexture(OctAlbedoTextureConfig);
+	genTexture(OctNormalTextureConfig);
+	genTexture(OctChebyshevsTextureConfig);
+	ElayGraphics::ResourceManager::registerSharedData("OctRadianceTexture", OctAlbedoTextureConfig);
+	ElayGraphics::ResourceManager::registerSharedData("OctNormalTexture", OctNormalTextureConfig);
+	ElayGraphics::ResourceManager::registerSharedData("OctChebyshevsTexture", OctChebyshevsTextureConfig);
+
 	
-	m_TextureConfig4Albedo = std::make_shared<ElayGraphics::STexture>();
-	m_TextureConfig4Normal = std::make_shared<ElayGraphics::STexture>();
-	m_TextureConfig4Chebyshev = std::make_shared<ElayGraphics::STexture>();
-	m_TextureConfig4Albedo->InternalFormat = m_TextureConfig4Normal->InternalFormat = GL_RGBA32F;
-	m_TextureConfig4Albedo->ExternalFormat = m_TextureConfig4Normal->ExternalFormat = GL_RGBA;
-	m_TextureConfig4Albedo->DataType = m_TextureConfig4Normal->DataType = GL_FLOAT;
-	m_TextureConfig4Albedo->TextureType = m_TextureConfig4Normal->TextureType = ElayGraphics::STexture::ETextureType::Texture2DArray;
-	m_TextureConfig4Albedo->Width = m_TextureConfig4Normal->Width = m_BakeResolution;
-	m_TextureConfig4Albedo->Height = m_TextureConfig4Normal->Height = m_BakeResolution;
-	m_TextureConfig4Albedo->Depth = m_TextureConfig4Normal->Depth = m_TextureConfig4Albedos.size();
-
-	m_TextureConfig4Chebyshev->InternalFormat = GL_RG32F;
-	m_TextureConfig4Chebyshev->ExternalFormat = GL_RG;
-	m_TextureConfig4Chebyshev->DataType = GL_FLOAT;
-	m_TextureConfig4Chebyshev->TextureType = ElayGraphics::STexture::ETextureType::Texture2DArray;
-	m_TextureConfig4Chebyshev->Width = m_BakeResolution;
-	m_TextureConfig4Chebyshev->Height = m_BakeResolution;
-	m_TextureConfig4Chebyshev->Depth = m_TextureConfig4Albedos.size();
-
-	genTexture(m_TextureConfig4Chebyshev);
-	genTexture(m_TextureConfig4Albedo);
-	genTexture(m_TextureConfig4Normal);
-	auto TextureConfig4Depth = std::make_shared<ElayGraphics::STexture>(); 
-	TextureConfig4Depth->TextureType = ElayGraphics::STexture::ETextureType::Texture2DArray;
-	TextureConfig4Depth->InternalFormat = GL_DEPTH_COMPONENT32F;
-	TextureConfig4Depth->ExternalFormat = GL_DEPTH_COMPONENT;
-	TextureConfig4Depth->DataType = GL_FLOAT;
-	TextureConfig4Depth->Width = TextureConfig4Depth->Height = m_BakeResolution;
-	TextureConfig4Depth->Depth = m_TextureConfig4Albedos.size();
-	TextureConfig4Depth->TextureAttachmentType = ElayGraphics::STexture::ETextureAttachmentType::DepthArrayTexture;
-	genTexture(TextureConfig4Depth);
-	m_FBO = genFBO({ m_TextureConfig4Albedo, m_TextureConfig4Normal,m_TextureConfig4Chebyshev,TextureConfig4Depth });
-
-
-	m_pShader = std::make_shared<CShader>("OctahedronPass_VS.glsl", "OctahedronPass_FS.glsl");
+	m_pShader = std::make_shared<CShader>("OctahedronPass_CS.glsl");
 	m_pShader->activeShader();
+	m_pShader->setIntUniformValue("u_BakeResolution", BakeResolution);
+	m_pShader->setIntUniformValue("u_ImageWidthNum", BakeAlbedoTextures.size()  / Level);
+	m_pShader->setIntUniformValue("u_ImageHeightNum", Level);
+	for (int i = 0; i < BakeAlbedoTextures.size(); i++)
+	{
+		m_pShader->setTextureUniformValue("u_RadianceImages[" + std::to_string(i) + "]", BakeAlbedoTextures[i]);
+		m_pShader->setTextureUniformValue("u_NormalImage[" + std::to_string(i) + "]", BakeNormalTextures[i]);
+		m_pShader->setTextureUniformValue("u_ChebyshevsImage[" + std::to_string(i) + "]", BakeChebyshevsTextures[i]);
+	}
+
+	m_pShader->setImageUniformValue(OctAlbedoTextureConfig);
+	m_pShader->setImageUniformValue(OctNormalTextureConfig);
+	m_pShader->setImageUniformValue(OctChebyshevsTextureConfig);
+	std::vector<int> LocalGroupSize;
+	m_pShader->InquireLocalGroupSize(LocalGroupSize);
+	m_GlobalGroupSize.push_back((Width + LocalGroupSize[0] - 1) / LocalGroupSize[0]);
+	m_GlobalGroupSize.push_back((Height + LocalGroupSize[1] - 1) / LocalGroupSize[1]);
+	m_GlobalGroupSize.push_back(1);
 }
-	
-//************************************************************************************
-//Function:
+
 void COctahedronPass::updateV()
 {
-	glBindFramebuffer(GL_FRAMEBUFFER, m_FBO);
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glEnable(GL_DEPTH_TEST);
-	glEnable(GL_CULL_FACE);
-	glCullFace(GL_BACK);
-	glViewport(0, 0, m_BakeResolution, m_BakeResolution);
-	int Index = 0;
-	for (int i = m_Min.x; i < m_Max.x; i++)
-		for (int j = m_Min.y; j < m_Max.y; j++)
-			for (int k = m_Min.z; k < m_Max.z; k++)
-			{
-				glBindTexture(GL_TEXTURE_2D_ARRAY, m_TextureConfig4Albedo->TextureID);
-				glFramebufferTextureLayer(GL_DRAW_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, m_TextureConfig4Albedo->TextureID, 0, Index);
-				glBindTexture(GL_TEXTURE_2D_ARRAY, m_TextureConfig4Normal->TextureID);
-				glFramebufferTextureLayer(GL_DRAW_FRAMEBUFFER, GL_COLOR_ATTACHMENT1, m_TextureConfig4Normal->TextureID, 0, Index);
-				glBindTexture(GL_TEXTURE_2D_ARRAY, m_TextureConfig4Chebyshev->TextureID);
-				glFramebufferTextureLayer(GL_DRAW_FRAMEBUFFER, GL_COLOR_ATTACHMENT2, m_TextureConfig4Chebyshev->TextureID, 0, Index);
-				m_pShader->activeShader();
-				m_pShader->setTextureUniformValue("u_BakeAlbedoTextures", m_TextureConfig4Albedos[Index]);
-				m_pShader->setTextureUniformValue("u_BakeNormalTextures", m_TextureConfig4Normals[Index]);
-				m_pShader->setTextureUniformValue("u_BakeChebyshevsTextures", m_TextureConfig4Chebyshevs[Index]);
-				drawQuad();
-				Index++;
-			}
-	glViewport(0, 0, ElayGraphics::WINDOW_KEYWORD::getWindowWidth(), ElayGraphics::WINDOW_KEYWORD::getWindowHeight());
-	glDisable(GL_CULL_FACE);
-	glDisable(GL_DEPTH_TEST);
-	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	m_pShader->activeShader();
+	glDispatchCompute(m_GlobalGroupSize[0], m_GlobalGroupSize[1], m_GlobalGroupSize[2]);
+	glMemoryBarrier(GL_SHADER_IMAGE_ACCESS_BARRIER_BIT);
 }

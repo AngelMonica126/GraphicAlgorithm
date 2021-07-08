@@ -21,52 +21,43 @@ void CBakeProbePass::initV()
 	m_pSponza = std::dynamic_pointer_cast<CSponza>(ElayGraphics::ResourceManager::getGameObjectByName("Sponza"));
 	m_MinAABB = ElayGraphics::ResourceManager::getSharedDataByName<glm::vec3>("MinAABB");
 	m_MaxAABB = ElayGraphics::ResourceManager::getSharedDataByName<glm::vec3>("MaxAABB");
-	//m_Dimensions = MaxAABB - MinAABB;
-	for (int i = m_MinAABB.x; i < m_MaxAABB.x; i++)
-		for (int j = m_MinAABB.y; j < m_MaxAABB.y; j++)
-			for (int k = m_MinAABB.z; k < m_MaxAABB.z; k++)
-			{
-				auto TextureConfig4Albedo = std::make_shared<ElayGraphics::STexture>();
-				auto TextureConfig4Normal = std::make_shared<ElayGraphics::STexture>();
-				auto TextureConfig4Chebyshev = std::make_shared<ElayGraphics::STexture>();
-				TextureConfig4Albedo->InternalFormat = TextureConfig4Normal->InternalFormat = GL_RGBA32F;
-				TextureConfig4Albedo->ExternalFormat = TextureConfig4Normal->ExternalFormat = GL_RGBA;
-				TextureConfig4Albedo->DataType = TextureConfig4Normal->DataType = GL_FLOAT;
-				TextureConfig4Albedo->TextureType = TextureConfig4Normal->TextureType = ElayGraphics::STexture::ETextureType::TextureCubeMap;
-				TextureConfig4Albedo->Width = TextureConfig4Normal->Width = m_BakeResolution;
-				TextureConfig4Albedo->Height = TextureConfig4Normal->Height = m_BakeResolution;
+	glm::ivec3 Distance = m_MaxAABB - m_MinAABB;
+	int Num = Distance.x * Distance.y * Distance.z;
 
-				TextureConfig4Chebyshev->InternalFormat = GL_RG32F;
-				TextureConfig4Chebyshev->ExternalFormat = GL_RG;
-				TextureConfig4Chebyshev->DataType = GL_FLOAT;
-				TextureConfig4Chebyshev->TextureType = ElayGraphics::STexture::ETextureType::TextureCubeMap;
-				TextureConfig4Chebyshev->Width = m_BakeResolution;
-				TextureConfig4Chebyshev->Height = m_BakeResolution;
+	{
+		m_TextureConfig4Radiance = std::make_shared<ElayGraphics::STexture>();
+		m_TextureConfig4Normal = std::make_shared<ElayGraphics::STexture>();
+		m_TextureConfig4Chebyshev = std::make_shared<ElayGraphics::STexture>();
 
-				genTexture(TextureConfig4Chebyshev);
-				genTexture(TextureConfig4Albedo);
-				genTexture(TextureConfig4Normal);
-				auto TextureConfig4Depth = std::make_shared<ElayGraphics::STexture>();
-				TextureConfig4Depth->InternalFormat = GL_RGBA32F;
-				TextureConfig4Depth->ExternalFormat = GL_RGBA;
-				TextureConfig4Depth->DataType = GL_FLOAT;
-				TextureConfig4Depth->TextureType = ElayGraphics::STexture::ETextureType::DepthCubeMap;
-				TextureConfig4Depth->TextureAttachmentType = ElayGraphics::STexture::ETextureAttachmentType::CubeDepthTexture;
-				TextureConfig4Depth->Width = m_BakeResolution;
-				TextureConfig4Depth->Height = m_BakeResolution;
-				genTexture(TextureConfig4Depth);
-				m_TextureConfig4Albedos.push_back(TextureConfig4Albedo);
-				m_TextureConfig4Normals.push_back(TextureConfig4Normal);
-				m_TextureConfig4Depths.push_back(TextureConfig4Depth);
-				m_TextureConfig4Chebyshevs.push_back(TextureConfig4Chebyshev);
-				auto FBO = genFBO({ TextureConfig4Albedo, TextureConfig4Normal,TextureConfig4Chebyshev, TextureConfig4Depth });
-				m_FBOs.push_back(FBO);
-			}
+		m_TextureConfig4Radiance->InternalFormat = m_TextureConfig4Normal->InternalFormat = GL_RGBA32F;
+		m_TextureConfig4Radiance->ExternalFormat = m_TextureConfig4Normal->ExternalFormat = GL_RGBA;
+		m_TextureConfig4Radiance->DataType = m_TextureConfig4Normal->DataType = GL_FLOAT;
+		m_TextureConfig4Radiance->TextureType = m_TextureConfig4Normal->TextureType = ElayGraphics::STexture::ETextureType::TextureCubeArray;
+		m_TextureConfig4Radiance->Width = m_TextureConfig4Normal->Width = m_BakeResolution;
+		m_TextureConfig4Radiance->Height = m_TextureConfig4Normal->Height = m_BakeResolution;
+		m_TextureConfig4Radiance->Depth = m_TextureConfig4Normal->Depth = Num;
+
+		m_TextureConfig4Chebyshev->InternalFormat = GL_RG32F;
+		m_TextureConfig4Chebyshev->ExternalFormat = GL_RG;
+		m_TextureConfig4Chebyshev->DataType = GL_FLOAT;
+		m_TextureConfig4Chebyshev->TextureType = ElayGraphics::STexture::ETextureType::TextureCubeArray;
+		m_TextureConfig4Chebyshev->Width = m_BakeResolution;
+		m_TextureConfig4Chebyshev->Height = m_BakeResolution;
+		m_TextureConfig4Chebyshev->Depth = Num;
+
+		m_TextureConfig4Radiance->ImageBindUnit = 0;
+		m_TextureConfig4Normal->ImageBindUnit = 1;
+		m_TextureConfig4Chebyshev->ImageBindUnit = 2;
+		genTexture(m_TextureConfig4Chebyshev);
+		genTexture(m_TextureConfig4Radiance);
+		genTexture(m_TextureConfig4Normal);
+
+	}
 
 	ElayGraphics::ResourceManager::registerSharedData("BakeResolution", m_BakeResolution);
-	ElayGraphics::ResourceManager::registerSharedData("BakeAlbedoTextures", m_TextureConfig4Albedos);
-	ElayGraphics::ResourceManager::registerSharedData("BakeNormalTextures", m_TextureConfig4Normals);
-	ElayGraphics::ResourceManager::registerSharedData("BakeChebyshevsTextures", m_TextureConfig4Chebyshevs);
+	ElayGraphics::ResourceManager::registerSharedData("BakeAlbedoTextures", m_TextureConfig4Radiance);
+	ElayGraphics::ResourceManager::registerSharedData("BakeNormalTextures", m_TextureConfig4Radiance);
+	ElayGraphics::ResourceManager::registerSharedData("BakeChebyshevsTextures", m_TextureConfig4Normal);
 
 	m_pShader->activeShader();
 	m_pShader->setMat4UniformValue("u_ModelMatrix", glm::value_ptr(m_pSponza->getModelMatrix()));
@@ -77,13 +68,13 @@ void CBakeProbePass::initV()
 
 void CBakeProbePass::updateV()
 {
-	
+
 	int Index = 0;
 	for (int i = m_MinAABB.x; i < m_MaxAABB.x; i++)
 		for (int j = m_MinAABB.y; j < m_MaxAABB.y; j++)
 			for (int k = m_MinAABB.z; k < m_MaxAABB.z; k++)
 			{
-				glBindFramebuffer(GL_FRAMEBUFFER, m_FBOs[Index]);
+				glBindFramebuffer(GL_FRAMEBUFFER, 0);
 				glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 				glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 				glEnable(GL_DEPTH_TEST);
@@ -102,11 +93,11 @@ void CBakeProbePass::updateV()
 					auto ViewMatrix = ElayGraphics::Camera::getMainCameraViewMatrix();
 					auto DirLightVPMatrix = ElayGraphics::ResourceManager::getSharedDataByName<glm::mat4>("LightProjectionMatrix") * ElayGraphics::ResourceManager::getSharedDataByName<glm::mat4>("LightViewMatrix");
 					glm::mat4 LightViewMatrixMulInverseCameraViewMatrix = DirLightVPMatrix * glm::inverse(ViewMatrix);
-				
-					glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, m_TextureConfig4Albedos[Index]->TextureID, 0);
-					glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT1, GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, m_TextureConfig4Normals[Index]->TextureID, 0);
-					glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT2, GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, m_TextureConfig4Chebyshevs[Index]->TextureID, 0);
-					glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, m_TextureConfig4Depths[Index]->TextureID, 0);
+
+					//glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, m_m_TextureConfig4Radiances[Index]->TextureID, 0);
+					//glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT1, GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, m_m_TextureConfig4Normals[Index]->TextureID, 0);
+					//glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT2, GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, m_TextureConfig4Chebyshevs[Index]->TextureID, 0);
+					//glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, m_TextureConfig4Depths[Index]->TextureID, 0);
 					m_pShader->activeShader();
 					m_pShader->setMat4UniformValue("u_BakeViewMatrix", glm::value_ptr(LightViewMatrix));
 					m_pShader->setMat4UniformValue("u_BakeProjectionMatrix", glm::value_ptr(LightProjectionMatrix));
