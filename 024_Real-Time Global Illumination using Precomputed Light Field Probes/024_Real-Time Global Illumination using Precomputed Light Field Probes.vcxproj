@@ -139,7 +139,8 @@
     <None Include="DirectLightPass_CS.glsl" />
     <None Include="GBuffer_FS.glsl" />
     <None Include="GBuffer_VS.glsl" />
-    <None Include="OctahedronPass_CS.glsl" />
+    <None Include="OctahedronPass_FS.glsl" />
+    <None Include="OctahedronPass_VS.glsl" />
     <None Include="RSMBuffer_FS.glsl" />
     <None Include="RSMBuffer_VS.glsl" />
     <None Include="ScreenQuad_FS.glsl" />
