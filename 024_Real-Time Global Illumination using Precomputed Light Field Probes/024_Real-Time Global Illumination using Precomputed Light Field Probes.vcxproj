@@ -133,8 +133,10 @@
   <ItemGroup>
     <None Include="AABBDebug_FS.glsl" />
     <None Include="AABBDebug_VS.glsl" />
-    <None Include="BakeProbe_VS.glsl" />
+    <None Include="BakeIrradiancePass_FS.glsl" />
+    <None Include="BakeIrradiancePass_VS.glsl" />
     <None Include="BakeProbe_FS.glsl" />
+    <None Include="BakeProbe_VS.glsl" />
     <None Include="Common.glsl" />
     <None Include="DirectLightPass_CS.glsl" />
     <None Include="GBuffer_FS.glsl" />
@@ -148,6 +150,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AABBDebugPass.cpp" />
+    <ClCompile Include="BakeIrradiancePass.cpp" />
     <ClCompile Include="BakeProbePass.cpp" />
     <ClCompile Include="CustomGUI.cpp" />
     <ClCompile Include="DirectLightPass.cpp" />
@@ -161,6 +164,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AABBDebugPass.h" />
+    <ClInclude Include="BakeIrradiancePass.h" />
     <ClInclude Include="BakeProbePass.h" />
     <ClInclude Include="CustomGUI.h" />
     <ClInclude Include="DirectLightPass.h" />

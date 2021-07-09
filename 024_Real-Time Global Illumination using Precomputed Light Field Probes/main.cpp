@@ -23,7 +23,7 @@ int main()
 	ElayGraphics::ResourceManager::registerRenderPass(std::make_shared<CRSMBufferPass>("RSMBufferPass", 1));
 	ElayGraphics::ResourceManager::registerRenderPass(std::make_shared<CDirectLightPass>("DirectLightPass", 2));
 	ElayGraphics::ResourceManager::registerRenderPass(std::make_shared<CBakeProbePass>("BakeProbePass", 3, ElayGraphics::ERenderPassType::RenderPassType_Once));
-	ElayGraphics::ResourceManager::registerRenderPass(std::make_shared<COctahedronPass>("OctahedronPass", 4));
+	ElayGraphics::ResourceManager::registerRenderPass(std::make_shared<COctahedronPass>("OctahedronPass", 6, ElayGraphics::ERenderPassType::RenderPassType_Once));
 
 
 	ElayGraphics::ResourceManager::registerRenderPass(std::make_shared<CScreenQuadPass>("ScreenQuadPass", 7));

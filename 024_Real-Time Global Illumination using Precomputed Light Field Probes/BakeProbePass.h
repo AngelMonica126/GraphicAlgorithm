@@ -34,7 +34,7 @@ private:
 		glm::vec3(0,0,-1)//+Z
 	};
 
-	float m_Fovy = glm::radians(60.0f);
+	float m_Fovy = glm::radians(45.0f);
 	float m_Aspect = 1.0f;
 	float m_Near = 0.1f; 
 	float m_Far = 100.0f;

@@ -20,5 +20,5 @@ void main()
 	gl_Position = u_ProjectionMatrix * u_ViewMatrix * FragPosInViewSpace;
 	v2f_TexCoords = _TexCoord;
 	v2f_Normal = _Normal;	
-	v2f_FragPosInViewSpace = vec3(FragPosInViewSpace);
+	v2f_FragPosInViewSpace = vec3(_Position);
 }

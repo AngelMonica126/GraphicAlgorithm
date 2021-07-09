@@ -64,7 +64,7 @@ void CBakeProbePass::initV()
 			}
 
 	ElayGraphics::ResourceManager::registerSharedData("BakeResolution", m_BakeResolution);
-	ElayGraphics::ResourceManager::registerSharedData("BakeAlbedoTextures", m_TextureConfig4Albedos);
+	ElayGraphics::ResourceManager::registerSharedData("BakeRadianceTextures", m_TextureConfig4Albedos);
 	ElayGraphics::ResourceManager::registerSharedData("BakeNormalTextures", m_TextureConfig4Normals);
 	ElayGraphics::ResourceManager::registerSharedData("BakeChebyshevsTextures", m_TextureConfig4Chebyshevs);
 
@@ -90,16 +90,16 @@ void CBakeProbePass::updateV()
 				glEnable(GL_CULL_FACE);
 				glCullFace(GL_BACK);
 				glViewport(0, 0, m_BakeResolution, m_BakeResolution);
-				glm::vec3 LightPos = glm::vec3(i, j, k);
+				glm::vec3 ViewPos = glm::vec3(i, j, k);
+				auto LightDir = ElayGraphics::ResourceManager::getSharedDataByName<glm::vec3>("LightDir");
 				for (int i = 0; i < 6; i++)
 				{
-					glm::vec3 LightDir = m_BakeDir[i];
-					if (abs(LightDir) == m_LightUpVector)
-						LightDir.z += 0.01f;
-					glm::mat4x4 LightViewMatrix = glm::lookAt(LightPos, LightPos + LightDir, m_LightUpVector);
-					glm::mat4x4 LightProjectionMatrix = glm::perspective(m_Fovy, m_Aspect, m_Near, m_Far);
+					glm::vec3 ViewDir = m_BakeDir[i];
+					if (abs(ViewDir) == m_LightUpVector)
+						ViewDir.z += 0.01f;
+					glm::mat4x4 ViewMatrix = glm::lookAt(ViewPos, ViewPos + ViewDir, m_LightUpVector);
+					glm::mat4x4 ProjectionMatrix = glm::perspective(m_Fovy, m_Aspect, m_Near, m_Far);
 
-					auto ViewMatrix = ElayGraphics::Camera::getMainCameraViewMatrix();
 					auto DirLightVPMatrix = ElayGraphics::ResourceManager::getSharedDataByName<glm::mat4>("LightProjectionMatrix") * ElayGraphics::ResourceManager::getSharedDataByName<glm::mat4>("LightViewMatrix");
 					glm::mat4 LightViewMatrixMulInverseCameraViewMatrix = DirLightVPMatrix * glm::inverse(ViewMatrix);
 				
@@ -108,8 +108,8 @@ void CBakeProbePass::updateV()
 					glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT2, GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, m_TextureConfig4Chebyshevs[Index]->TextureID, 0);
 					glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, m_TextureConfig4Depths[Index]->TextureID, 0);
 					m_pShader->activeShader();
-					m_pShader->setMat4UniformValue("u_BakeViewMatrix", glm::value_ptr(LightViewMatrix));
-					m_pShader->setMat4UniformValue("u_BakeProjectionMatrix", glm::value_ptr(LightProjectionMatrix));
+					m_pShader->setMat4UniformValue("u_BakeViewMatrix", glm::value_ptr(ViewMatrix));
+					m_pShader->setMat4UniformValue("u_BakeProjectionMatrix", glm::value_ptr(ProjectionMatrix));
 					m_pShader->setMat4UniformValue("u_LightVPMatrixMulInverseCameraViewMatrix", glm::value_ptr(LightViewMatrixMulInverseCameraViewMatrix));
 					m_pShader->setFloatUniformValue("u_LightDir", LightDir.x, LightDir.y, LightDir.z);
 					m_pShader->setFloatUniformValue("u_Intensity", ElayGraphics::ResourceManager::getSharedDataByName<float>("LightIntensity"));

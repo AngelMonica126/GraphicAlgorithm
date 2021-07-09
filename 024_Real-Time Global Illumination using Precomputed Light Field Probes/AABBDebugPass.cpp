@@ -21,17 +21,18 @@ void CAABBDebugPass::initV()
 	m_pSponza = std::dynamic_pointer_cast<CSponza>(ElayGraphics::ResourceManager::getGameObjectByName("Sponza"));
 	m_Min = ElayGraphics::ResourceManager::getSharedDataByName<glm::vec3>("MinAABB");
 	m_Max = ElayGraphics::ResourceManager::getSharedDataByName<glm::vec3>("MaxAABB");
+	auto AlbedoTextures = ElayGraphics::ResourceManager::getSharedDataByName<std::shared_ptr<ElayGraphics::STexture>>("OctChebyshevsTextures");
 
 	m_pShader = std::make_shared<CShader>("AABBDebug_VS.glsl", "AABBDebug_FS.glsl");
 	m_pShader->activeShader();
-	m_pShader->setTextureUniformValue("u_BakeAlbedoTextures", ElayGraphics::ResourceManager::getSharedDataByName<std::shared_ptr<ElayGraphics::STexture>>("AlbedoTexture"));
+	m_pShader->setTextureUniformValue("u_OctRadianceTextures", AlbedoTextures);
+	m_pShader->setIntUniformValue("u_Index", 0);
 }
 
 //************************************************************************************
 //Function:
 void CAABBDebugPass::updateV()
 {
-	auto AlbedoTextures = ElayGraphics::ResourceManager::getSharedDataByName<std::vector<std::shared_ptr<ElayGraphics::STexture>>>("BakeAlbedoTextures");
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	glEnable(GL_DEPTH_TEST);
 	m_pShader->activeShader();
@@ -46,8 +47,9 @@ void CAABBDebugPass::updateV()
 				Model = glm::scale(Model, glm::vec3(0.1, 0.1, 0.1));
 				m_pShader->setFloatUniformValue("u_LightPos", Position.x, Position.y, Position.z);
 				m_pShader->setMat4UniformValue("u_ModelMatrix", glm::value_ptr(Model));
-				m_pShader->setTextureUniformValue("u_BakeAlbedoTextures", AlbedoTextures[Index++]);
+				m_pShader->setIntUniformValue("u_Index", Index);
 				drawSphere();
+				Index++;
 			}
 	glDisable(GL_DEPTH_TEST);
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
