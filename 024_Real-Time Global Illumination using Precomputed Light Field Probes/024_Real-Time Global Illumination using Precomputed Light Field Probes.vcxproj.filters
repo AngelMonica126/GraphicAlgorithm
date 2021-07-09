@@ -60,10 +60,10 @@
     <None Include="ScreenQuad_VS.glsl">
       <Filter>Shader</Filter>
     </None>
-    <None Include="BakeIrradiancePass_FS.glsl">
+    <None Include="DynamicObject_FS.glsl">
       <Filter>Shader</Filter>
     </None>
-    <None Include="BakeIrradiancePass_VS.glsl">
+    <None Include="DynamicObject_VS.glsl">
       <Filter>Shader</Filter>
     </None>
   </ItemGroup>
@@ -101,7 +101,10 @@
     <ClCompile Include="OctahedronPass.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="BakeIrradiancePass.cpp">
+    <ClCompile Include="DynamicObject.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DynamicObjectPass.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -136,7 +139,10 @@
     <ClInclude Include="OctahedronPass.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="BakeIrradiancePass.h">
+    <ClInclude Include="DynamicObjectPass.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DynamicObject.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

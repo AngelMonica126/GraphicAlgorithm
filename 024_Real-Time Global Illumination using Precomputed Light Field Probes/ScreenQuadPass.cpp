@@ -3,7 +3,7 @@
 #include "Shader.h"
 #include "Utils.h"
 #include <GLFW/glfw3.h>
-
+#include <GLM/gtc/type_ptr.hpp>
 CScreenQuadPass::CScreenQuadPass(const std::string& vPassName, int vExecutionOrder) : IRenderPass(vPassName, vExecutionOrder)
 {
 }

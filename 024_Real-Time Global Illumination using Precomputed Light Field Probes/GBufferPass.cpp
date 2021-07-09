@@ -40,7 +40,6 @@ void GBufferPass::initV()
 	m_pShader->setMat4UniformValue("u_ModelMatrix", glm::value_ptr(m_pSponza->getModelMatrix()));
 	m_pShader->setFloatUniformValue("u_Near", ElayGraphics::Camera::getMainCameraNear());
 	m_pShader->setFloatUniformValue("u_Far", ElayGraphics::Camera::getMainCameraFar());
-	m_pShader->setMat4UniformValue("u_ModelMatrix", glm::value_ptr(m_pSponza->getModelMatrix()));
 	m_pShader->setMat4UniformValue("u_TransposeInverseViewModelMatrix", glm::value_ptr(glm::transpose(glm::inverse(ElayGraphics::Camera::getMainCameraViewMatrix() *  m_pSponza->getModelMatrix()))));
 	m_pSponza->initModel(*m_pShader);
 }

@@ -21,7 +21,7 @@ void CAABBDebugPass::initV()
 	m_pSponza = std::dynamic_pointer_cast<CSponza>(ElayGraphics::ResourceManager::getGameObjectByName("Sponza"));
 	m_Min = ElayGraphics::ResourceManager::getSharedDataByName<glm::vec3>("MinAABB");
 	m_Max = ElayGraphics::ResourceManager::getSharedDataByName<glm::vec3>("MaxAABB");
-	auto AlbedoTextures = ElayGraphics::ResourceManager::getSharedDataByName<std::shared_ptr<ElayGraphics::STexture>>("OctChebyshevsTextures");
+	auto AlbedoTextures = ElayGraphics::ResourceManager::getSharedDataByName<std::shared_ptr<ElayGraphics::STexture>>("OctRadianceTextures");
 
 	m_pShader = std::make_shared<CShader>("AABBDebug_VS.glsl", "AABBDebug_FS.glsl");
 	m_pShader->activeShader();
