@@ -35,8 +35,8 @@ void COctahedronPass::initV()
 	m_TextureConfig4Radiance->Height = m_TextureConfig4Normal->Height = m_BakeResolution;
 	m_TextureConfig4Radiance->Depth = m_TextureConfig4Normal->Depth = m_TextureConfig4Radiances.size();
 
-	m_TextureConfig4Chebyshev->InternalFormat = GL_RG16F;
-	m_TextureConfig4Chebyshev->ExternalFormat = GL_RG;
+	m_TextureConfig4Chebyshev->InternalFormat = GL_RGBA16F;
+	m_TextureConfig4Chebyshev->ExternalFormat = GL_RGBA;
 	m_TextureConfig4Chebyshev->DataType = GL_FLOAT;
 	m_TextureConfig4Chebyshev->TextureType = ElayGraphics::STexture::ETextureType::Texture2DArray;
 	m_TextureConfig4Chebyshev->Width = m_BakeResolution;

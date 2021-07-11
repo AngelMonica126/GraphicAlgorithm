@@ -36,8 +36,8 @@ void CBakeProbePass::initV()
 				TextureConfig4Albedo->Width = TextureConfig4Normal->Width = m_BakeResolution;
 				TextureConfig4Albedo->Height = TextureConfig4Normal->Height = m_BakeResolution;
 
-				TextureConfig4Chebyshev->InternalFormat = GL_RG32F;
-				TextureConfig4Chebyshev->ExternalFormat = GL_RG;
+				TextureConfig4Chebyshev->InternalFormat = GL_RGB32F;
+				TextureConfig4Chebyshev->ExternalFormat = GL_RGB;
 				TextureConfig4Chebyshev->DataType = GL_FLOAT;
 				TextureConfig4Chebyshev->TextureType = ElayGraphics::STexture::ETextureType::TextureCubeMap;
 				TextureConfig4Chebyshev->Width = m_BakeResolution;

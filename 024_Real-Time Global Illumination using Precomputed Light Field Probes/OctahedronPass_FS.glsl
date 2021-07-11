@@ -5,7 +5,7 @@
 in  vec2 v2f_TexCoords;
 layout(rgba16f ,binding = 0) uniform writeonly image2DArray u_OutputOctRadianceImage;
 layout(rgba16f ,binding = 1) uniform writeonly image2DArray u_OutputOctNormalImage;
-layout(rg16f ,binding = 2) uniform writeonly  image2DArray u_OutputOctChebyshevsImage;
+layout(rgba16f ,binding = 2) uniform writeonly  image2DArray u_OutputOctChebyshevsImage;
 layout(rgba16f ,binding = 3) uniform writeonly image2DArray u_OutputOctIrradianceImage;
 
 uniform samplerCube u_BakeRadianceTextures;
@@ -131,8 +131,11 @@ ivec2 XYZ2CubeUV(vec3 vDir)
 	return ivec2(c);
 }
 
-vec2 getFilterChebyshevs(ivec2 FragPos)
+vec3 getFilterChebyshevs(ivec2 FragPos)
 {
+	vec3 Dir = octDecode(FragPos  * 2.0f / u_BakeResolution - 1.0);
+	Dir = filpDir(Dir);
+	float Distance = texture(u_BakeChebyshevsTextures,Dir).z;
 	ivec2 Pos = FragPos;
 	int BeginX = max(0,Pos.x - 1);
 	int BeginY = max(0,Pos.y - 1);
@@ -150,7 +153,7 @@ vec2 getFilterChebyshevs(ivec2 FragPos)
 			Result += texture(u_BakeChebyshevsTextures,Dir).xy * u_Weight[WeightIndex++];
 		}
 	}
-	return Result;
+	return vec3(Result,Distance);
 }
 
 void main()
@@ -160,6 +163,6 @@ void main()
 	Dir = filpDir(Dir);
 	imageStore(u_OutputOctRadianceImage, ivec3(FragPos,u_Index), vec4(texture(u_BakeRadianceTextures,Dir).xyz, 1.0));
 	imageStore(u_OutputOctNormalImage, ivec3(FragPos,u_Index), vec4(texture(u_BakeNormalTextures,Dir).xyz, 1.0));
-	imageStore(u_OutputOctChebyshevsImage, ivec3(FragPos,u_Index), vec4(getFilterChebyshevs(FragPos),0,0));
+	imageStore(u_OutputOctChebyshevsImage, ivec3(FragPos,u_Index), vec4(getFilterChebyshevs(FragPos),0));
 	imageStore(u_OutputOctIrradianceImage, ivec3(FragPos,u_Index), vec4(getIrradince(Dir), 1.0));
 }

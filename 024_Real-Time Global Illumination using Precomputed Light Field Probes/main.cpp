@@ -29,7 +29,7 @@ int main()
 	ElayGraphics::ResourceManager::registerRenderPass(std::make_shared<COctahedronPass>("OctahedronPass", 6, ElayGraphics::ERenderPassType::RenderPassType_Once));
 	ElayGraphics::ResourceManager::registerRenderPass(std::make_shared<CScreenQuadPass>("ScreenQuadPass", 7));
 	ElayGraphics::ResourceManager::registerRenderPass(std::make_shared<CDynamicObjectPass>("DynamicObjectPass", 8));
-	//ElayGraphics::ResourceManager::registerRenderPass(std::make_shared<CAABBDebugPass>("AABBDebugPass", 9));
+	ElayGraphics::ResourceManager::registerRenderPass(std::make_shared<CAABBDebugPass>("AABBDebugPass", 9));
 
 
 	ElayGraphics::ResourceManager::registerSubGUI(std::make_shared<CCustomGUI>("CustomGUI", 1));

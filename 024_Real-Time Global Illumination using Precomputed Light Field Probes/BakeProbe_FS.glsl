@@ -6,7 +6,7 @@ in  vec3 v2f_Normal;
 //in vec3 v2f_Tangent;
 layout (location = 0) out vec4 AlbedoAndMetallic_;
 layout (location = 1) out vec4 Normal_;
-layout (location = 2) out vec2 Chebyshevs_;
+layout (location = 2) out vec3 Chebyshevs_;
 
 uniform sampler2D u_LightDepthTexture;	
 uniform sampler2D u_DiffuseTexture;
@@ -57,5 +57,5 @@ void main()
 	AlbedoAndMetallic_ = vec4(Mapped,1.0);
 	Normal_ = vec4(FragViewNormal,0);
 	float depth = (gl_FragCoord.z);
-	Chebyshevs_ = vec2(depth,depth * depth);
+	Chebyshevs_ = vec3(depth,depth * depth,LinearizeDepth(depth));
 }
