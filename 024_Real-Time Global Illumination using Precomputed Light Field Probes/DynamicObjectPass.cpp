@@ -52,7 +52,8 @@ void CDynamicObjectPass::updateV()
 	glCullFace(GL_BACK);
 
 	m_pShader->activeShader();
-	m_pSponza->updateModel(*m_pShader);
+	//m_pSponza->updateModel(*m_pShader);
+	drawSphere();
 
 	glDisable(GL_CULL_FACE);
 	glDisable(GL_DEPTH_TEST);
