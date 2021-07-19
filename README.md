@@ -11,7 +11,7 @@
 
 # 项目配置
 
-* 首先克隆本项目到本地
+* 首先克隆本项目到本地（**注意最好采用克隆，有一些模型放到了lfs，直接下载zip会导致有些场景丢失**）
 
 * 下载GraphicSDK https://pan.baidu.com/s/1XjYGrGhCO_KSqL7pCUzBrA 密码: 1234 （git lfs一直抽风），然后将其解压即可
 
