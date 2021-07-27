@@ -24,14 +24,14 @@ void CESMBufferPass::initV()
 	m_pDynamicObject = std::dynamic_pointer_cast<CDynamicObject>(ElayGraphics::ResourceManager::getGameObjectByName("DynamicObject"));
 	auto TextureConfig4Depth = std::make_shared<ElayGraphics::STexture>();
 	TextureConfig4Depth->isMipmap = true;
-	TextureConfig4Depth->InternalFormat = GL_RG32F;
-	TextureConfig4Depth->ExternalFormat = GL_RG;
-	TextureConfig4Depth->DataType = GL_FLOAT;
 	TextureConfig4Depth->Width  = m_RSMResolution;
 	TextureConfig4Depth->Height = m_RSMResolution;
-	TextureConfig4Depth->Type4WrapS = GL_CLAMP_TO_EDGE;
-	TextureConfig4Depth->Type4WrapT = GL_CLAMP_TO_EDGE;
-
+	TextureConfig4Depth->InternalFormat = GL_DEPTH_COMPONENT32F;
+	TextureConfig4Depth->ExternalFormat = GL_DEPTH_COMPONENT;
+	TextureConfig4Depth->DataType = GL_FLOAT;
+	TextureConfig4Depth->Type4MinFilter = GL_NEAREST;
+	TextureConfig4Depth->Type4MagFilter = GL_NEAREST;
+	TextureConfig4Depth->TextureAttachmentType = ElayGraphics::STexture::ETextureAttachmentType::DepthTexture;
 	genTexture(TextureConfig4Depth);
 	m_FBO = genFBO({TextureConfig4Depth});
 

@@ -1,6 +1,6 @@
 #version 430 core
 #pragma optionNV (unroll all)	
-
+#define C 80
 #define LOCAL_GROUP_SIZE 32
 
 layout (local_size_x = LOCAL_GROUP_SIZE, local_size_y = LOCAL_GROUP_SIZE) in;
@@ -42,22 +42,15 @@ void main()
 	float radius = FragPosInLightSpace.x * FragPosInLightSpace.x+ FragPosInLightSpace.y * FragPosInLightSpace.y;
 
 	FragPosInLightSpace.xyz = (FragPosInLightSpace.xyz + 1) / 2;
-	float Visibility4DirectLight = 0.0f;
 	if(FragPosInLightSpace.z < 0.0f || FragPosInLightSpace.x > 1.0f || FragPosInLightSpace.y > 1.0f || FragPosInLightSpace.x < 0.0f || FragPosInLightSpace.y < 0.0f || radius > m_CameraSizeExtent)
-		DirectIllumination = 0;
+		DirectIllumination = 0.0;
 	else
 	{
 		float Depth = (FragPosInLightSpace.z);
 		vec2 FragNDCPos4Light = FragPosInLightSpace.xy;
-		vec2 VarianceData  = texture(u_LightDepthTexture, FragNDCPos4Light).rg; 
-		float Var = VarianceData.g - VarianceData.r * VarianceData.r;
-		if(Depth - 0.00001 <= VarianceData.r){
-			Visibility4DirectLight =  1.0;
-		}
-		else{
-		    Visibility4DirectLight =  Var /(Var + pow(Depth - VarianceData.r, 2.0));
-		}
-		DirectIllumination = u_Intensity * max(dot(LightDirInViewSpace, FragViewNormal), 0) * Visibility4DirectLight;
+		float Filterd  = texture(u_LightDepthTexture, FragNDCPos4Light).r; 
+		float ESM = clamp(Filterd * exp(-C * Depth),0,1);
+		DirectIllumination = u_Intensity * max(dot(LightDirInViewSpace, FragViewNormal), 0) * ESM;
 	}
 
 	imageStore(u_OutputDirectIlluminationImage, FragPos, vec4(DirectIllumination, DirectIllumination, DirectIllumination, 1));

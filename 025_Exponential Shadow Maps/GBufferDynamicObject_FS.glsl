@@ -14,7 +14,6 @@ void main()
 	vec3 Albedo = u_DiffuseColor;
 	AlbedoAndMetallic_ = vec4(u_DiffuseColor, 0.0f);
 	vec3 Normal = normalize(v2f_Normal);
-	float Roughness = 0.2f;
-	NormalAndDoubleRoughness_ = vec4(Normal, Roughness * Roughness);
+	NormalAndDoubleRoughness_ = vec4(Normal, 0);
 	Position_ = vec4(v2f_FragPosInViewSpace, 1.0f);
 }

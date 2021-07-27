@@ -1,7 +1,8 @@
 #version 430 core
 #define PI 3.141592654
+#define C 80
 in  vec2 v2f_TexCoords;
-out vec2 Color_;
+out float Color_;
 
 uniform sampler2D u_SourceTexture;
 uniform sampler2D u_CoarserTexture;
@@ -20,11 +21,13 @@ void main()
 {
 	if(g_level == 7)
 	{
-		Color_ = textureLod(u_CoarserTexture, v2f_TexCoords,7).rg;
+		float Color = textureLod(u_CoarserTexture, v2f_TexCoords,7).r;
+		Color_ = exp(Color * C);
 		return ;
 	}
-	vec2 Color = textureLod(u_SourceTexture, v2f_TexCoords,g_level + 1).rg;
+	float Color = textureLod(u_SourceTexture, v2f_TexCoords,g_level + 1).r;
 	float weight = MipGaussianBlendWeight(v2f_TexCoords);
-	vec2 src = textureLod(u_CoarserTexture, v2f_TexCoords,g_level).rg;
-	Color_ = vec2((1 - weight) * Color + weight * src);
+	float src = textureLod(u_CoarserTexture, v2f_TexCoords,g_level).r;
+	src = exp(src * C);
+	Color_ = ((1 - weight) * Color + weight * src);
 }
