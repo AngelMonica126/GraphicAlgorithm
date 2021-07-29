@@ -65,6 +65,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "024_Real-Time Global Illumi
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "025_Exponential Shadow Maps", "025_Exponential Shadow Maps\025_Exponential Shadow Maps.vcxproj", "{663265C7-6140-4E77-8010-6A55594648AA}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "026_Moment Shadow Mapping", "026_Moment Shadow Mapping\026_Moment Shadow Mapping.vcxproj", "{97FCA7B4-CED8-468B-B837-AB122E910296}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -313,6 +315,14 @@ Global
 		{663265C7-6140-4E77-8010-6A55594648AA}.Release|x64.Build.0 = Release|x64
 		{663265C7-6140-4E77-8010-6A55594648AA}.Release|x86.ActiveCfg = Release|Win32
 		{663265C7-6140-4E77-8010-6A55594648AA}.Release|x86.Build.0 = Release|Win32
+		{97FCA7B4-CED8-468B-B837-AB122E910296}.Debug|x64.ActiveCfg = Debug|x64
+		{97FCA7B4-CED8-468B-B837-AB122E910296}.Debug|x64.Build.0 = Debug|x64
+		{97FCA7B4-CED8-468B-B837-AB122E910296}.Debug|x86.ActiveCfg = Debug|Win32
+		{97FCA7B4-CED8-468B-B837-AB122E910296}.Debug|x86.Build.0 = Debug|Win32
+		{97FCA7B4-CED8-468B-B837-AB122E910296}.Release|x64.ActiveCfg = Release|x64
+		{97FCA7B4-CED8-468B-B837-AB122E910296}.Release|x64.Build.0 = Release|x64
+		{97FCA7B4-CED8-468B-B837-AB122E910296}.Release|x86.ActiveCfg = Release|Win32
+		{97FCA7B4-CED8-468B-B837-AB122E910296}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
