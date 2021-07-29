@@ -43,10 +43,9 @@ void CRSMBufferPass::initV()
 
 	m_pShader->activeShader();
 	m_pShader->setMat4UniformValue("u_ModelMatrix", glm::value_ptr(m_pHalfCornellBox->getModelMatrix()));
-	glm::vec3 LightLookAtPos = glm::vec3(0, 1.0, 0);
-	glm::vec3 LightPos = glm::vec3(5, 5, 5);
-	glm::vec3 LightDir = glm::normalize(LightLookAtPos - LightPos);
-	glm::mat4 LightViewMatrix = glm::lookAt(LightPos, LightLookAtPos, glm::vec3(0, 1, 0));
+	glm::vec3 LightPos = glm::vec3(-0.15, -1.13, -0.58);	
+	glm::vec3 LightDir = glm::normalize(glm::vec3(-1.0, -0.7071, 0));	
+	glm::mat4 LightViewMatrix = glm::lookAt(LightPos, LightPos + LightDir, glm::vec3(0, 1, 0));
 	glm::mat4 LightProjectionMatrix = glm::ortho(-2.0f, 2.0f, -2.0f, 2.0f, 0.1f, 10.0f);
 	glm::mat4 LightVPMatrix = LightProjectionMatrix * LightViewMatrix;
 	m_pShader->setMat4UniformValue("u_LightVPMatrix", glm::value_ptr(LightVPMatrix));

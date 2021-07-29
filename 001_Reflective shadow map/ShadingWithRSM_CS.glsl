@@ -23,8 +23,8 @@ uniform sampler2D u_AlbedoTexture;
 uniform sampler2D u_NormalTexture;
 uniform sampler2D u_PositionTexture;
 uniform sampler2D u_RSMFluxTexture;
-uniform sampler2D u_RSMNormalTexture;		//RSM中的Normal存储的片元在相机空间下的法线
-uniform sampler2D u_RSMPositionTexture;		//RSM中的Positon存储的片元在相机空间下的位置
+uniform sampler2D u_RSMNormalTexture;		
+uniform sampler2D u_RSMPositionTexture;		
 uniform mat4  u_LightVPMatrixMulInverseCameraViewMatrix;
 uniform float u_MaxSampleRadius;
 uniform int   u_RSMSize;
@@ -51,9 +51,11 @@ void main()
 	FragPosInLightSpace /= FragPosInLightSpace.w;
 	vec2 FragNDCPos4Light = (FragPosInLightSpace.xy + 1) / 2;
 	float RSMTexelSize = 1.0 / u_RSMSize;
-
-	vec3 DirectIllumination = FragAlbedo * max(dot(-u_LightDirInViewSpace, FragViewNormal), 0);
-
+	vec3 DirectIllumination;
+	if(FragPosInLightSpace.z < 0.0f || FragPosInLightSpace.x > 1.0f || FragPosInLightSpace.y > 1.0f || FragPosInLightSpace.x < 0.0f || FragPosInLightSpace.y < 0.0f )
+		DirectIllumination = vec3(0.1) * FragAlbedo;
+	else
+		DirectIllumination = FragAlbedo * max(dot(-u_LightDirInViewSpace, FragViewNormal), 0.1);
 	vec3 IndirectIllumination = vec3(0);
 	for(int i = 0; i < u_VPLNum; ++i)
 	{
@@ -67,7 +69,7 @@ void main()
 	}
 	IndirectIllumination *= FragAlbedo;
 
-	vec3 Result = DirectIllumination*0.1 + IndirectIllumination;
+	vec3 Result = DirectIllumination  + IndirectIllumination / u_VPLNum;
 
 	imageStore(u_OutputImage, FragPos, vec4(Result, 1.0));
 }
