@@ -9,4 +9,6 @@ public:
 
 	virtual void initV() override;
 	virtual void updateV() override;
+	int  m_OldKeyDebug = -1;
+	int  m_OldKeyNormal = -1;
 };

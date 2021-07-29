@@ -3,12 +3,12 @@
 in  vec2 v2f_TexCoords;
 out vec4 Color_;
 
-uniform sampler2D u_DirectTexture;
-uniform sampler2D u_Albedo;
+uniform sampler2D u_Texture;
+uniform float u_Exposure = 2.0f;
 
 void main()
 {
-	vec3 Direct = (texture(u_DirectTexture, v2f_TexCoords, 0).rgb);
-	vec3 Albedo = texture(u_Albedo, v2f_TexCoords).rgb;
-	Color_ = vec4(Albedo * Direct + Albedo,1);
+	vec3 mapped = vec3(1.0) - exp(-(texture(u_Texture, v2f_TexCoords).rgb) * u_Exposure);
+	mapped = pow(mapped, vec3(1.0f / 2.2f));
+	Color_ = vec4(mapped,1);
 }

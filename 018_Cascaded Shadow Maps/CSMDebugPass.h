@@ -5,11 +5,11 @@
 #include <GL/glew.h>
 
 class CLightCamera;
-class CDirectLightPass : public IRenderPass
+class CCSMDebugPass : public IRenderPass
 {
 public:
-	CDirectLightPass(const std::string& vPassName, int vExcutionOrder);
-	virtual ~CDirectLightPass();
+	CCSMDebugPass(const std::string& vPassName, int vExcutionOrder);
+	virtual ~CCSMDebugPass();
 
 	virtual void initV() override;
 	virtual void updateV() override;

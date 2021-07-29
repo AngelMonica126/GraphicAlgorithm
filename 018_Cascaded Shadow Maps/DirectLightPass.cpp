@@ -4,7 +4,8 @@
 #include "Utils.h"
 #include "Shader.h"
 #include <GLM/gtc/type_ptr.hpp>
-
+#include <GLFW/glfw3.h>
+#include "LightCamera.h"
 CDirectLightPass::CDirectLightPass(const std::string& vPassName, int vExcutionOrder) : IRenderPass(vPassName, vExcutionOrder)
 {
 }
@@ -19,6 +20,7 @@ void CDirectLightPass::initV()
 	auto NormalTexture = ElayGraphics::ResourceManager::getSharedDataByName<std::shared_ptr<ElayGraphics::STexture>>("NormalTexture");
 	auto PositionTexture = ElayGraphics::ResourceManager::getSharedDataByName<std::shared_ptr<ElayGraphics::STexture>>("PositionTexture");
 	auto LightDepthTexture = ElayGraphics::ResourceManager::getSharedDataByName<std::shared_ptr<ElayGraphics::STexture>>("LightDepthTexture");
+	m_pCLightCamera = std::dynamic_pointer_cast<CLightCamera>(ElayGraphics::ResourceManager::getGameObjectByName("LightCamera"));
 
 	auto TextureConfig4DirectIllumination = std::make_shared<ElayGraphics::STexture>();
 	TextureConfig4DirectIllumination->InternalFormat = GL_RGBA32F;
@@ -48,10 +50,16 @@ void CDirectLightPass::initV()
 
 void CDirectLightPass::updateV()
 {
+	std::vector<glm::mat4> Frustum = m_pCLightCamera->getFrustum();
 	m_pShader->activeShader();
+	m_pShader->setIntUniformValue("u_SpiltNum", Frustum.size());
 	auto ViewMatrix = ElayGraphics::Camera::getMainCameraViewMatrix();
-	//m_LightVPMatrix = ElayGraphics::ResourceManager::getSharedDataByName<glm::mat4>("LightProjectionMatrix") * ElayGraphics::ResourceManager::getSharedDataByName<glm::mat4>("LightViewMatrix");;
-	//m_pShader->setMat4UniformValue("u_LightVPMatrixMulInverseCameraViewMatrix", glm::value_ptr(m_LightVPMatrix));
+	for (int i = 0; i < Frustum.size(); i++)
+	{
+		m_LightVPMatrix = Frustum[i] * ElayGraphics::ResourceManager::getSharedDataByName<glm::mat4>("LightViewMatrix");
+		m_pShader->setMat4UniformValue("u_LightVPMatrixMulInverseCameraViewMatrix[" + std::to_string(i) +"]", glm::value_ptr(m_LightVPMatrix));
+
+	}
 	auto LightDir = ElayGraphics::ResourceManager::getSharedDataByName<glm::vec3>("LightDir");
 	m_pShader->setFloatUniformValue("u_LightDir", LightDir.x, LightDir.y, LightDir.z);
 	glDispatchCompute(m_GlobalGroupSize[0], m_GlobalGroupSize[1], m_GlobalGroupSize[2]);

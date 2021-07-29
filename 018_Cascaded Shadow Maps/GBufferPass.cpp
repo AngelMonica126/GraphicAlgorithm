@@ -44,7 +44,7 @@ void GBufferPass::initV()
 	m_pShader->setMat4UniformValue("u_ModelMatrix", glm::value_ptr(m_pSponza->getModelMatrix()));
 	m_pShader->setFloatUniformValue("u_Near", ElayGraphics::Camera::getMainCameraNear());
 	m_pShader->setFloatUniformValue("u_Far", ElayGraphics::Camera::getMainCameraFar());
-	m_pShader->setMat4UniformValue("u_LightVPMatrix", glm::value_ptr(Frustum[0] * ElayGraphics::ResourceManager::getSharedDataByName<glm::mat4>("LightViewMatrix")));
+	m_pShader->setMat4UniformValue("u_LightVPMatrix", glm::value_ptr(Frustum[3] * ElayGraphics::ResourceManager::getSharedDataByName<glm::mat4>("LightViewMatrix")));
 	m_pShader->setMat4UniformValue("u_TransposeInverseViewModelMatrix", glm::value_ptr(glm::transpose(glm::inverse(ElayGraphics::Camera::getMainCameraViewMatrix() *  m_pSponza->getModelMatrix()))));
 	m_pSponza->initModel(*m_pShader);
 }
@@ -56,13 +56,12 @@ void GBufferPass::updateV()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glEnable(GL_DEPTH_TEST);
 	glDisable(GL_CULL_FACE);
-	glViewport(0, 0, 512, 512);
 
 	m_pShader->activeShader();
 	m_pShader->setMat4UniformValue("u_TransposeInverseViewModelMatrix", glm::value_ptr(glm::transpose(glm::inverse(ElayGraphics::Camera::getMainCameraViewMatrix() *  m_pSponza->getModelMatrix()))));
 	m_pSponza->updateModel(*m_pShader);
 
-	//glDisable(GL_CULL_FACE);
+	glDisable(GL_CULL_FACE);
 	glDisable(GL_DEPTH_TEST);
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 

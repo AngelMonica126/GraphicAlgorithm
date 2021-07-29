@@ -39,6 +39,9 @@
     <None Include="GBuffer_VS.glsl">
       <Filter>Shader</Filter>
     </None>
+    <None Include="CSMDebugPass_CS.glsl">
+      <Filter>Shader</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CascadedShadowMapPass.cpp">
@@ -65,6 +68,9 @@
     <ClCompile Include="Sponza.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="CSMDebugPass.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CascadedShadowMapPass.h">
@@ -86,6 +92,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="CustomGUI.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CSMDebugPass.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

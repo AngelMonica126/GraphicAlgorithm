@@ -5,7 +5,6 @@ layout(location = 2) in vec2 _TexCoord;
 
 uniform mat4 u_ModelMatrix;
 uniform mat4 u_LightVPMatrix;
-
 void main()
 {
 	vec4 FragPosInWorldSpace = u_ModelMatrix * vec4(_Position, 1.0f);

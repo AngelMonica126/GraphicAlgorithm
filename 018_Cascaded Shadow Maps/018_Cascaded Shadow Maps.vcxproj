@@ -127,6 +127,7 @@
   <ItemGroup>
     <None Include="CascadedShadowMap_FS.glsl" />
     <None Include="CascadedShadowMap_VS.glsl" />
+    <None Include="CSMDebugPass_CS.glsl" />
     <None Include="DirectLightPass_CS.glsl" />
     <None Include="GBuffer_FS.glsl" />
     <None Include="GBuffer_VS.glsl" />
@@ -135,6 +136,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CascadedShadowMapPass.cpp" />
+    <ClCompile Include="CSMDebugPass.cpp" />
     <ClCompile Include="CustomGUI.cpp" />
     <ClCompile Include="DirectLightPass.cpp" />
     <ClCompile Include="GBufferPass.cpp" />
@@ -145,6 +147,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CascadedShadowMapPass.h" />
+    <ClInclude Include="CSMDebugPass.h" />
     <ClInclude Include="CustomGUI.h" />
     <ClInclude Include="DirectLightPass.h" />
     <ClInclude Include="GBufferPass.h" />

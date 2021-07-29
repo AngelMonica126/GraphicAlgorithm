@@ -6,9 +6,10 @@
 #include "DirectLightPass.h"
 #include "CustomGUI.h"
 #include "LightCamera.h"
+#include "CSMDebugPass.h"
 int main()
 {
-	ElayGraphics::WINDOW_KEYWORD::setWindowSize(1280, 720);
+	ElayGraphics::WINDOW_KEYWORD::setWindowSize(1920, 1080);
 	ElayGraphics::WINDOW_KEYWORD::setIsCursorDisable(true);
 	ElayGraphics::COMPONENT_CONFIG::setIsEnableGUI(false);
 
@@ -18,8 +19,8 @@ int main()
 	ElayGraphics::ResourceManager::registerRenderPass(std::make_shared<GBufferPass>("GBufferPass", 1));
 	ElayGraphics::ResourceManager::registerRenderPass(std::make_shared<CascadedShadowMapPass>("CascadedShadowMapPass", 2));
 	ElayGraphics::ResourceManager::registerRenderPass(std::make_shared<CDirectLightPass>("DirectLightPass", 3));
-	ElayGraphics::ResourceManager::registerRenderPass(std::make_shared<CScreenQuadPass>("ScreenQuadPass", 4));
-
+	ElayGraphics::ResourceManager::registerRenderPass(std::make_shared<CCSMDebugPass>("CSMDebugPass", 4));
+	ElayGraphics::ResourceManager::registerRenderPass(std::make_shared<CScreenQuadPass>("ScreenQuadPass", 5));
 
 	ElayGraphics::ResourceManager::registerSubGUI(std::make_shared<CCustomGUI>("CustomGUI", 1));
 	ElayGraphics::App::initApp();

@@ -11,6 +11,8 @@ CSponza::~CSponza()
 
 void CSponza::initV()
 {
+	//setModel(ElayGraphics::ResourceManager::getOrCreateModel("../Model/VioletSponza/SponzaPBR.obj"));
+
 	setModel(ElayGraphics::ResourceManager::getOrCreateModel("../Model/lost_empire/lost_empire.obj"));
 }
 
