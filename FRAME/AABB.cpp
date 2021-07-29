@@ -1,3 +1,7 @@
+//--------------------------------------------------------------------------------------
+// Copyright (c) Elay Pu. All rights reserved.
+//--------------------------------------------------------------------------------------
+
 #include "AABB.h"
 
 CAABB::CAABB(const glm::vec3& vMin, const glm::vec3& vMax) : m_Min(vMin), m_Max(vMax)

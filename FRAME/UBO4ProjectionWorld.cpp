@@ -1,3 +1,7 @@
+//--------------------------------------------------------------------------------------
+// Copyright (c) Elay Pu. All rights reserved.
+//--------------------------------------------------------------------------------------
+
 #include "UBO4ProjectionWorld.h"
 #include <GLM/glm.hpp>
 #include <GLM/gtc/matrix_transform.hpp>

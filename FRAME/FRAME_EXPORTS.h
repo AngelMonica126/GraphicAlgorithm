@@ -1,3 +1,7 @@
+//--------------------------------------------------------------------------------------
+// Copyright (c) Elay Pu. All rights reserved.
+//--------------------------------------------------------------------------------------
+
 #pragma once
 #ifndef FRAME_EXPORTS
 #define FRAME_DLLEXPORTS __declspec(dllimport)

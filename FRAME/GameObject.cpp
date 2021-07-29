@@ -1,3 +1,7 @@
+//--------------------------------------------------------------------------------------
+// Copyright (c) Elay Pu. All rights reserved.
+//--------------------------------------------------------------------------------------
+
 #include "GameObject.h"
 #include <GLM/gtc/matrix_transform.hpp>
 #include "Shader.h"

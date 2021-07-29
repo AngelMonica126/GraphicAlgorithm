@@ -1,3 +1,7 @@
+//--------------------------------------------------------------------------------------
+// Copyright (c) Elay Pu. All rights reserved.
+//--------------------------------------------------------------------------------------
+
 //////////////////////////////////////////////////////////////////////////
 //The input manager designs two working patterns:
 //1. Other classes can get the input state through a series of "get..." member functions.

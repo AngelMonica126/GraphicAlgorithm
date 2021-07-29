@@ -1,3 +1,7 @@
+//--------------------------------------------------------------------------------------
+// Copyright (c) Elay Pu. All rights reserved.
+//--------------------------------------------------------------------------------------
+
 #include "GUI.h"
 #include <vector>
 #include <boost/algorithm/string/split.hpp>

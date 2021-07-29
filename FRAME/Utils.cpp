@@ -1,3 +1,7 @@
+//--------------------------------------------------------------------------------------
+// Copyright (c) Elay Pu. All rights reserved.
+//--------------------------------------------------------------------------------------
+
 #include "Utils.h"
 #include <initializer_list>
 #define STB_IMAGE_IMPLEMENTATION
