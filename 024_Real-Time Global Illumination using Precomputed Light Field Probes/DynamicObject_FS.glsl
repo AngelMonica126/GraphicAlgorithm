@@ -6,13 +6,14 @@
 
 in  vec3 v2f_FragPosInWorldSpace;
 in  vec3 v2f_Normal;
-in vec3 temp;
 layout(location = 0) out vec4 Color_;
 layout(std140, binding = 0) uniform u_Matrices4ProjectionWorld
 {
 	mat4 u_ProjectionMatrix;
 	mat4 u_ViewMatrix;
 };
+
+uniform sampler2D u_BRDFLut;
 uniform vec3 u_DiffuseColor;
 uniform sampler2D u_PositionTexture;
 uniform sampler2D u_NormalTexture;
@@ -99,7 +100,7 @@ vec3 computeGlossyRay(vec3 vPosition, vec3 ViewDir, vec3 vNormal) {
 		ivec3 Offset = ivec3(i, i >> 1, i >> 2) & ivec3(1);
 		ivec3 CellCoords = convertPointToGridIndex(vPosition) + Offset;
 		int Index = gridCoordToProbeIndex(CellCoords);
-		vec2 Texcoord = (octEncode(vNormal) * 0.5 + 0.5);
+		vec2 Texcoord = (octEncode(wi) * 0.5 + 0.5);
 		vec3 Normal = texture(u_OutputOctNormalImage, vec3(Texcoord, Index), 0).xyz;
 		if(dot(Normal,wi) < 0)
 			return texture(u_OutputOctRadianceImage, vec3(Texcoord, Index), 0).rgb;
@@ -110,16 +111,28 @@ vec3 computeGlossyRay(vec3 vPosition, vec3 ViewDir, vec3 vNormal) {
 	return texture(u_OutputOctRadianceImage, vec3(Texcoord, Index), 0).rgb;
 }
 
+vec3 FresnelSchlickRoughness(float cosTheta, vec3 F0, float roughness)
+{
+    return F0 + (max(vec3(1.0 - roughness), F0) - F0) * pow(max(1.0 - cosTheta, 0.0), 5.0);
+}  
+
 void main()
 {
 	vec3 Albedo = vec3(1);
 	vec3 Position = v2f_FragPosInWorldSpace;
-	vec3 Normal = normalize(temp);
+	vec3 Normal = normalize(v2f_Normal);
 	vec3 Diffuse = computePrefilteredIrradiance(Position,Normal);
 	vec3 FragInViewSpace = vec3(u_ViewMatrix * vec4(Position,1));
 	vec3 ViewDir = -normalize(FragInViewSpace);
 	vec3 Specular = computeGlossyRay(Position,ViewDir,Normal);
-	vec3 Color = (Diffuse + Specular) * Albedo;
+	vec3 F0 = vec3(0.2,0.2,0.2);
+	float Roughness = 0.2;
+	vec3 F        = FresnelSchlickRoughness(max(dot(Normal, ViewDir), 0.0), F0, Roughness);
+	vec2 EnvBRDF  = texture(u_BRDFLut, vec2(max(dot(Normal, ViewDir), 0.0), Roughness)).rg;
+	vec3 LUT = (F * EnvBRDF.x + EnvBRDF.y);
+
+
+	vec3 Color = (Diffuse + Specular * LUT) * Albedo;
 	vec3 Mapped = vec3(1.0) - exp(-Color * u_Exposure);
 	Mapped = pow(Mapped, vec3(1.0f / 2.2f));
 	Color_ = vec4(Mapped, 1.0f);

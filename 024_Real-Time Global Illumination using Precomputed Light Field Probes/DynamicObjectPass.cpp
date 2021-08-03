@@ -19,6 +19,10 @@ CDynamicObjectPass::~CDynamicObjectPass()
 //Function:
 void CDynamicObjectPass::initV()
 {
+
+	auto m_LUTTexture = std::make_shared<ElayGraphics::STexture>();
+	loadTextureFromFile("../Textures/BRDFLUT/ibl_brdf_lut.png", m_LUTTexture);
+
 	m_pShader = std::make_shared<CShader>("DynamicObject_VS.glsl", "DynamicObject_FS.glsl");
 	m_pSponza = std::dynamic_pointer_cast<CDynamicObject>(ElayGraphics::ResourceManager::getGameObjectByName("DynamicObject"));
 
@@ -27,7 +31,7 @@ void CDynamicObjectPass::initV()
 	m_pShader->setTextureUniformValue("u_AlbedoTexture", ElayGraphics::ResourceManager::getSharedDataByName<std::shared_ptr<ElayGraphics::STexture>>("AlbedoTexture"));
 	m_pShader->setTextureUniformValue("u_PositionTexture", ElayGraphics::ResourceManager::getSharedDataByName<std::shared_ptr<ElayGraphics::STexture>>("PositionTexture"));
 	m_pShader->setTextureUniformValue("u_NormalTexture", ElayGraphics::ResourceManager::getSharedDataByName<std::shared_ptr<ElayGraphics::STexture>>("NormalTexture"));
-
+	m_pShader->setTextureUniformValue("u_BRDFLut", m_LUTTexture);
 	m_pShader->setTextureUniformValue("u_OutputOctRadianceImage", ElayGraphics::ResourceManager::getSharedDataByName<std::shared_ptr<ElayGraphics::STexture>>("OctRadianceTextures"));
 	m_pShader->setTextureUniformValue("u_OutputOctNormalImage", ElayGraphics::ResourceManager::getSharedDataByName<std::shared_ptr<ElayGraphics::STexture>>("OctNormalTextures"));
 	m_pShader->setTextureUniformValue("u_OutputOctChebyshevsImage", ElayGraphics::ResourceManager::getSharedDataByName<std::shared_ptr<ElayGraphics::STexture>>("OctChebyshevsTextures"));
@@ -52,8 +56,7 @@ void CDynamicObjectPass::updateV()
 	glCullFace(GL_BACK);
 
 	m_pShader->activeShader();
-	//m_pSponza->updateModel(*m_pShader);
-	drawSphere();
+	m_pSponza->updateModel(*m_pShader);
 
 	glDisable(GL_CULL_FACE);
 	glDisable(GL_DEPTH_TEST);

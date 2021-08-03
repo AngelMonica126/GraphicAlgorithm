@@ -77,7 +77,6 @@ void CBakeProbePass::initV()
 
 void CBakeProbePass::updateV()
 {
-	
 	int Index = 0;
 	for (int i = m_MinAABB.x; i < m_MaxAABB.x; i++)
 		for (int j = m_MinAABB.y; j < m_MaxAABB.y; j++)
@@ -122,5 +121,4 @@ void CBakeProbePass::updateV()
 	glDisable(GL_CULL_FACE);
 	glDisable(GL_DEPTH_TEST);
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
-
 }

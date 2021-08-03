@@ -1,12 +1,12 @@
+//--------------------------------------------------------------------------------------
+// Copyright (c) Elay Pu. All rights reserved.
+//--------------------------------------------------------------------------------------
+
 #pragma once
 #include <map>
 #include <vector>
 #include <iostream>
-namespace//--------------------------------------------------------------------------------------
-// Copyright (c) Elay Pu. All rights reserved.
-//--------------------------------------------------------------------------------------
-
-Graphics
+namespace ElayGraphics
 {
 	//This container class is designed in order to achieve that find corresponding data by name fastly and gaurantee that data stored in containers are ordered. The type of data recommended is pointer.
 	template <typename TDataType>
