@@ -68,6 +68,5 @@ void CShadingPass::updateV()
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	m_pShader->activeShader();
 	m_pSponza->updateModel(*m_pShader);
-	//drawSphere();
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }

@@ -19,11 +19,8 @@ void CLightSources::initV()
 	auto pSponzaAABB = pSponza->getAABB();
 	auto& MinCorner = pSponzaAABB->getMin();
 	auto& MaxCorner = pSponzaAABB->getMax();
-	//在场景里平均分配光源
 	float SponzaVolume = pSponzaAABB->getVolume();
-	//float LightRadius = pow(SponzaVolume, 1.0f / 3.0f);
 	float LightRadius = 0.5f;
-	//float Ind = LightRadius / 8.0f;
 	std::default_random_engine RandomEngine;
 	std::uniform_real_distribution<float> UniformFloat01(0.0f, 1.0f);
 	std::uniform_real_distribution<float> UniformFloat(0.4f, 0.7f);
@@ -35,7 +32,6 @@ void CLightSources::initV()
 	for (int i = 0; i < m_LightNum; ++i)
 	{
 		Position = { UniformFloatX(RandomEngine),UniformFloatY(RandomEngine),UniformFloatZ(RandomEngine), 1 };
-		//Position = { -1.0,-2.15,0, 1 };
 		hueToRGB(UniformFloat01(RandomEngine)*UniformFloat(RandomEngine), ColorAndRadius);
 		ColorAndRadius.w = LightRadius;
 		m_LightSources.push_back({ Position,ColorAndRadius });

@@ -29,8 +29,8 @@ uniform vec3 u_MinAABB;
 uniform ivec3 u_CellNum;
 uniform int u_BakeResolution = 128;
 const float RayBumpEpsilon = 0.01;
-const float MinThickness = 0.03; // meters
-const float MaxThickness = 0.50; // meters
+const float MinThickness = 0.03;
+const float MaxThickness = 0.50;
 
 
 ivec3 convertPointToGridIndex(vec3 vPos) {

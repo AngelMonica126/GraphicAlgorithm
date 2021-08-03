@@ -127,16 +127,6 @@ vector<float> Harmonics::RenderBasis(const glm::vec3& pos)
 		Y[7] = 1.0 / 4.0 *1.f / 2.f * sqrt(15.f / PI) * y * x;
 		Y[8] = 1.0 / 4.0 *1.f / 4.f * sqrt(15.f / PI) * (x * x - z * z);
 	}
-	//if (m_Degree >= 3)
-	//{
-	//	Y[9] = 1.f / 4.f * sqrt(35.f / (2.f * PI)) * (3 * x * x - z * z) * z;
-	//	Y[10] = 1.f / 2.f * sqrt(105.f / PI) * x * z * y;
-	//	Y[11] = 1.f / 4.f * sqrt(21.f / (2.f * PI)) * z * (4 * y * y - x * x - z * z);
-	//	Y[12] = 1.f / 4.f * sqrt(7.f / PI)*y*(2 * y*y - 3 * x*x - 3 * z * z);
-	//	Y[13] = 1.f / 4.f * sqrt(21.f / (2.f * PI)) * x * (4 * y * y - x * x - z * z);
-	//	Y[14] = 1.f / 4.f * sqrt(105.f / PI) * (x * x - z * z) * y;
-	//	Y[15] = 1.f / 4.f * sqrt(35.f / (2 * PI)) * (x * x - 3 * z * z) * x;
-	//}
 	return Y;
 }
 

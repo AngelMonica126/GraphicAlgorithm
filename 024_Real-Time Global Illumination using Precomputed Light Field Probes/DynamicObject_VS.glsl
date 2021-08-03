@@ -17,6 +17,6 @@ void main()
 {
 	vec4 FragPosInWorldSpace =  u_ModelMatrix * vec4(_Position, 1.0f);
 	gl_Position = u_ProjectionMatrix * u_ViewMatrix * FragPosInWorldSpace;
-	v2f_Normal = (mat3(u_ModelMatrix) * _Normal);	//这个可以在外面算好了传进来
+	v2f_Normal = (mat3(u_ModelMatrix) * _Normal);
 	v2f_FragPosInWorldSpace = vec3(FragPosInWorldSpace);
 }

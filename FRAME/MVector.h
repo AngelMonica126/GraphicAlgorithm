@@ -8,7 +8,6 @@
 #include <iostream>
 namespace ElayGraphics
 {
-	//This container class is designed in order to achieve that find corresponding data by name fastly and gaurantee that data stored in containers are ordered. The type of data recommended is pointer.
 	template <typename TDataType>
 	class MVector
 	{
@@ -45,14 +44,13 @@ void ElayGraphics::MVector<TDataType>::push_back(const std::string &vDataName, c
 {
 	m_DataSet.insert(0,vData);
 	sort(m_DataSet->begin(),m_DataSet->end(), [](const TDataType &vPass1, const TDataType &vPass2) {return vPass1 < vPass2; })
-	//m_DataSet.insert(std::lower_bound(m_DataSet.begin(), m_DataSet.end(), vData, ), vData);   //sort when insert;
 	m_DataMap[vDataName] = vData;
 }
 
 template <typename TDataType>
 void ElayGraphics::MVector<TDataType>::push_back(const std::string &vDataName, const TDataType &vData, int vPointerFlag)
 {
-	m_DataSet.insert(std::lower_bound(m_DataSet.begin(), m_DataSet.end(), vData, [](const TDataType &vPass1, const TDataType &vPass2) {return *vPass1 < *vPass2; }), vData);   //sort when insert;
+	m_DataSet.insert(std::lower_bound(m_DataSet.begin(), m_DataSet.end(), vData, [](const TDataType &vPass1, const TDataType &vPass2) {return *vPass1 < *vPass2; }), vData); 
 	m_DataMap[vDataName] = vData;
 }
 
@@ -62,7 +60,7 @@ template <typename TDataType>
 template <typename Pred>
 void ElayGraphics::MVector<TDataType>::push_back(const std::string &vDataName, const TDataType &vData, Pred vPred)
 {
-	m_DataSet.insert(std::lower_bound(m_DataSet.begin(), m_DataSet.end(), vData, vPred), vData);   //sort when insert;
+	m_DataSet.insert(std::lower_bound(m_DataSet.begin(), m_DataSet.end(), vData, vPred), vData);   
 }
 
 template <typename TDataType>

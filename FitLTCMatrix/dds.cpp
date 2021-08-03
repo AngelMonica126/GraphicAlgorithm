@@ -36,10 +36,10 @@ struct DDS_HEADER
 };
 #pragma pack(pop)
 
-uint32_t const DDS_MAGIC                        = 0x20534444; // "DDS "
-uint32_t const DDS_HEADER_FLAGS_TEXTURE         = 0x00001007; // DDSD_CAPS | DDSD_HEIGHT | DDSD_WIDTH | DDSD_PIXELFORMAT
+uint32_t const DDS_MAGIC                        = 0x20534444; 
+uint32_t const DDS_HEADER_FLAGS_TEXTURE         = 0x00001007; 
 uint32_t const DDS_HEADER_FLAGS_PITCH           = 0x00000008;
-uint32_t const DDS_SURFACE_FLAGS_TEXTURE        = 0x00001000; // DDSCAPS_TEXTURE
+uint32_t const DDS_SURFACE_FLAGS_TEXTURE        = 0x00001000; 
 uint32_t const DDS_PF_FLAGS_FOURCC              = 0x00000004;
 uint32_t const DDS_RESOURCE_DIMENSION_TEXTURE2D = 3;
 

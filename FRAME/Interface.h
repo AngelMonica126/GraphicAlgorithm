@@ -81,7 +81,7 @@ namespace ElayGraphics
 		FRAME_DLLEXPORTS void updateSharedDataByName(const std::string& vDataName, const boost::any& vData);
 
 		template <typename TDataType>
-		TDataType getSharedDataByName(const std::string &vDataName)		//no return const &, because any_cast will allocate one temporary variable
+		TDataType getSharedDataByName(const std::string &vDataName)
 		{
 			return boost::any_cast<TDataType>(getSharedDataByName(vDataName));
 		}

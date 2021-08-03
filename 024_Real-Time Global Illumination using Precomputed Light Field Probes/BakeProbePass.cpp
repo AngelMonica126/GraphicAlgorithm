@@ -21,7 +21,6 @@ void CBakeProbePass::initV()
 	m_pSponza = std::dynamic_pointer_cast<CSponza>(ElayGraphics::ResourceManager::getGameObjectByName("Sponza"));
 	m_MinAABB = ElayGraphics::ResourceManager::getSharedDataByName<glm::vec3>("MinAABB");
 	m_MaxAABB = ElayGraphics::ResourceManager::getSharedDataByName<glm::vec3>("MaxAABB");
-	//m_Dimensions = MaxAABB - MinAABB;
 	for (int i = m_MinAABB.x; i < m_MaxAABB.x; i++)
 		for (int j = m_MinAABB.y; j < m_MaxAABB.y; j++)
 			for (int k = m_MinAABB.z; k < m_MaxAABB.z; k++)

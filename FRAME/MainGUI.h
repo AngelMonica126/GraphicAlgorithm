@@ -21,7 +21,7 @@ public:
 	ImGuiIO* getIO() const { return m_pIO; }
 
 private:
-	ImGuiIO*					m_pIO = nullptr;							//use share_ptr will cause error when program exits
+	ImGuiIO*					m_pIO = nullptr;
 	std::shared_ptr<ImFont>		m_pDefaultFont;
 	std::vector<unsigned short>	m_IconRanges = { 0xf000,0xf3ff,0 };
 	bool m_IsShowDefaultWindow = true;

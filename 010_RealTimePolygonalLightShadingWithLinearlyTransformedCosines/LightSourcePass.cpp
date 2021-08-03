@@ -22,7 +22,6 @@ void CLightSourcePass::initV()
 	m_pShader = std::make_shared<CShader>("LightSource_VS.glsl", "LightSource_FS.glsl");
 	std::shared_ptr<ElayGraphics::STexture> m_LightSourceTexture = std::make_shared<ElayGraphics::STexture>();
 	loadTextureFromFile("Textures/0.png",m_LightSourceTexture);
-	//int LTCMatrixTexture = ElayGraphics::ResourceManager::getSharedDataByName<GLuint>("LTCMatrixTexture");
 	m_pShader->activeShader();
 	m_pShader->setTextureUniformValue("u_LightSourceTexture", m_LightSourceTexture);
 }
