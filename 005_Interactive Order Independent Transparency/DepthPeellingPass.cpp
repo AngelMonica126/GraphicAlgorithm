@@ -18,8 +18,6 @@ DepthPeellingPass::~DepthPeellingPass()
 void DepthPeellingPass::initV()
 {
 	ElayGraphics::Camera::setMainCameraFarPlane(100);
-	ElayGraphics::Camera::setMainCameraPos({ -1.75313, 15.1488, 40.9769 });	//对应1.0的LightCameraSize，同时避免红光
-	ElayGraphics::Camera::setMainCameraFront({ 0.0491563, -0.0413525, -0.997935 });
 	ElayGraphics::Camera::setMainCameraMoveSpeed(0.1);
 
 	m_pShader = std::make_shared<CShader>("DepthPeelling_VS.glsl", "DepthPeelling_FS.glsl");

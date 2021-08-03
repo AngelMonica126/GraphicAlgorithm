@@ -1,4 +1,0 @@
-Model/CornellBox/* filter=lfs diff=lfs merge=lfs -text
-Model/salle_de_bain/* filter=lfs diff=lfs merge=lfs -text
-Model/CornellBox/HalfCornellBoxAndBuddha/* filter=lfs diff=lfs merge=lfs -text
-

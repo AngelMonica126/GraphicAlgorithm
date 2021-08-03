@@ -11,9 +11,7 @@ CSponza::~CSponza()
 
 void CSponza::initV()
 {
-	setModel(ElayGraphics::ResourceManager::getOrCreateModel("../Model/salle_de_bain/salle_de_bain.obj"));	//../Model/CornellBox/HalfCornell/HalfCornell.obj
-	auto AABB = getAABB();
-	//setScale({ 300,300,300 });
+	setModel(ElayGraphics::ResourceManager::getOrCreateModel("../Model/sponza/sponza.obj"));
 }
 
 void CSponza::updateV()

@@ -22,7 +22,6 @@ void CGatherBufferPass::initV()
 	TextureConfig->ImageBindUnit = 0;
 	genTexture(TextureConfig);
 	ElayGraphics::ResourceManager::registerSharedData("GatherTexture", TextureConfig);
-	//ElayGraphics::ResourceManager::registerSharedData("FinalTexture", GatherTexture);
 
 	auto ShadingTexture = ElayGraphics::ResourceManager::getSharedDataByName<std::shared_ptr<ElayGraphics::STexture>>("ShadingTexture");
 

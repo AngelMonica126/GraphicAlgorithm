@@ -8,7 +8,7 @@
 int main()
 {
 	ElayGraphics::WINDOW_KEYWORD::setWindowSize(1920, 1152);
-	ElayGraphics::WINDOW_KEYWORD::setIsCursorDisable(false);
+	ElayGraphics::WINDOW_KEYWORD::setIsCursorDisable(true);
 	ElayGraphics::COMPONENT_CONFIG::setIsEnableGUI(false);
 
 	ElayGraphics::ResourceManager::registerGameObject(std::make_shared<CSponza>("Sponza", 1));

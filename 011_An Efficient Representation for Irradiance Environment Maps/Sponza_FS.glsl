@@ -64,14 +64,14 @@ void main()
 	y2 = y * y;
 	z2 = z * z;
 	Basis[0] = 1.f / 2.f * sqrt(1.f / PI);
-    Basis[1] = 2.0 / 3.0 * sqrt(3.f / (4.f * PI)) * z;
-    Basis[2] = 2.0 / 3.0 * sqrt(3.f / (4.f * PI)) * y;
-    Basis[3] = 2.0 / 3.0 * sqrt(3.f / (4.f * PI)) * x;
-    Basis[4] = 1.0 / 4.0 * 1.f / 2.f * sqrt(15.f / PI) * x * z;
-    Basis[5] = 1.0 / 4.0 * 1.f / 2.f * sqrt(15.f / PI) * z * y;
-    Basis[6] = 1.0 / 4.0 * 1.f / 4.f * sqrt(5.f / PI) * (-x2 - z2 + 2 * y2);
-    Basis[7] = 1.0 / 4.0 * 1.f / 2.f * sqrt(15.f / PI) * y * x;
-    Basis[8] = 1.0 / 4.0 * 1.f / 4.f * sqrt(15.f / PI) * (x2 - z2);
+    Basis[1] = sqrt(3.f / (4.f * PI)) * z;
+    Basis[2] = sqrt(3.f / (4.f * PI)) * y;
+    Basis[3] = sqrt(3.f / (4.f * PI)) * x;
+    Basis[4] = 1.f / 2.f * sqrt(15.f / PI) * x * z;
+    Basis[5] = 1.f / 2.f * sqrt(15.f / PI) * z * y;
+    Basis[6] = 1.f / 4.f * sqrt(5.f / PI) * (-x2 - z2 + 2 * y2);
+    Basis[7] = 1.f / 2.f * sqrt(15.f / PI) * y * x;
+    Basis[8] = 1.f / 4.f * sqrt(15.f / PI) * (x2 - z2);
 
 	vec3 Specular = vec3(0,0,0);
 	for (int i = 0; i < 9; i++)

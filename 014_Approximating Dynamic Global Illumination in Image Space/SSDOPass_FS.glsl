@@ -46,6 +46,8 @@ void main()
         Offset = u_ProjectionMatrix * Offset; 
         Offset.xyz /= Offset.w; 
         Offset.xyz = Offset.xyz * 0.5 + 0.5; 
+		if(Offset.x > 1.0 || Offset.x < 0 || Offset.y > 1.0 || Offset.x < 0)
+			continue;
         float SampleDepth = -texture(u_PositionTexture, Offset.xy).w; 
         vec3 SampleNormal = texture(u_NormalTexture, Offset.xy).rgb;
 		vec3 SamplePos = texture(u_PositionTexture, Offset.xy).xyz;

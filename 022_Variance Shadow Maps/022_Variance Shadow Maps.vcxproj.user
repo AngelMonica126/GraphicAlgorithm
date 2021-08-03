@@ -4,4 +4,8 @@
     <LocalDebuggerEnvironment>PATH=$(OPENGL)/bin/x64;$(ASSIMP)/bin/x64;%PATH%</LocalDebuggerEnvironment>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LocalDebuggerEnvironment>PATH=$(OPENGL)/bin/x64;$(ASSIMP)/bin/x64;%PATH%</LocalDebuggerEnvironment>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
 </Project>
