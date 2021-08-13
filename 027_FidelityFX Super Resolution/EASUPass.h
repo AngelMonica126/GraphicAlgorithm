@@ -12,7 +12,20 @@ public:
 
 	virtual void initV() override;
 	virtual void updateV() override;
-
+	void FsrEasuCon(
+		glm::vec4& con0,
+		glm::vec4& con1,
+		glm::vec4& con2,
+		glm::vec4& con3,
+		// This the rendered image resolution being upscaled
+		float inputViewportInPixelsX,
+		float inputViewportInPixelsY,
+		// This is the resolution of the resource containing the input image (useful for dynamic resolution)
+		float inputSizeInPixelsX,
+		float inputSizeInPixelsY,
+		// This is the display resolution which the input image gets upscaled to
+		float outputSizeInPixelsX,
+		float outputSizeInPixelsY);
 private:
 	std::vector<int> m_GlobalGroupSize;
 	int m_DisplayWidth;

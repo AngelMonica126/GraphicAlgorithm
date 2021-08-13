@@ -12,5 +12,6 @@ public:
 	virtual void updateV() override;
 
 private:
-	int m_OldKeyMStatusSave = -1;
+	int  m_OldKeyNormal = -1;
+	int  m_OldKeyFSR = -1;
 };
