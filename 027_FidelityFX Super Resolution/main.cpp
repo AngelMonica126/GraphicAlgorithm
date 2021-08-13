@@ -10,7 +10,7 @@ int main()
 	ElayGraphics::COMPONENT_CONFIG::setIsEnableGUI(false);
 
 	ElayGraphics::ResourceManager::registerRenderPass(std::make_shared<CEASUPass>("EASUPass", 0));
-	//ElayGraphics::ResourceManager::registerRenderPass(std::make_shared<CRCASPass>("RCASPass", 1));
+	ElayGraphics::ResourceManager::registerRenderPass(std::make_shared<CRCASPass>("RCASPass", 1));
 	ElayGraphics::ResourceManager::registerRenderPass(std::make_shared<CScreenQuadPass>("ScreenQuadPass", 2));
 
 	ElayGraphics::App::initApp();

@@ -15,6 +15,4 @@ public:
 
 private:
 	std::vector<int> m_GlobalGroupSize;
-	glm::mat4 m_LightVPMatrix;
-	glm::vec3 m_LightDir;
 };
