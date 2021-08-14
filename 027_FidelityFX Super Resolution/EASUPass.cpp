@@ -19,9 +19,6 @@ void CEASUPass::FsrEasuCon(
 	glm::vec4& con1,
 	glm::vec4& con2,
 	glm::vec4& con3,
-	// This the rendered image resolution being upscaled
-	float inputViewportInPixelsX,
-	float inputViewportInPixelsY,
 	// This is the resolution of the resource containing the input image (useful for dynamic resolution)
 	float inputSizeInPixelsX,
 	float inputSizeInPixelsY,
@@ -29,10 +26,10 @@ void CEASUPass::FsrEasuCon(
 	float outputSizeInPixelsX,
 	float outputSizeInPixelsY) {
 	// Output integer position to a pixel position in viewport.
-	con0[0] = (inputViewportInPixelsX* 1.0f / (outputSizeInPixelsX));
-	con0[1] = (inputViewportInPixelsY* 1.0f / (outputSizeInPixelsY));
-	con0[2] = ((0.5)*inputViewportInPixelsX* 1.0f / (outputSizeInPixelsX) - (0.5));
-	con0[3] = ((0.5)*inputViewportInPixelsY* 1.0f / (outputSizeInPixelsY) - (0.5));
+	con0[0] = (inputSizeInPixelsX* 1.0f / (outputSizeInPixelsX));
+	con0[1] = (inputSizeInPixelsY* 1.0f / (outputSizeInPixelsY));
+	con0[2] = ((0.5)*inputSizeInPixelsX* 1.0f / (outputSizeInPixelsX) - (0.5));
+	con0[3] = ((0.5)*inputSizeInPixelsY* 1.0f / (outputSizeInPixelsY) - (0.5));
 	// Viewport pixel position to normalized image space.
 	// This is used to get upper-left of 'F' tap.
 	con1[0] = ( 1.0f / (inputSizeInPixelsX));
@@ -66,7 +63,7 @@ void CEASUPass::FsrEasuCon(
 void CEASUPass::initV()
 {
 	auto m_InputTexture = std::make_shared<ElayGraphics::STexture>();
-	loadTextureFromFile("../Textures/Other/onepiece_low.png", m_InputTexture);
+	loadTextureFromFile("../Textures/Other/onepiece_medium.png", m_InputTexture);
 
 	m_DisplayWidth =  ElayGraphics::WINDOW_KEYWORD::getWindowWidth();
 	m_DisplayHeight = ElayGraphics::WINDOW_KEYWORD::getWindowHeight();
@@ -87,9 +84,7 @@ void CEASUPass::initV()
 	glm::vec4 con1 = glm::vec4(0);
 	glm::vec4 con2 = glm::vec4(0);
 	glm::vec4 con3 = glm::vec4(0);
-	FsrEasuCon(con0, con1, con2, con3, m_RenderWidth, m_RenderHeight,
-		m_RenderWidth, m_RenderHeight,
-		m_DisplayWidth, m_DisplayHeight);
+	FsrEasuCon(con0, con1, con2, con3, m_RenderWidth, m_RenderHeight,m_DisplayWidth, m_DisplayHeight);
 	m_pShader = std::make_shared<CShader>("EASUPass_CS.glsl");
 	m_pShader->activeShader();
 	m_pShader->setTextureUniformValue("u_InputTexture", m_InputTexture);
