@@ -17,9 +17,6 @@ public:
 		glm::vec4& con1,
 		glm::vec4& con2,
 		glm::vec4& con3,
-		// This the rendered image resolution being upscaled
-		float inputViewportInPixelsX,
-		float inputViewportInPixelsY,
 		// This is the resolution of the resource containing the input image (useful for dynamic resolution)
 		float inputSizeInPixelsX,
 		float inputSizeInPixelsY,

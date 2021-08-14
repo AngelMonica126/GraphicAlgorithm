@@ -16,9 +16,8 @@ uniform vec4 con3;
 vec4 FsrEasuRF(vec2 p) { vec4 res = vec4(textureGather(u_InputTexture, p, 0)); return res; }
 vec4 FsrEasuGF(vec2 p) { vec4 res = vec4(textureGather(u_InputTexture, p, 1)); return res; }
 vec4 FsrEasuBF(vec2 p) { vec4 res = vec4(textureGather(u_InputTexture, p, 2)); return res; }
-float APrxLoRcpF1(float x) {return 1.0f / x;}
-vec3 AMin3F3(vec3 x,vec3 y,vec3 z){return min(x,min(y,z));}
-vec3 AMax3F3(vec3 x,vec3 y,vec3 z){return max(x,max(y,z));}
+vec3 Min3F3(vec3 x,vec3 y,vec3 z){return min(x,min(y,z));}
+vec3 Max3F3(vec3 x,vec3 y,vec3 z){return max(x,max(y,z));}
 
  void FsrEasuTapF(
 	 inout vec3 aC, // Accumulated color, with negative lobe.
@@ -31,12 +30,12 @@ vec3 AMax3F3(vec3 x,vec3 y,vec3 z){return max(x,max(y,z));}
 	 vec3 c) { // Tap color.
 	  // Rotate offset by direction.
 	 vec2 v;
-	 v.x = (off.x*(dir.x)) + (off.y*dir.y);
-	 v.y = (off.x*(-dir.y)) + (off.y*dir.x);
+	 v.x = (off.x * (dir.x)) + (off.y * dir.y);
+	 v.y = (off.x * (-dir.y)) + (off.y * dir.x);
 	 // Anisotropy.
 	 v *= len;
 	 // Compute distance^2.
-	 float d2 = v.x*v.x + v.y*v.y;
+	 float d2 = v.x * v.x + v.y * v.y;
 	 // Limit to the window as at corner, 2 taps can easily be outside.
 	 d2 = min(d2, clp);
 	 // Approximation of lancos2 without sin() or rcp(), or sqrt() to get x.
@@ -46,11 +45,11 @@ vec3 AMax3F3(vec3 x,vec3 y,vec3 z){return max(x,max(y,z));}
 	 // The general form of the 'base' is,
 	 //  (a*(b*x^2-1)^2-(a-1))
 	 // Where 'a=1/(2*b-b^2)' and 'b' moves around the negative lobe.
-	 float wB = float(2.0 / 5.0)*d2 + float(-1.0);
+	 float wB = float(2.0 / 5.0) * d2 + float(-1.0);
 	 float wA = lob * d2 + float(-1.0);
 	 wB *= wB;
 	 wA *= wA;
-	 wB = float(25.0 / 16.0)*wB + float(-(25.0 / 16.0 - 1.0));
+	 wB = float(25.0 / 16.0) * wB + float(-(25.0 / 16.0 - 1.0));
 	 float w = wB * wA;
 	 // Do weighted average.
 	 aC += c * w; aW += w;
@@ -67,7 +66,7 @@ vec3 AMax3F3(vec3 x,vec3 y,vec3 z){return max(x,max(y,z));}
 	 //  s t
 	 //  u v
 	 float w = float(0.0);
-	 if (biS)w = (float(1.0) - pp.x)*(float(1.0) - pp.y);
+	 if (biS)w = (float(1.0) - pp.x) * (float(1.0) - pp.y);
 	 if (biT)w = pp.x *(float(1.0) - pp.y);
 	 if (biU)w = (float(1.0) - pp.x)*           pp.y;
 	 if (biV)w = pp.x *           pp.y;
@@ -80,20 +79,20 @@ vec3 AMax3F3(vec3 x,vec3 y,vec3 z){return max(x,max(y,z));}
 	 float dc = lD - lC;
 	 float cb = lC - lB;
 	 float lenX = max(abs(dc), abs(cb));
-	 lenX = APrxLoRcpF1(lenX);
+	 lenX = 1.0f / lenX;
 	 float dirX = lD - lB;
 	 dir.x += dirX * w;
-	 lenX = clamp(abs(dirX)*lenX,0,1);
+	 lenX = clamp(abs(dirX) * lenX,0,1);
 	 lenX *= lenX;
 	 len += lenX * w;
 	 // Repeat for the y axis.
 	 float ec = lE - lC;
 	 float ca = lC - lA;
 	 float lenY = max(abs(ec), abs(ca));
-	 lenY = APrxLoRcpF1(lenY);
+	 lenY = 1.0f / lenY;
 	 float dirY = lE - lA;
 	 dir.y += dirY * w;
-	 lenY = clamp(abs(dirY)*lenY,0,1);
+	 lenY = clamp(abs(dirY) * lenY,0,1);
 	 lenY *= lenY;
 	 len += lenY * w;
  }
@@ -117,7 +116,7 @@ void FsrEasuF(out vec3 pix,ivec2 ip) {
 
 //------------------------------------------------------------------------------------------------------------------------------
   // Get position of 'f'.
-	 vec2 pp = vec2(ip)*(con0.xy) + (con0.zw);
+	 vec2 pp = vec2(ip) * con0.xy + con0.zw;
 	 vec2 fp = floor(pp);
 	 pp -= fp;
 	 //------------------------------------------------------------------------------------------------------------------------------
@@ -137,11 +136,11 @@ void FsrEasuF(out vec3 pix,ivec2 ip) {
 	   //    a b
 	   //    r g    <- unused (z)
 	   // Allowing dead-code removal to remove the 'z's.
-	 vec2 p0 = fp * (con1.xy) + (con1.zw);//Veerzeng 这里是将其转换到纹理空间(0,1)
+	 vec2 p0 = fp * con1.xy + con1.zw;//Veerzeng 这里是将其转换到纹理空间(0,1)
 	 // These are from p0 to avoid pulling two constants on pre-Navi hardware.
-	 vec2 p1 = p0 + (con2.xy);
-	 vec2 p2 = p0 + (con2.zw);
-	 vec2 p3 = p0 + (con3.xy);
+	 vec2 p1 = p0 + con2.xy;
+	 vec2 p2 = p0 + con2.zw;
+	 vec2 p3 = p0 + con3.xy;
 	 vec4 bczzR = FsrEasuRF(p0);
 	 vec4 bczzG = FsrEasuGF(p0);
 	 vec4 bczzB = FsrEasuBF(p0);
@@ -156,10 +155,10 @@ void FsrEasuF(out vec3 pix,ivec2 ip) {
 	 vec4 zzonB = FsrEasuBF(p3);
 	 //------------------------------------------------------------------------------------------------------------------------------
 	   // Simplest multi-channel approximate luma possible (luma times 2, in 2 FMA/MAD).
-	 vec4 bczzL = bczzB * vec4(0.5) + (bczzR*vec4(0.5) + bczzG);
-	 vec4 ijfeL = ijfeB * vec4(0.5) + (ijfeR*vec4(0.5) + ijfeG);
-	 vec4 klhgL = klhgB * vec4(0.5) + (klhgR*vec4(0.5) + klhgG);
-	 vec4 zzonL = zzonB * vec4(0.5) + (zzonR*vec4(0.5) + zzonG);
+	 vec4 bczzL = bczzB * 0.5f + (bczzR * 0.5f + bczzG);
+	 vec4 ijfeL = ijfeB * 0.5f + (ijfeR * 0.5f + ijfeG);
+	 vec4 klhgL = klhgB * 0.5f + (klhgR * 0.5f + klhgG);
+	 vec4 zzonL = zzonB * 0.5f + (zzonR * 0.5f + zzonG);
 	 // Rename.
 	 float bL = bczzL.x;
 	 float cL = bczzL.y;
@@ -175,7 +174,7 @@ void FsrEasuF(out vec3 pix,ivec2 ip) {
 	 float nL = zzonL.w;
 	 // Accumulate for bilinear interpolation.
 	 vec2 dir = vec2(0.0);
-	 float len = (0.0);
+	 float len = 0.0;
 	 FsrEasuSetF(dir, len, pp, true, false, false, false, bL, eL, fL, gL, jL);
 	 FsrEasuSetF(dir, len, pp, false, true, false, false, cL, fL, gL, hL, kL);
 	 FsrEasuSetF(dir, len, pp, false, false, true, false, fL, iL, jL, kL, nL);
@@ -186,32 +185,32 @@ void FsrEasuF(out vec3 pix,ivec2 ip) {
 	 float dirR = dir2.x + dir2.y;
 	 bool zro = dirR < (1.0 / 32768.0);
 	 dirR = 1.0f / sqrt(dirR);
-	 dirR = zro ? (1.0) : dirR;
-	 dir.x = zro ? (1.0) : dir.x;
+	 dirR = zro ? 1.0f : dirR;
+	 dir.x = zro ? 1.0f : dir.x;
 	 dir *= vec2(dirR);
 	 // Transform from {0 to 2} to {0 to 1} range, and shape with square.
-	 len = len * (0.5);
+	 len = len * 0.5f;
 	 len *= len;
 	 // Stretch kernel {1.0 vert|horz, to sqrt(2.0) on diagonal}.
-	 float stretch = (dir.x*dir.x + dir.y*dir.y)*APrxLoRcpF1(max(abs(dir.x), abs(dir.y)));
+	 float stretch = (dir.x * dir.x + dir.y * dir.y) * (1.0f / (max(abs(dir.x), abs(dir.y))));
 	 // Anisotropic length after rotation,
 	 //  x := 1.0 lerp to 'stretch' on edges
 	 //  y := 1.0 lerp to 2x on edges
-	 vec2 len2 = vec2((1.0) + (stretch - (1.0))*len, (1.0) + (-0.5)*len);
+	 vec2 len2 = vec2(1.0f + (stretch - 1.0f) * len, 1.0f + -0.5f * len);
 	 // Based on the amount of 'edge',
 	 // the window shifts from +/-{sqrt(2.0) to slightly beyond 2.0}.
-	 float lob = (0.5) + ((1.0 / 4.0 - 0.04) - 0.5)*len;
+	 float lob = 0.5f + ((1.0f / 4.0f - 0.04f) - 0.5f) * len;
 	 // Set distance^2 clipping point to the end of the adjustable window.
-	 float clp = APrxLoRcpF1(lob);
+	 float clp = 1.0f / lob;
 	 //------------------------------------------------------------------------------------------------------------------------------
 	   // Accumulation mixed with min/max of 4 nearest.
 	   //    b c
 	   //  e f g h
 	   //  i j k l
 	   //    n o
-	 vec3 min4 = min(AMin3F3(vec3(ijfeR.z, ijfeG.z, ijfeB.z), vec3(klhgR.w, klhgG.w, klhgB.w), vec3(ijfeR.y, ijfeG.y, ijfeB.y)),
+	 vec3 min4 = min(Min3F3(vec3(ijfeR.z, ijfeG.z, ijfeB.z), vec3(klhgR.w, klhgG.w, klhgB.w), vec3(ijfeR.y, ijfeG.y, ijfeB.y)),
 		 vec3(klhgR.x, klhgG.x, klhgB.x));
-	 vec3 max4 = max(AMax3F3(vec3(ijfeR.z, ijfeG.z, ijfeB.z), vec3(klhgR.w, klhgG.w, klhgB.w), vec3(ijfeR.y, ijfeG.y, ijfeB.y)),
+	 vec3 max4 = max(Max3F3(vec3(ijfeR.z, ijfeG.z, ijfeB.z), vec3(klhgR.w, klhgG.w, klhgB.w), vec3(ijfeR.y, ijfeG.y, ijfeB.y)),
 		 vec3(klhgR.x, klhgG.x, klhgB.x));
 	 // Accumulation.
 	 vec3 aC = vec3(0.0);
