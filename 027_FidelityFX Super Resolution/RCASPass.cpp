@@ -22,11 +22,11 @@ void CRCASPass::initV()
 	TextureConfig4RCAS->DataType = GL_FLOAT;
 	TextureConfig4RCAS->ImageBindUnit = 1;
 	genTexture(TextureConfig4RCAS);
-	glm::vec4 con = ElayGraphics::ResourceManager::getSharedDataByName<glm::vec4>("con");
+	glm::vec4 Const = ElayGraphics::ResourceManager::getSharedDataByName<glm::vec4>("Const");
 	m_pShader = std::make_shared<CShader>("RCASPass_CS.glsl");
 	m_pShader->activeShader();
 	m_pShader->setTextureUniformValue("u_RASUTexture", ElayGraphics::ResourceManager::getSharedDataByName<std::shared_ptr<ElayGraphics::STexture>>("EASUTexture"));
-	m_pShader->setFloatUniformValue("con", con.x, con.y, con.z, con.w);
+	m_pShader->setFloatUniformValue("u_Con0", Const.x, Const.y, Const.z, Const.w);
 	m_pShader->setImageUniformValue(TextureConfig4RCAS);
 
 	std::vector<int> LocalGroupSize;
