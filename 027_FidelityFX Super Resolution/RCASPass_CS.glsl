@@ -2,7 +2,7 @@
 #pragma optionNV (unroll all)	
 #define LOCAL_GROUP_SIZE 32
 // This is set at the limit of providing unnatural results for sharpening.
-#define FSR_RCAS_LIMIT (0.25-(1.0/16.0))
+#define FSR_RCAS_LIMIT (0.25 - (1.0 / 16.0))
 layout (local_size_x = LOCAL_GROUP_SIZE, local_size_y = LOCAL_GROUP_SIZE) in;
 layout (rgba32f, binding = 1) uniform writeonly image2D u_OutputRCASImage;
 
@@ -45,32 +45,26 @@ void fsrRcasF(out float pixR,out float pixG,out float pixB,ivec2 ip) { // Consta
 	 float eL = eB * 0.5f + (eR * 0.5f + eG);
 	 float fL = fB * 0.5f + (fR * 0.5f + fG);
 	 float hL = hB * 0.5f + (hR * 0.5f + hG);
-	 // Noise detection.
-	 float nz = 0.25f * bL + 0.25f * dL + 0.25f * fL + 0.25f * hL - eL;
-	 nz = clamp(abs(nz) * (1.0f / (max3F1(max3F1(bL, dL, eL), fL, hL) - min3F1(min3F1(bL, dL, eL), fL, hL))),0.0f,1.0f);
-	 nz = -0.5f * nz + 1.0;
 	 // Min and max of ring.
-	 float mn4R = min(min3F1(bR, dR, fR), hR);
-	 float mn4G = min(min3F1(bG, dG, fG), hG);
-	 float mn4B = min(min3F1(bB, dB, fB), hB);
-	 float mx4R = max(max3F1(bR, dR, fR), hR);
-	 float mx4G = max(max3F1(bG, dG, fG), hG);
-	 float mx4B = max(max3F1(bB, dB, fB), hB);
+	 float Min4R = min(min3F1(bR, dR, fR), hR);
+	 float Min4G = min(min3F1(bG, dG, fG), hG);
+	 float Min4B = min(min3F1(bB, dB, fB), hB);
+	 float Max4R = max(max3F1(bR, dR, fR), hR);
+	 float Max4G = max(max3F1(bG, dG, fG), hG);
+	 float Max4B = max(max3F1(bB, dB, fB), hB);
 	 // Immediate constants for peak range.
 	 vec2 PeakC = vec2(1.0, -1.0 * 4.0);
 	 // Limiters, these need to be high precision RCPs.
-	 float HitMinR = mn4R * (1.0f / (4.0f * mx4R));
-	 float HitMinG = mn4G * (1.0f / (4.0f * mx4G));
-	 float HitMinB = mn4B * (1.0f / (4.0f * mx4B));
-	 float HitMaxR = (PeakC.x - mx4R) * (1.0f / (4.0f * mn4R + PeakC.y));
-	 float HitMaxG = (PeakC.x - mx4G) * (1.0f / (4.0f * mn4G + PeakC.y));
-	 float HitMaxB = (PeakC.x - mx4B) * (1.0f / (4.0f * mn4B + PeakC.y));
+	 float HitMinR = Min4R * (1.0f / (4.0f * Max4R));
+	 float HitMinG = Min4G * (1.0f / (4.0f * Max4G));
+	 float HitMinB = Min4B * (1.0f / (4.0f * Max4B));
+	 float HitMaxR = (PeakC.x - Max4R) * (1.0f / (4.0f * Min4R + PeakC.y));
+	 float HitMaxG = (PeakC.x - Max4G) * (1.0f / (4.0f * Min4G + PeakC.y));
+	 float HitMaxB = (PeakC.x - Max4B) * (1.0f / (4.0f * Min4B + PeakC.y));
 	 float LobeR = max(-HitMinR, HitMaxR);
 	 float LobeG = max(-HitMinG, HitMaxG);
 	 float LobeB = max(-HitMinB, HitMaxB);
 	 float Lobe = max(float(-FSR_RCAS_LIMIT), min(max3F1(LobeR, LobeG, LobeB), 0.0)) * (u_Con0.x);
-	 // Apply noise removal.
-	 Lobe *= nz;
 	 // Resolve, which needs the medium precision rcp approximation to avoid visible tonality changes.
 	 float RcpL = 1.0f / (4.0f * Lobe + 1.0f);
 	 pixR = (Lobe * bR + Lobe * dR + Lobe * hR + Lobe * fR + eR) * RcpL;

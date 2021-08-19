@@ -24,7 +24,7 @@ void fsrEasuTapF(
 	inout float aW, // Accumulated weight.
 	vec2 Off, // Pixel offset from resolve position to tap.
 	vec2 Dir, // Gradient direction.
-	vec2 Feature, // Length.
+	vec2 Len, // Length.
 	float Lob, // Negative lobe strength.
 	float Clp, // Clipping point.
 	vec3 Color) { // Tap color.
@@ -33,7 +33,7 @@ void fsrEasuTapF(
 	v.x = (Off.x * (Dir.x)) + (Off.y * Dir.y);
 	v.y = (Off.x * (-Dir.y)) + (Off.y * Dir.x);
 	// Anisotropy.
-	v *= Feature;
+	v *= Len;
 	// Compute distance^2.
 	float x2 = v.x * v.x + v.y * v.y;
 	// Limit to the window as at corner, 2 taps can easily be outside.
@@ -181,7 +181,6 @@ vec3 fsrEasuF(ivec2 ip)
 	float Lob = 0.5f + ((1.0f / 4.0f - 0.04f) - 0.5f) * Feature;
 	// Set distance^2 clipping point to the end of the adjustable window.
 	float Clp = 1.0f / Lob;
-
 	//------------------------------------------------------------------------------------------------------------------------------
 	  // Accumulation mixed with min/max of 4 nearest.
 	  //    b c

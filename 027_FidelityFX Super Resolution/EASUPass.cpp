@@ -23,20 +23,20 @@ void CEASUPass::fsrEasuCon(
 	float inputSizeInPixelsY,
 	float outputSizeInPixelsX,
 	float outputSizeInPixelsY) {
-	Con0[0] = (inputSizeInPixelsX* 1.0f / (outputSizeInPixelsX));
-	Con0[1] = (inputSizeInPixelsY* 1.0f / (outputSizeInPixelsY));
-	Con0[2] = ((0.5)*inputSizeInPixelsX* 1.0f / (outputSizeInPixelsX) - (0.5));
-	Con0[3] = ((0.5)*inputSizeInPixelsY* 1.0f / (outputSizeInPixelsY) - (0.5));
-	Con1[0] = ( 1.0f / (inputSizeInPixelsX));
-	Con1[1] = ( 1.0f / (inputSizeInPixelsY));
-	Con1[2] = ((1.0)* 1.0f / (inputSizeInPixelsX));
-	Con1[3] = ((-1.0)* 1.0f / (inputSizeInPixelsY));
-	Con2[0] = ((-1.0)* 1.0f / (inputSizeInPixelsX));
-	Con2[1] = ((2.0)* 1.0f / (inputSizeInPixelsY));
-	Con2[2] = ((1.0)* 1.0f / (inputSizeInPixelsX));
-	Con2[3] = ((2.0)* 1.0f / (inputSizeInPixelsY));
-	Con3[0] = ((0.0)* 1.0f / (inputSizeInPixelsX));
-	Con3[1] = ((4.0)* 1.0f / (inputSizeInPixelsY));
+	Con0[0] = (inputSizeInPixelsX * 1.0f / outputSizeInPixelsX);
+	Con0[1] = (inputSizeInPixelsY * 1.0f / outputSizeInPixelsY);
+	Con0[2] = (0.5f * inputSizeInPixelsX * 1.0f / outputSizeInPixelsX - 0.5f);
+	Con0[3] = (0.5f * inputSizeInPixelsY * 1.0f / outputSizeInPixelsY - 0.5f);
+	Con1[0] = (1.0f / inputSizeInPixelsX);
+	Con1[1] = (1.0f / inputSizeInPixelsY);
+	Con1[2] = (1.0 * 1.0f / inputSizeInPixelsX);
+	Con1[3] = (-1.0f * 1.0f / inputSizeInPixelsY);
+	Con2[0] = (-1.0f * 1.0f / inputSizeInPixelsX);
+	Con2[1] = (2.0f * 1.0f / inputSizeInPixelsY);
+	Con2[2] = (1.0f * 1.0f / inputSizeInPixelsX);
+	Con2[3] = (2.0f * 1.0f / inputSizeInPixelsY);
+	Con3[0] = (0.0f * 1.0f / inputSizeInPixelsX);
+	Con3[1] = (4.0f * 1.0f / inputSizeInPixelsY);
 	Con3[2] = Con3[3] = 0;
 }
 
@@ -50,7 +50,6 @@ void CEASUPass::initV()
 
 	m_RenderWidth = m_InputTexture->Width;
 	m_RenderHeight = m_InputTexture->Height;
-
 
 	auto TextureConfig4EASU = std::make_shared<ElayGraphics::STexture>();
 	TextureConfig4EASU->InternalFormat = GL_RGBA32F;
@@ -87,5 +86,4 @@ void CEASUPass::updateV()
 	m_pShader->activeShader();
 	glDispatchCompute(m_GlobalGroupSize[0], m_GlobalGroupSize[1], m_GlobalGroupSize[2]);
 	glMemoryBarrier(GL_SHADER_IMAGE_ACCESS_BARRIER_BIT);
-	
 }
