@@ -69,6 +69,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "026_Moment Shadow Mapping",
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "027_FidelityFX Super Resolution", "027_FidelityFX Super Resolution\027_FidelityFX Super Resolution.vcxproj", "{38746FFB-F40D-4869-AC7E-E356380A5383}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "028_Mobile Friendly FSR", "028_Mobile Friendly FSR\028_Mobile Friendly FSR.vcxproj", "{4F74DE76-CA8B-421A-890F-59E457E9CC01}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -333,6 +335,14 @@ Global
 		{38746FFB-F40D-4869-AC7E-E356380A5383}.Release|x64.Build.0 = Release|x64
 		{38746FFB-F40D-4869-AC7E-E356380A5383}.Release|x86.ActiveCfg = Release|Win32
 		{38746FFB-F40D-4869-AC7E-E356380A5383}.Release|x86.Build.0 = Release|Win32
+		{4F74DE76-CA8B-421A-890F-59E457E9CC01}.Debug|x64.ActiveCfg = Debug|x64
+		{4F74DE76-CA8B-421A-890F-59E457E9CC01}.Debug|x64.Build.0 = Debug|x64
+		{4F74DE76-CA8B-421A-890F-59E457E9CC01}.Debug|x86.ActiveCfg = Debug|Win32
+		{4F74DE76-CA8B-421A-890F-59E457E9CC01}.Debug|x86.Build.0 = Debug|Win32
+		{4F74DE76-CA8B-421A-890F-59E457E9CC01}.Release|x64.ActiveCfg = Release|x64
+		{4F74DE76-CA8B-421A-890F-59E457E9CC01}.Release|x64.Build.0 = Release|x64
+		{4F74DE76-CA8B-421A-890F-59E457E9CC01}.Release|x86.ActiveCfg = Release|Win32
+		{4F74DE76-CA8B-421A-890F-59E457E9CC01}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
