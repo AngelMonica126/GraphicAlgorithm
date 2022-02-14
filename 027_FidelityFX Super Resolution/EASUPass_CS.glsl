@@ -28,8 +28,9 @@ void fsrEasuTapF(
 	vec2 Len, // Length.
 	float w, // Negative lobe strength.
 	float Clp, // Clipping point.
-	vec3 Color) { // Tap color.
-	//公式15
+	vec3 Color)
+{ // Tap color.
+//公式15
 	vec2 v;
 	v.x = (Off.x * (Dir.x)) + (Off.y * Dir.y);
 	v.y = (Off.x * (-Dir.y)) + (Off.y * Dir.x);
@@ -57,7 +58,8 @@ void fsrEasuSetF(
 	inout float Feature,
 	vec2 P,
 	bool BoolS, bool BoolT, bool BoolU, bool BoolV,
-	float LumaA, float LumaB, float LumaC, float LumaD, float LumaE) {
+	float LumaA, float LumaB, float LumaC, float LumaD, float LumaE)
+{
 	//  s t
 	//  u v
 	float Weight = 0.0f;
@@ -165,7 +167,7 @@ vec3 fsrEasuF(ivec2 ip)
 
 	//公式11
 	float w = 0.5f - 0.25f * Feature;
-	
+
 	//公式12
 	float Clp = 1.0f / w;
 

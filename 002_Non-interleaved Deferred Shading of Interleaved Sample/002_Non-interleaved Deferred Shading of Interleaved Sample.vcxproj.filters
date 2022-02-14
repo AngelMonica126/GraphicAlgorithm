@@ -1,39 +1,103 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="源文件">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="头文件">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
-    <Filter Include="资源文件">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    <Filter Include="Headers">
+      <UniqueIdentifier>{C196CD9C-2D76-4C38-368E-D70EA2ECB299}</UniqueIdentifier>
     </Filter>
     <Filter Include="Shader">
-      <UniqueIdentifier>{e2999cf9-0a85-4d33-9150-66c89f933069}</UniqueIdentifier>
+      <UniqueIdentifier>{FC0C0CD1-E8AE-36A7-D169-4AFBBDAABDF7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources">
+      <UniqueIdentifier>{89565304-F535-D29F-FE4D-5D766AAC3801}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ScreenQuad_FS.glsl">
-      <Filter>Shader</Filter>
-    </None>
-    <None Include="SplitGBuffer_CS.glsl">
-      <Filter>Shader</Filter>
-    </None>
+    <ClInclude Include="CustomGUI.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="EgdeDetectionPass.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="GatherBufferPass.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="GaussianBlurPass.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="LightSource.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="ScreenQuadPass.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="ShadingOnSplitedGBufferPass.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="SplitGBufferPass.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Sponza.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="SponzaGBufferPass.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="CustomGUI.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="EgdeDetectionPass.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="GatherBufferPass.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="GaussianBlurPass.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="LightSource.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="ScreenQuadPass.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="ShadingOnSplitedGBufferPass.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="SplitGBufferPass.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Sponza.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="SponzaGBufferPass.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
     <None Include="EgdeDetection_CS.glsl">
       <Filter>Shader</Filter>
     </None>
-    <None Include="ShadingOnSplitedGBuffer_CS.glsl">
+    <None Include="GatherBufferPass_CS.glsl">
       <Filter>Shader</Filter>
     </None>
     <None Include="GaussianBlur_CS.glsl">
       <Filter>Shader</Filter>
     </None>
-    <None Include="GatherBufferPass_CS.glsl">
+    <None Include="ScreenQuad_FS.glsl">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="ScreenQuad_VS.glsl">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="ShadingOnSplitedGBuffer_CS.glsl">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="SplitGBuffer_CS.glsl">
       <Filter>Shader</Filter>
     </None>
     <None Include="Sponza_FS.glsl">
@@ -42,75 +106,5 @@
     <None Include="Sponza_VS.glsl">
       <Filter>Shader</Filter>
     </None>
-    <None Include="ScreenQuad_VS.glsl">
-      <Filter>Shader</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="LightSource.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="SplitGBufferPass.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="EgdeDetectionPass.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="CustomGUI.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="GaussianBlurPass.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="GatherBufferPass.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="ShadingOnSplitedGBufferPass.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="SponzaGBufferPass.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Sponza.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="ScreenQuadPass.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="ScreenQuadPass.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="EgdeDetectionPass.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="CustomGUI.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="ShadingOnSplitedGBufferPass.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="SplitGBufferPass.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="GaussianBlurPass.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="SponzaGBufferPass.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="GatherBufferPass.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="LightSource.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Sponza.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
   </ItemGroup>
 </Project>

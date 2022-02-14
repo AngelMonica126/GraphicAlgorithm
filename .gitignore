@@ -5,3 +5,9 @@ Release/
 Fonts/
 packages/
 GraphicSDK/
+*.sln
+*.vcxproj
+*.filters
+*.vcxproj.filters
+*.user
+*.vcxproj.user

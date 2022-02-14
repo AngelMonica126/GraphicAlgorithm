@@ -1,91 +1,79 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="源文件">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="头文件">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
-    <Filter Include="资源文件">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    <Filter Include="Headers">
+      <UniqueIdentifier>{C196CD9C-2D76-4C38-368E-D70EA2ECB299}</UniqueIdentifier>
     </Filter>
     <Filter Include="Shader">
-      <UniqueIdentifier>{5a9bb547-a73d-489d-82ec-c9e0c3735cbe}</UniqueIdentifier>
+      <UniqueIdentifier>{FC0C0CD1-E8AE-36A7-D169-4AFBBDAABDF7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources">
+      <UniqueIdentifier>{89565304-F535-D29F-FE4D-5D766AAC3801}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CustomGUI.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectLightPass.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="DynamicObject.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="GBufferPass.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="LightCamera.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="NonuniformBlurPass.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="ScreenQuadPass.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Sponza.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="VSMBufferPass.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CustomGUI.cpp">
-      <Filter>源文件</Filter>
+      <Filter>Sources</Filter>
     </ClCompile>
     <ClCompile Include="DirectLightPass.cpp">
-      <Filter>源文件</Filter>
+      <Filter>Sources</Filter>
     </ClCompile>
     <ClCompile Include="DynamicObject.cpp">
-      <Filter>源文件</Filter>
+      <Filter>Sources</Filter>
     </ClCompile>
     <ClCompile Include="GBufferPass.cpp">
-      <Filter>源文件</Filter>
+      <Filter>Sources</Filter>
     </ClCompile>
     <ClCompile Include="LightCamera.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="ScreenQuadPass.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Sponza.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>源文件</Filter>
+      <Filter>Sources</Filter>
     </ClCompile>
     <ClCompile Include="NonuniformBlurPass.cpp">
-      <Filter>源文件</Filter>
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="ScreenQuadPass.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Sponza.cpp">
+      <Filter>Sources</Filter>
     </ClCompile>
     <ClCompile Include="VSMBufferPass.cpp">
-      <Filter>源文件</Filter>
+      <Filter>Sources</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Sponza.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="ScreenQuadPass.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="LightCamera.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="GBufferPass.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="DynamicObject.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="DirectLightPass.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="CustomGUI.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="NonuniformBlurPass.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="VSMBufferPass.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
+    <ClCompile Include="main.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="DirectLightPass_CS.glsl">
-      <Filter>Shader</Filter>
-    </None>
-    <None Include="GBuffer_FS.glsl">
-      <Filter>Shader</Filter>
-    </None>
-    <None Include="GBuffer_VS.glsl">
       <Filter>Shader</Filter>
     </None>
     <None Include="GBufferDynamicObject_FS.glsl">
@@ -94,16 +82,22 @@
     <None Include="GBufferDynamicObject_VS.glsl">
       <Filter>Shader</Filter>
     </None>
-    <None Include="ScreenQuad_FS.glsl">
+    <None Include="GBuffer_FS.glsl">
       <Filter>Shader</Filter>
     </None>
-    <None Include="ScreenQuad_VS.glsl">
+    <None Include="GBuffer_VS.glsl">
       <Filter>Shader</Filter>
     </None>
     <None Include="NonuniformBlur_FS.glsl">
       <Filter>Shader</Filter>
     </None>
     <None Include="NonuniformBlur_VS.glsl">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="ScreenQuad_FS.glsl">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="ScreenQuad_VS.glsl">
       <Filter>Shader</Filter>
     </None>
     <None Include="VSMBuffer_FS.glsl">

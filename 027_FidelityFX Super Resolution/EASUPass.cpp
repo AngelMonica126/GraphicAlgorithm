@@ -22,7 +22,8 @@ void CEASUPass::fsrEasuCon(
 	float inputSizeInPixelsX,
 	float inputSizeInPixelsY,
 	float outputSizeInPixelsX,
-	float outputSizeInPixelsY) {
+	float outputSizeInPixelsY)
+{
 	Con0[0] = (inputSizeInPixelsX * 1.0f / outputSizeInPixelsX);
 	Con0[1] = (inputSizeInPixelsY * 1.0f / outputSizeInPixelsY);
 	Con0[2] = (0.5f * inputSizeInPixelsX * 1.0f / outputSizeInPixelsX - 0.5f);
@@ -45,7 +46,7 @@ void CEASUPass::initV()
 	auto m_InputTexture = std::make_shared<ElayGraphics::STexture>();
 	loadTextureFromFile("../Textures/Other/onepiece_medium.png", m_InputTexture);
 
-	m_DisplayWidth =  ElayGraphics::WINDOW_KEYWORD::getWindowWidth();
+	m_DisplayWidth = ElayGraphics::WINDOW_KEYWORD::getWindowWidth();
 	m_DisplayHeight = ElayGraphics::WINDOW_KEYWORD::getWindowHeight();
 
 	m_RenderWidth = m_InputTexture->Width;
@@ -63,7 +64,7 @@ void CEASUPass::initV()
 	glm::vec4 Con1 = glm::vec4(0);
 	glm::vec4 Con2 = glm::vec4(0);
 	glm::vec4 Con3 = glm::vec4(0);
-	fsrEasuCon(Con0, Con1, Con2, Con3, m_RenderWidth, m_RenderHeight,m_DisplayWidth, m_DisplayHeight);
+	fsrEasuCon(Con0, Con1, Con2, Con3, m_RenderWidth, m_RenderHeight, m_DisplayWidth, m_DisplayHeight);
 	m_pShader = std::make_shared<CShader>("EASUPass_CS.glsl");
 	m_pShader->activeShader();
 	m_pShader->setTextureUniformValue("u_InputTexture", m_InputTexture);

@@ -14,6 +14,6 @@ out vec3 v2f_TexCoords;
 void main()
 {
 	vec4 pos = u_ProjectionMatrix * mat4(mat3(u_ViewMatrix)) * vec4(_Position, 1.0f);
-    gl_Position = pos.xyww;
+	gl_Position = pos.xyww;
 	v2f_TexCoords = _Position;
 }
